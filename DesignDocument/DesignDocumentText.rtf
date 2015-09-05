@@ -1,233 +1,699 @@
-{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\fnil\fcharset128 OpenSymbol;}{\f2\fnil\fcharset0 Courier New;}{\f3\froman\fprq2\fcharset128 Times New Roman;}{\f4\fmodern\fprq1\fcharset128 Courier New;}{\f5\fnil\fcharset0 Times New Roman;}{\f6\fswiss\fcharset0 Calibri;}}
-{\colortbl ;\red0\green0\blue255;}
-{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\nowidctlpar\sa200\sl276\slmult1\lang9\kerning1\f0\fs22 Team Waugh\lang1033\fs24\par
-\lang9\fs22 Tanks_Game_RW\lang1033\fs24\par
-\lang9\fs22 Software Design Document\lang1033\fs24\par
-\lang9\fs22 Names: Riley Waugh\lang1033\fs24\par
-\lang9\fs22 Date of Creation: 9/2/2015\lang1033\fs24\par
-\par
-\lang9\ul\b\fs22 1. Intro\lang1033\ulnone\b0\fs24\par
-\par
-\lang9\fs22\tab\b 1.1 Purpose\lang1033\b0\fs24\par
-\lang9\fs22\tab This design document will describe the workings and the process of creation of a \tab tanks \tab game.\lang1033\fs24\par
-\lang9\fs22\tab\lang1033\fs24\par
-\lang9\fs22\tab\b 1.2 Scope\lang1033\b0\fs24\par
-\lang9\b\fs22\tab\b0 The sowtware will be a 2-d tanks game. This means that the player will control a \tab tanks, \tab navigate a mazelike map, and shoot bullets at other tanks. A map \tab creator/editor will \tab accompany the game.\lang1033\fs24\par
-\lang9\fs22\tab\lang1033\fs24\par
-\lang9\fs22\tab\b 1.3 Overview\lang1033\b0\fs24\par
-\lang9\fs22\tab In this design doc, the game overview and architecture will be explained. this \tab document will also go over the data design and component design and human \tab interface design and requirements.\lang1033\fs24\par
-\par
-\lang9\fs22\tab\b 1.4 Reference Material\lang1033\b0\fs24\par
-\lang9\fs22\tab The game will be reminiscent of "Tank Trouble" ({\field{\*\fldinst{HYPERLINK "https://www.tanktrouble.com/"}}{\fldrslt{\ul\cf1 https://www.tanktrouble.com/}}}\lang1033\f0\fs24 )\par
-\par
-\lang9\fs22\tab\b 1.5 Definitions and Acronyms\lang1033\b0\fs24\par
-\lang9\fs22\tab "TGRW"refers to the software\lang1033\fs24\par
-\par
-\lang9\ul\b\fs22 2. System Overview\lang1033\ulnone\b0\fs24\par
-\lang9\fs22\tab The game will be  a 2-d, top-down shooter game for strictly entertainment purposes. THe player will maneuver a tank through a labyrinthine map  in order to collect powerups or shoot the opponent. Upgrades will significantly increase the power of a tank. Reaction time and accuracy and experience will be key to winning a round. Whenever a player wins a round by shooting another player, the winning player will be awarded 1 point. A player wins the game by gaining a specified amount of points. Players will use the keyboard for controls.\lang1033\fs24\par
-\lang9\fs22\tab A map editor will accompany the game.  A creator will be able to add walls, player spawn locations, and upgrade spawn loactions. The creator will then be able to save the map, and later load the map in the game.\lang1033\fs24\par
-\par
-\lang9\ul\b\fs22 3. System Architecture\lang1033\ulnone\b0\fs24\par
-\lang9\fs22\tab\lang1033\fs24\par
-\pard\nowidctlpar\fi-360\li1080\sa200\sl276\slmult1\tx1080\lang1023\b\fs22 3.1\tab\lang9 Architectural Design\lang1033\b0\fs24\par
-\pard\nowidctlpar\sa200\sl276\slmult1\lang9\b\fs22\tab\b0 see DesignDocumentVisuals.png in the DesignDocument folder.\lang1033\fs24\par
-\par
-\pard\nowidctlpar\fi-360\li1080\sa200\sl276\slmult1\tx1080\kerning0\b 3.2\tab\lang9\kerning1\fs22 Architectural Description\lang1033\b0\fs24\par
-\pard\nowidctlpar\sa200\sl276\slmult1\lang9\b\fs22\tab\b0 The player will transition from state to state using buttons, a type of menuEntity. Maps \tab created in the map editor will be saved as a text file, ready to be loaded for further use. \tab Maps will be saved and loaded based on deciphering strings. Guns will be created in a \tab text document, too. The player also specifies the \tab win condition, and when that win \tab condition is met in the Game class, the game transitions \tab to the EndGameMenu. \tab Transistioning will be a matter of disabling one state and enabling another.\lang1033\fs24\par
-\lang9\fs22\tab\lang1033\fs24\par
-\pard\nowidctlpar\fi-360\li1080\sa200\sl276\slmult1\tx1080\kerning0\b 3.3\tab\lang9\kerning1\fs22 Design Rationale\lang1033\b0\fs24\par
-\pard\nowidctlpar\sa200\sl276\slmult1\lang9\fs22\tab I picked a state-by-state architecture because it fits the desired function of swapping \tab between menus, engineering the game before you play it.\lang1033\fs24\par
-\par
-\par
-\par
-\par
-\par
-\pard\nowidctlpar\fi-360\li360\sa200\sl276\slmult1\tx360\kerning0\b 4.\tab\lang9\kerning1\ul\fs22 Data Design\lang1033\ulnone\b0\fs24\par
-\pard\nowidctlpar\sa200\sl276\slmult1\lang9\fs22\tab\lang1033\fs24\par
-\pard\nowidctlpar\fi-360\li1080\sa200\sl276\slmult1\tx1080\kerning0\b 4.1\tab\lang9\kerning1\fs22 Data Description\lang1033\b0\fs24\par
-\pard\nowidctlpar\sa200\sl276\slmult1\lang9\fs22\tab The data will be stored in vectors or as strings in text files\lang1033\fs24\par
-\par
-\pard\nowidctlpar\fi-360\li1080\sa200\sl276\slmult1\tx1080\kerning0\b 4.2\tab\lang9\kerning1\fs22 Data Dictionary\lang1033\b0\fs24\par
-\pard\nowidctlpar\sa200\sl276\slmult1\lang9\fs22\tab\tab Data:\lang1033\fs24\par
-\pard\nowidctlpar\fi-360\li1440\sa200\sl276\slmult1\tx1440\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 Collision\ulnone : determing collision between Collidables will be done in the Game class update cycle and will only be used in that class.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 Weapons\ulnone : guns will be stored as  text documents.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 maps\ulnone : maps will be stored as text documents.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 mouse data\ulnone : mouse data will be collected in the base app and sent up a chain of updates.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 sprites and textures\ulnone : The resource manager will load all images from a directory and will be accessable from every class.\lang1033\fs24\par
-\pard\nowidctlpar\li1440\sa200\sl276\slmult1\par
-\lang9\fs22 Objects:\lang1033\fs24\par
-\pard\nowidctlpar\fi-360\li1440\sa200\sl276\slmult1\tx1440\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 BasicButton\ulnone : A child of MenuEntity. Based on mouse data, the button will either be idle, hovered, held down, being clicked, idle and clicked, hovered and clicked, held down and clicked, or being unclicked. The button will return this information as an enum.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 BasicBullet\ulnone : The bullet of the BasicGun; bounces off walls.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 BasicGun\ulnone : The default gun.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 Bullet\ulnone : A child of collidable. Bullets move around the screen.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 Collidable\ulnone : Two collidables are the only things that can collide.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 CollidableManager\ulnone : A vector of all collidables that can provide pointers to collidables and can check collision.\lang1033\fs24\par
-\pard\nowidctlpar\li1440\sa200\sl276\slmult1\par
-\pard\nowidctlpar\fi-360\li1440\sa200\sl276\slmult1\tx1440\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 CollisionBoxVector\ulnone : A member of Collidable; Each Collidable has a vector of vectors of points to determine collision.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 ControlSet\ulnone : A set of keys.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 EndGameMenu\ulnone : One of the main states of the software. When the game is won, the EndGameMenu appears.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 Game\ulnone : A Game is a map, a determiner of tags, and a broad updater. One of the main states of the software.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 GeneralMap\ulnone : Parent of GMap and MEMap; contains a vector of rectangles.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 GMap\ulnone : aka game map, Gmap is a child of GeneralMap and Collidable\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 Gun\ulnone : A weapon; determines things like spread, initial velocity of a bullet, etc.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 MainMenu\ulnone : One of the main states of the software. From the MainMenu, the player can access most parts of the software.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 MapEditor\ulnone : a main state of software. It allows the player to create maps they will play on in the Game class.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 MEMap\ulnone : A child of GeneralMap and has a grid of tiles and 2 collisionBoxVectors.\par
-\lang1033\kerning0\f1\fs24\'81\'45\f0\tab\ul MEEntity\ulnone : a Wall, a PlayerSpawn, or an UpgradeSapawn. Every MEEntity can be dragged an dropped and has a source area.\par
-\f1\'81\'45\f0\tab\ul MEEntityManager\ulnone : Manages the functionality of the map editor along with MenuManager.\kerning1\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 Menu\ulnone : A menu is a set of menuEntities.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 MenuBackground\ulnone : One child of MenuEntity. It is essentially just a texture with a position.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 MenuEnitity\ulnone : Any type of button, text, image, etc.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 MenuManager\ulnone : A set of Menus for cases like the MainMenu, where there may be sound menus, option menus, etc.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 MinigunBullet\ulnone : A child of Bullet; bounces off walls.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 MinigunGun\ulnone : A child of Gun; faster firing rate and more spread than Basicgun\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 MinigunPU\ulnone : A child of Powerup; can upgrade and upgradable \lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 Player\ulnone : A tank. Players can move, shoot, win the game, etc.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 PlayerManager\ulnone : Keeps a vector of all players. Can also provide pointers to Players.\par
-\lang1033\kerning0\f1\fs24\'81\'45\f0\tab\ul PlayerSpawn\ulnone : A child of MEEntity; when loaded, will be an area to spawn a Player.\kerning1\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 Powerup\ulnone : A child of Collidable; can  ugrade a Player's stats\lang1033\fs24 .\par
-\kerning0\f1\'81\'45\f0\tab\ul PowerupSpawn\ulnone : A child of MEEntity; when loaded, will be an area to spawn powerups.\kerning1\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 ResourceManager\ulnone : A set of textures and fonts that can load all files of a type (e.g. .ttf, .jpeg, .png) from a given directory. It also can provide pointers to textures and fonts.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 Slider\ulnone : A child of MenuEntity; it contains a knob and a base, and the position of the knob on the base affects something, like brightness or music volume.\lang1033\fs24\par
-\kerning0\f1\'81\'45\tab\lang9\kerning1\ul\f0\fs22 TextBox\ulnone : A child of MenuEntity; simply centered text.\par
-\lang1033\kerning0\f1\fs24\'81\'45\f0  \tab\ul Wall\ulnone : A child of MEEntity; one of the things that can be placed on a map and will become non-transversable terrain when loaded.\kerning1\par
-\pard\nowidctlpar\sa200\sl276\slmult1\par
-\par
-\tab\b 5. Component Design\b0\par
-\lang9\fs22\tab The MainMenu is the starting state of the software. The player will uses buttons to \tab navigate to other menus and states. It will look something like this:\lang1033\fs24\par
-\lang9\f2\fs22\tab udpate\lang1033\fs24\par
-\lang9\fs22\tab\{\lang1033\fs24\par
-\lang9\fs22\tab\tab update menu entities;\lang1033\fs24\par
-\lang9\fs22\tab\tab if menu/state button was activated,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab go to menu/state;\lang1033\fs24\par
-\lang9\fs22\tab\}\lang1033\f0\fs24\par
-\lang9\f3\fs22\tab\lang1033\f0\fs24\par
-\lang9\f3\fs22\tab The EndGameMenu will operate in a similar way.\lang1033\f0\fs24\par
-\lang9\f3\fs22\tab The Game update loop does many things and will look something like this:\lang1033\f0\fs24\par
-\lang9\f2\fs22\tab update\lang1033\fs24\par
-\lang9\fs22\tab\{\lang1033\fs24\par
-\lang9\fs22\tab\tab if 'P' button is pressed,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab pause menu activates;\lang1033\fs24\par
-\lang9\fs22\tab\tab\lang1033\fs24\par
-\lang9\fs22\tab\tab Update CollidableManager (all collidables)\lang1033\fs24\par
-\lang9\fs22\tab\tab get and interpret all collisions\lang1033\fs24\par
-\par
-\par
-\lang9\fs22\tab\tab if wincon is met or 'ESC' is pressed, \lang1033\fs24\par
-\lang9\fs22\tab\tab\tab move to EndGameScreen;\lang1033\fs24\par
-\par
-\lang9\fs22\tab\}\lang1033\f0\fs24\par
-\lang9\fs22\tab The Game update loop looks simple, but updating the collidablemanager is deceptively\lang1033\fs24\par
-\lang9\fs22\tab  complicated. It will look someting like this\lang1033\fs24\par
-\lang9\f2\fs22\tab /*for CollidableManager*/ update\lang1033\fs24\par
-\lang9\fs22\tab\{\lang1033\fs24\par
-\lang9\fs22\tab\tab for all collidables, increment movement.\lang1033\fs24\par
-\lang9\fs22\tab\tab clear vector that holds all collisions;\lang1033\fs24\par
-\lang9\fs22\tab\tab fill collision vector();\lang1033\fs24\par
-\lang9\fs22\tab\tab process collision vector();\lang1033\fs24\par
-\lang9\fs22\tab\}\lang1033\f0\fs24\par
-\lang9\f3\fs22\tab Again, this looks simple. Fill collision vector is more interesting:\lang1033\f0\fs24\par
-\lang9\f3\fs22\tab\f2 Fill Collision Vector\lang1033\fs24\par
-\lang9\fs22\tab\{\lang1033\fs24\par
-\pard\nowidctlpar\li-720\sa200\sl276\slmult1\lang9\fs22\tab\tab\tab for each permutation of two vectors, which \tab\tab\tab\tab\tab separates diffent types of \tab collidables,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab\tab check if each element in one collides with\tab\tab\tab\tab\tab any element in the other, if so,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab\tab\tab record element k of vector j colliding \tab\tab\tab\tab\tab with element l of vector m and put it \tab\tab\tab\tab\tab\tab into collision vector; \lang1033\fs24\par
-\pard\nowidctlpar\sa200\sl276\slmult1\lang9\fs22\tab\}\lang1033\f0\fs24\par
-\par
-\par
-\par
-\par
-\lang9\f4\fs22\tab\f3 checking collision goes like this:\lang1033\f0\fs24\par
-\lang9\f3\fs22\tab\f2 Collide(collidable a, collidable b)\lang1033\fs24\par
-\lang9\fs22\tab\{\lang1033\fs24\par
-\lang9\fs22\tab\tab for each permutation of 1 of a's vectors of vectors \tab\tab of points and 1 of b's,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab for each of a's points x in that vector\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab\tab check if x is inside b's vector of points, \tab\tab\tab\tab if so,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab\tab\tab a collides with b, break;\lang1033\fs24\par
-\par
-\lang9\fs22\tab\}\lang1033\fs24\par
-\lang9\fs22\tab checking if a point is inside a vector of points is annoying:\lang1033\fs24\par
-\lang9\fs22\tab checkAinVecB\lang1033\fs24\par
-\lang9\fs22\tab\{\lang1033\fs24\par
-\lang9\fs22\tab\tab draw lines from each point bi in b;\lang1033\fs24\par
-\lang9\fs22\tab\tab sum the angle <(bi,A,b((i+1)/b.size())) for all \tab\tab\tab i<b.size();\lang1033\fs24\par
-\lang9\fs22\tab\tab if the sum == 2pi, it's inside\lang1033\fs24\par
-\lang9\fs22\tab\}\lang1033\fs24\par
-\lang9\fs22\tab finding the angle between vector u and v goes like this:\lang1033\fs24\par
-\lang9\fs22\tab cos(angle between u and v) = (u DOT_PRODUCT v)/(||u|| ||v||)\lang1033\fs24\par
-\par
-\par
-\par
-\par
-\par
-\lang9\fs22\tab process collision vector goes like this:\lang1033\fs24\par
-\lang9\fs22\tab process collision vector\lang1033\fs24\par
-\lang9\fs22\tab\{\tab\lang1033\fs24\par
-\lang9\fs22\tab\tab for every collision found, unincrement the movement of \tab\tab the collidables involved, but only once for each \tab\tab\tab collidable;\lang1033\fs24\par
-\lang9\fs22\tab\tab if a Player hit a Powerup,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab powerup.affect(Player); // different for each \tab\tab\tab\tab\tab\tab\tab   // powerup\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab powerup disappears;\lang1033\fs24\par
-\par
-\lang9\fs22\tab\tab if a Player hit a bullet,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab player.health -= bullet.power;\lang1033\fs24\par
-\par
-\lang9\fs22\tab\tab if a bullet hits a wall,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab if bullet.wallinteraction == BOUNCE,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab\tab bullet bounces off the wall;\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab else if == STOP,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab\tab bullet stops;\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab else if == PIERCE,\lang1033\fs24\par
-\lang9\fs22\tab\tab\tab\tab //do nothing\tab\lang1033\fs24\par
-\lang9\fs22\tab\}\lang1033\f0\fs24\par
-\lang9\f4\fs22\tab\lang1033\f0\fs24\par
-\par
-\par
-\par
-\lang9\f3\fs22\tab In the MapEditor, it will be a drag and drop style map creator\lang1033\f0 . Its update cycle \tab looks like this:\par
-\tab\f2 /*MapEditor*/ update\par
-\tab\{\par
-\tab\tab update the MEEntityManager;\par
-\tab\tab update the MenuManager;\par
-\tab\}\par
-\tab\f5\par
-\tab Updating the MEEntityManager looks like this:\par
-\tab\f2 /*MEEntityManager*/ update\par
-\tab\{\par
-\tab\tab drag and drop MEEntities;\par
-\tab\tab based on the MEMap collision boxes, place walls and \tab\tab\tab spawnpoints;\par
-\tab\}\par
-\tab\f5 Finding out where to places dropped walls goes like this:\par
-\tab\f2 findDropPlace\par
-\tab\{\par
-\tab\tab if wall is dropped,\par
-\tab\tab\tab if cursor was inside a hitbox on a side of a \tab\tab\tab\tab square of the grid in MEMap,\par
-\tab\tab\tab\tab add a wall there if it doesnt make a wall \tab\tab\tab\tab\tab ring, combine adjacent walls;\par
-\tab\tab else if x is dropped,\par
-\tab\tab\tab if cursor was inside a hitbox in he center of a \tab\tab\tab square of the grid in MEMap,\par
-\tab\tab\tab\tab add x there;\par
-\tab\}\par
-\tab\f5 Checking wall rings is neccesarry. Imagine if a player created a map with two \tab spawnpoints sectioned completly off by walls. the tanks would never interact.\par
-\tab\f2 FindWallRings\par
-\tab\{\par
-\tab\tab while there exists a wall with one non-connected end\par
-\tab\tab\{\par
-\tab\tab\tab remove  all walls that have one end not \tab\tab\tab\tab\tab connecting to anything\par
-\tab\tab\}\par
-\tab\tab if there are any non-edge walls left, there is a \tab\tab\tab ring.\par
-\tab\}\par
-\tab\f5 Combining adjacent walls goes like this:\par
-\tab\f2 combineWalls\par
-\tab\{\par
-\tab\tab if the place the wall was just placed in has a \tab\tab\tab\tab neighbor spot with a wall, \par
-\tab\tab\tab make a new wall with the max and min vertices of \tab\tab\tab the walls;\par
-\par
-\tab\}\par
-\f0\fs24\par
-\par
-\par
-\lang9\f3\fs22\tab\lang1033\f0\fs24\par
-\lang9\b\fs22\tab\lang1033\b0\fs24\par
-\pard\nowidctlpar\sa200\sl240\slmult1\lang9\b\f6\fs22\tab\lang1033\b0\f0\fs24\par
-\pard\nowidctlpar\sa200\sl276\slmult1\par
+{\rtf1\ansi\deff0\adeflang1025
+{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq0\fcharset0 Times New Roman;}{\f4\fnil\fprq0\fcharset128 OpenSymbol{\*\falt Arial Unicode MS};}{\f5\fmodern\fprq1\fcharset0 Courier New;}{\f6\froman\fprq2\fcharset128 Times New Roman;}{\f7\fmodern\fprq1\fcharset128 Courier New;}{\f8\fswiss\fprq0\fcharset0 Calibri;}{\f9\fnil\fprq2\fcharset0 Microsoft YaHei;}{\f10\fnil\fprq2\fcharset0 Mangal;}{\f11\fnil\fprq0\fcharset128 Mangal;}}
+{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green0\blue128;\red128\green128\blue128;}
+{\stylesheet{\s0\snext0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033 Default;}
+{\*\cs15\snext15\cf3\ul\ulc0\langfe255\lang255\lang255 Internet Link;}
+{\*\cs16\snext16 Numbering Symbols;}
+{\s17\sbasedon0\snext18\sb240\sa120\keepn\hich\af9\dbch\af10\afs28\loch\f2\fs28 Heading;}
+{\s18\sbasedon0\snext18\sb0\sa120 Text body;}
+{\s19\sbasedon18\snext19\sb0\sa120\dbch\af11 List;}
+{\s20\sbasedon0\snext20\sb120\sa120\noline\i\dbch\af11\afs24\ai\fs24 Caption;}
+{\s21\sbasedon0\snext21\noline\dbch\af11 Index;}
+}{\info{\creatim\yr0\mo0\dy0\hr0\min0}{\revtim\yr0\mo0\dy0\hr0\min0}{\printim\yr0\mo0\dy0\hr0\min0}{\comment OpenOffice}{\vern4010}}\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720\deftab720
+
+{\*\pgdsctbl
+{\pgdsc0\pgdscuse195\pgwsxn12240\pghsxn15840\marglsxn1800\margrsxn1800\margtsxn1440\margbsxn1440\pgdscnxt0 Default;}}
+\formshade{\*\pgdscno0}\paperh15840\paperw12240\margl1800\margr1800\margt1440\margb1440\sectd\sbknone\sectunlocked1\pgndec\pgwsxn12240\pghsxn15840\marglsxn1800\margrsxn1800\margtsxn1440\margbsxn1440\ftnbj\ftnstart1\ftnrstcont\ftnnar\aenddoc\aftnrstcont\aftnstart1\aftnnrlc
+\pgndec\pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+Team Waugh}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+Tanks_Game_RW}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+Software Design Document}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+Names: Riley Waugh}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+Date of Creation: 9/2/2015}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
 }
- 
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ul\ulc0\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+1. Intro}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab }{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+1.1 Purpose}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab This design document will describe the workings and the process of creation of a \tab tanks \tab game.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab }{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+1.2 Scope}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+\tab }{\afs22\rtlch \ltrch\loch\fs22\lang9
+The sowtware will be a 2-d tanks game. This means that the player will control a \tab tanks, \tab navigate a mazelike map, and shoot bullets at other tanks. A map \tab creator/editor will \tab accompany the game.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab }{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+1.3 Overview}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab In this design doc, the game overview and architecture will be explained. this \tab document will also go over the data design and component design and human \tab interface design and requirements.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab }{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+1.4 Reference Material}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab The game will be reminiscent of "Tank Trouble" (}{{\field{\*\fldinst HYPERLINK "https://www.tanktrouble.com/" }{\fldrslt \cf3\ul\ulc0\langfe255\lang255\lang255\cf2\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+https://www.tanktrouble.com/}{\rtlch \ltrch\loch
+}})}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab }{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+1.5 Definitions and Acronyms}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab "TGRW"refers to the software}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ul\ulc0\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+2. System Overview}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab The game will be  a 2-d, top-down shooter game for strictly entertainment purposes. THe player will maneuver a tank through a labyrinthine map  in order to collect powerups or shoot the opponent. Upgrades will significantly increase the power of a tank. Reaction time and accuracy and experience will be key to winning a round. Whenever a player wins a round by shooting another player, the winning player will be awarded 1 point. A player wins the game by gaining a specified amount of points. Players will use the keyboard for controls.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab A map editor will accompany the game.  A creator will be able to add walls, player spawn locations, and upgrade spawn loactions. The creator will then be able to save the map, and later load the map in the game.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ul\ulc0\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+3. System Architecture}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1080\li1080\ri0\lin1080\rin0\fi-360\sb0\sa200{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang1023
+3.1\tab }{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+Architectural Design}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+\tab }{\afs22\rtlch \ltrch\loch\fs22\lang9
+see DesignDocumentVisuals.png in the DesignDocument folder.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1080\li1080\ri0\lin1080\rin0\fi-360\sb0\sa200{\b\kerning0\ab\rtlch \ltrch\loch
+3.2\tab }{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+Architectural Description}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+\tab }{\afs22\rtlch \ltrch\loch\fs22\lang9
+The player will transition from state to state using buttons, a type of menuEntity. Maps \tab created in the map editor will be saved as a text file, ready to be loaded for further use. \tab Maps will be saved and loaded based on deciphering strings. Guns will be created in a \tab text document, too. The player also specifies the \tab win condition, and when that win \tab condition is met in the Game class, the game transitions \tab to the EndGameMenu. \tab Transistioning will be a matter of disabling one state and enabling another.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1080\li1080\ri0\lin1080\rin0\fi-360\sb0\sa200{\b\kerning0\ab\rtlch \ltrch\loch
+3.3\tab }{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+Design Rationale}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab I picked a state-by-state architecture because it fits the desired function of swapping \tab between menus, engineering the game before you play it.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx360\li360\ri0\lin360\rin0\fi-360\sb0\sa200{\b\kerning0\ab\rtlch \ltrch\loch
+4.\tab }{\ul\ulc0\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+Data Design}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1080\li1080\ri0\lin1080\rin0\fi-360\sb0\sa200{\b\kerning0\ab\rtlch \ltrch\loch
+4.1\tab }{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+Data Description}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab The data will be stored in vectors or as strings in text files}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1080\li1080\ri0\lin1080\rin0\fi-360\sb0\sa200{\b\kerning0\ab\rtlch \ltrch\loch
+4.2\tab }{\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+Data Dictionary}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+\tab \tab Data:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+Collision}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: determing collision between Collidables will be done in the Game class update cycle and will only be used in that class.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+Weapons}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: guns will be stored as  text documents.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+maps}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: maps will be stored as text documents.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+mouse data}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: mouse data will be collected in the base app and sent up a chain of updates.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+sprites and textures}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: The resource manager will load all images from a directory and will be accessable from every class.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li1440\ri0\lin1440\rin0\fi0\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li1440\ri0\lin1440\rin0\fi0\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+Objects:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+BasicButton}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A child of MenuEntity. Based on mouse data, the button will either be idle, hovered, held down, being clicked, idle and clicked, hovered and clicked, held down and clicked, or being unclicked. The button will return this information as an enum.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+BasicBullet}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: The bullet of the BasicGun; bounces off walls.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+BasicGun}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: The default gun.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+Bullet}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A child of collidable. Bullets move around the screen.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+Collidable}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: Two collidables are the only things that can collide.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+CollidableManager}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A vector of all collidables that can provide pointers to collidables and can check collision.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li1440\ri0\lin1440\rin0\fi0\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+CollisionBoxVector}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A member of Collidable; Each Collidable has a vector of vectors of points to determine collision.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+ControlSet}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A set of keys.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+EndGameMenu}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: One of the main states of the software. When the game is won, the EndGameMenu appears.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+Game}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A Game is a map, a determiner of tags, and a broad updater. One of the main states of the software.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+GeneralMap}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: Parent of GMap and MEMap; contains a vector of rectangles.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+GMap}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: aka game map, Gmap is a child of GeneralMap and Collidable}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+Gun}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A weapon; determines things like spread, initial velocity of a bullet, etc.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+MainMenu}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: One of the main states of the software. From the MainMenu, the player can access most parts of the software.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+MapEditor}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: a main state of software. It allows the player to create maps they will play on in the Game class.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+MEMap}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A child of GeneralMap and has a grid of tiles and 2 collisionBoxVectors.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\rtlch \ltrch\loch
+\tab }{\ul\ulc0\kerning0\rtlch \ltrch\loch
+MEEntity}{\kerning0\rtlch \ltrch\loch
+: a Wall, a PlayerSpawn, or an UpgradeSapawn. Every MEEntity can be dragged an dropped and has a source area.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\rtlch \ltrch\loch
+\tab }{\ul\ulc0\kerning0\rtlch \ltrch\loch
+MEEntityManager}{\kerning0\rtlch \ltrch\loch
+: Manages the functionality of the map editor along with MenuManager.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+Menu}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A menu is a set of menuEntities.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+MenuBackground}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: One child of MenuEntity. It is essentially just a texture with a position.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+MenuEnitity}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: Any type of button, text, image, etc.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+MenuManager}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A set of Menus for cases like the MainMenu, where there may be sound menus, option menus, etc.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+MinigunBullet}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A child of Bullet; bounces off walls.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+MinigunGun}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A child of Gun; faster firing rate and more spread than Basicgun}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+MinigunPU}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A child of Powerup; can upgrade and upgradable }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+Player}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A tank. Players can move, shoot, win the game, etc.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+PlayerManager}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: Keeps a vector of all players. Can also provide pointers to Players.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\rtlch \ltrch\loch
+\tab }{\ul\ulc0\kerning0\rtlch \ltrch\loch
+PlayerSpawn}{\kerning0\rtlch \ltrch\loch
+: A child of MEEntity; when loaded, will be an area to spawn a Player.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+Powerup}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A child of Collidable; can  ugrade a Player's stats}{\rtlch \ltrch\loch
+.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\rtlch \ltrch\loch
+\tab }{\ul\ulc0\kerning0\rtlch \ltrch\loch
+PowerupSpawn}{\kerning0\rtlch \ltrch\loch
+: A child of MEEntity; when loaded, will be an area to spawn powerups.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+ResourceManager}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A set of textures and fonts that can load all files of a type (e.g. .ttf, .jpeg, .png) from a given directory. It also can provide pointers to textures and fonts.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+Slider}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A child of MenuEntity; it contains a knob and a base, and the position of the knob on the base affects something, like brightness or music volume.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\hich\af4\dbch\af4\rtlch \ltrch\loch\loch\f4
+\tab }{\ul\ulc0\afs22\rtlch \ltrch\loch\fs22\lang9
+TextBox}{\afs22\rtlch \ltrch\loch\fs22\lang9
+: A child of MenuEntity; simply centered text.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\tx1440\li1440\ri0\lin1440\rin0\fi-360\sb0\sa200{\kerning0\dbch\af4\hich\af4\rtlch \ltrch\dbch\loch\f4
+\u12539\'3f}{\kerning0\rtlch \ltrch\dbch
+ }{\kerning0\rtlch \ltrch\loch
+\tab }{\ul\ulc0\kerning0\rtlch \ltrch\loch
+Wall}{\kerning0\rtlch \ltrch\loch
+: A child of MEEntity; one of the things that can be placed on a map and will become non-transversable terrain when loaded.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li-15\ri0\lin-15\rin0\fi0\sb0\sa200{\b\ab\rtlch \ltrch\loch
+5. Component Design}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+The MainMenu is the starting state of the software. The player will uses buttons to navigate to other menus and states. It will look something like this:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab udpate}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab update menu entities;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab if menu/state button was activated,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab go to menu/state;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af6\dbch\af6\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af6\dbch\af6\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+The EndGameMenu will operate in a similar way.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af6\dbch\af6\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af6\dbch\af6\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+The Game update loop does many things and will look something like this:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab update}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab if 'P' button is pressed,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab pause menu activates;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab Update CollidableManager (all collidables)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab get and interpret all collisions;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab if round wincon is met,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab move to next round, increment score;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\rtlch \ltrch\loch\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab if wincon is met or quit button is pressed, }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab move to EndGameScreen;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22\lang9
+The Game update loop looks simple, but updating the collidablemanager is deceptively complicated. It will look someting like this}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab /*for CollidableManager*/ update}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab for all collidables, increment movement.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab clear vector that holds all collisions;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab fill collision vector();}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab process collision vector();}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af6\dbch\af6\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+Again, this looks simple. Fill collision vector is more interesting:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af6\dbch\af6\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+\tab }{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+Fill Collision Vector}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab for each permutation of two vectors, which \tab \tab \tab \tab \tab separates diffent types of \tab collidables,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab \tab check if each element in one collides with\tab \tab \tab \tab \tab any element in the other, if so,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab \tab \tab record element k of vector j colliding \tab \tab \tab \tab \tab with element l of vector m and put it \tab \tab \tab \tab \tab \tab into collision vector; }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af7\dbch\af7\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+C}{\hich\af6\dbch\af6\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+hecking collision goes like this:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af6\dbch\af6\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+\tab }{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+Collide(collidable a, collidable b)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab for each permutation of 1 of a's vectors of vectors \tab \tab of points and 1 of b's,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab for each of a's points x in that vector}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab \tab check if x is inside b's vector of points, \tab \tab \tab \tab if so,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab \tab \tab a collides with b, break;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\rtlch \ltrch\loch\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+Checking if a point is inside a vector of points is annoying:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab checkAinVecB}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab draw lines from each point bi in b;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab sum the angle <(bi,A,b((i+1)/b.size())) for all \tab \tab \tab i<b.size();}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab if the sum == 2pi, it's inside}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab finding the angle between vector u and v goes like this:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab cos(angle between u and v) = (u DOT_PRODUCT v)/(||u|| ||v||)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\rtlch \ltrch\loch\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\rtlch \ltrch\loch\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab process collision vector goes like this:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab process collision vector}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \{\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab for every collision found, unincrement the movement of \tab \tab the collidables involved, but only once for each \tab \tab \tab collidable;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab if a Player hit a Powerup,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab powerup.affect(Player); // different for each \tab \tab \tab \tab \tab \tab \tab   // powerup}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab powerup disappears;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\rtlch \ltrch\loch\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab if a Player hit a bullet,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab player.health -= bullet.power;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\rtlch \ltrch\loch\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab if a bullet hits a wall,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab if bullet.wallinteraction == BOUNCE,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab \tab bullet bounces off the wall;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab else if == STOP,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab \tab bullet stops;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab else if == PIERCE,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \tab \tab \tab //do nothing\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af6\dbch\af6\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+In the MapEditor, it will be a drag and drop style map creator}{\afs22\rtlch \ltrch\loch\fs22
+. Its update cycle looks like this:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\afs22\rtlch \ltrch\loch\fs22
+\tab }{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+/*MapEditor*/ update}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab update the MEEntityManager;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab update the MenuManager;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af3\dbch\af3\afs22\rtlch \ltrch\loch\fs22\loch\f3
+\tab Updating the MEEntityManager looks like this:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af3\dbch\af3\afs22\rtlch \ltrch\loch\fs22\loch\f3
+\tab }{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+/*MEEntityManager*/ update}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab drag and drop MEEntities;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab based on the MEMap collision boxes, place walls and \tab \tab spawnpoints;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af3\dbch\af3\afs22\rtlch \ltrch\loch\fs22\loch\f3
+Finding out where to places dropped walls goes like this:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af3\dbch\af3\afs22\rtlch \ltrch\loch\fs22\loch\f3
+\tab }{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+findDropPlace}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab if wall is dropped,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab \tab if cursor was inside a hitbox on a side of a \tab \tab \tab square of the grid in MEMap,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab \tab \tab add a wall there if it doesn't make a wall \tab \tab \tab \tab ring;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab else if x is dropped,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab \tab if cursor was inside a hitbox in he center of a \tab \tab \tab square of the grid in MEMap,}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab \tab \tab add x there;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af3\dbch\af3\afs22\rtlch \ltrch\loch\fs22\loch\f3
+Checking wall rings is neccesarry. Imagine if a player created a map with two spawnpoints sectioned completly off by walls. the tanks would never interact.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af3\dbch\af3\afs22\rtlch \ltrch\loch\fs22\loch\f3
+\tab }{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+FindWallRings}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab while there exists a wall with one non-connected end}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab \tab remove  all walls that have one end not \tab \tab \tab \tab connecting to anything;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab if there are any non-edge walls left, there is a \tab \tab \tab ring.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f6
+Maps get saved like this: }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f6
+\tab }{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f7
+save}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f7
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f7
+\tab \tab combineWalls;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f7
+\tab \tab open text file, enter in a new wall entry, make a \tab \tab string containing all information needed.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f7
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af3\dbch\af3\afs22\rtlch \ltrch\loch\fs22\loch\f3
+Combining adjacent walls goes like this:}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af3\dbch\af3\afs22\rtlch \ltrch\loch\fs22\loch\f3
+\tab }{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+combineWalls}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \{}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab if the place the wall was just placed in has a \tab \tab \tab neighbor spot with a wall, }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \tab \tab make a new wall with the max and min vertices of \tab \tab \tab the walls;}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+\tab \}}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\li0\ri0\lin0\rin0\fi0\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f7
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\hich\af5\dbch\af5\afs22\rtlch \ltrch\loch\fs22\loch\f5
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\hich\af6\dbch\af6\afs22\rtlch \ltrch\loch\fs22\lang9\loch\f6
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ul\ulc0\b\afs22\ab\rtlch \ltrch\loch\fs22\lang9
+6. }{\ul\ulc0\b\ab\rtlch \ltrch\loch
+Human Interface Design}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b\ab\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b\ab\rtlch \ltrch\loch
+\tab 6.1 Overview of User Interface}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b\ab\rtlch \ltrch\loch
+\tab }{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+The user will start at the MainMenu. She will then be able to maneuver to the\tab MapEditor or options menu or the Game class by clicking an on-screen \tab BasicButton. }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+\tab From the MapEditor, she will be able to create and save a map or \tab cancel back to \tab the MainMenu.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+\tab From the options menu, she will be able to adjust the sound and brightness and \tab cancel back to the MainMenu}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+\tab If she hits StartGame, it will send her to a pre-game menu which will ask her \tab various things, like how many Players there will be, what maps to use, how many \tab points to play to, what type of handicap, etc. Then she moves to the Game}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+\tab In the Game, she will control a tank with the keyboard, trying to shoot the other \tab Players. She can pause the game and quit or access an options menu there.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+\tab After she wins enough rounds, she will move to the EndGameScreen where she \tab will be shown the Players' results. She can then move back to the MainMenu by \tab hitting a BasicButton.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+\tab }{\ulnone\ulc0\b\ab\rtlch \ltrch\loch
+6.2 Screen Images}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b0\ab0\rtlch \ltrch
+ }{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+\tab (none available yet)}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+\tab }{\ulnone\ulc0\b\ab\rtlch \ltrch\loch
+6.3 Screen Objects and Actions}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+\tab MenuEntities often can be interacted with via clicking, and Players will move \tab according to the keyboard controls. Shooting, dying, getting a Powerup will all \tab have an animation and a sound associated with them.}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\rtlch \ltrch\loch
+}
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+\tab }
+\par \pard\plain \s0\nowidctlpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf0\kerning1\hich\af0\langfe2052\dbch\af0\afs24\lang1081\loch\f0\fs24\lang1033\sl276\slmult1\sb0\sa200{\ulnone\ulc0\b0\ab0\rtlch \ltrch\loch
+\tab \tab }
+\par }
