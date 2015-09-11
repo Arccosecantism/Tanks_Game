@@ -32,25 +32,31 @@ void checkEvents(Event& fevent)
 			mousePosition = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
 			break;
 		}
-		case sf::Event::MousButtonPressed:
+		case sf::Event::MouseButtonPressed:
 		{
 			if(fevent.mouseButton.button == sf::Mouse::Left)
 			{
-				MouseDataHelpers[0] = CLICKED;
+				mouseData.x = CLICKED;
 			}
 			if(fevent.mouseButton.button == sf::Mouse::Right)
 			{
-				MouseDataHelpers[1] = CLICKED;
-			} 
-			
+				mouseData.y = CLICKED;
+			}
+			break;
 		}
-		
-		
-		
-		
-		
+		case sf::Event::MouseButtonReleased:
+		{
+			if(fevent.mouseButton.button == sf::Mouse::Left)
+			{
+				mouseData.x = RELEASED;
+			}
+			if(fevent.mouseButton.button == sf::Mouse::Right)
+			{
+				mouseData.y = RELEASED;
+			}
+			break;	
+		}
 	}
-
 	
 }
 
@@ -70,7 +76,27 @@ void App::draw()					//draw all objects
 void App::getMouseData()			//retrieve mouse data
 {
 
-	MouseDataHelpers[2] = 0;
+
+
+		if(mouseData.x == PRESSED)
+		{
+			mouseData.x = HELD;
+		}
+		else if(mouseData.x == RELEASED)
+		{
+			mouseData.x = UNHELD;
+		}
+		if(mouseData.y == PRESSED)
+		{
+			mouseData.y = HELD;
+		}
+		else if(mouseData.y == RELEASED)
+		{
+			mouseData.y = UNHELD;
+		}
+		
+		
+	}
 }
 
 void App::getKeyboardData()			//retrieve keyboard data
