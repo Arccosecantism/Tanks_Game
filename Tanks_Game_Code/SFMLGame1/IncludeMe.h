@@ -9,3 +9,5 @@
 
 
 #include <SFML/Graphics.hpp>
+
+//include this in every .h
