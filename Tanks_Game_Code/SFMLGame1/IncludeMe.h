@@ -9,5 +9,7 @@
 
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <SFML/Audio.hpp>
 
 //include this in every .h
