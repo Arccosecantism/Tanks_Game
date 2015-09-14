@@ -1,15 +1,8 @@
-#ifdef SFML_STATIC
-#pragma comment(lib, "glew.lib")
-#pragma comment(lib, "freetype.lib")
-#pragma comment(lib, "jpeg.lib")
-#pragma comment(lib, "opengl32.lib")
-#pragma comment(lib, "winmm.lib")
-#pragma comment(lib, "gdi32.lib")  
-#endif // SFML_STATIC
+#pragma once
 
-
-#include <SFML/Graphics.hpp>
+#include "SFMLbase.h"
 #include <iostream>
-#include <SFML/Audio.hpp>
+#include "MouseData.h"
+#include "ResourceManager.h"
 
-//include this in every .h
+//include this in almost every .h

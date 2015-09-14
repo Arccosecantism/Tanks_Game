@@ -9,7 +9,7 @@ App::App(sf::RenderWindow& fwindow)								/*basic counstructor for App. App mus
 																RenderWindow which it will send all over the place*/
 {
 	window = &fwindow;											//setting a pointer to a renderwindow
-	mouseData = sf::Vector2i(UNHELD, UNHELD);					//starting the mouse as unheld
+	mouseInfo.setButtonData(sf::Vector2i(UNHELD, UNHELD));					//starting the mouse as unheld
 }
 
 
@@ -51,7 +51,7 @@ void App::checkEvents(sf::Event& fevent)
 
 		case sf::Event::MouseMoved:								//mouse is moved
 		{
-			mousePosition = sf::Vector2i(fevent.mouseMove.x, fevent.mouseMove.y);	//set mouse position to the new position	
+			mouseInfo.setMousePosition(sf::Vector2i(fevent.mouseMove.x, fevent.mouseMove.y));	//set mouse position to the new position	
 			break;
 		}
 
@@ -61,11 +61,11 @@ void App::checkEvents(sf::Event& fevent)
 		{
 			if (fevent.mouseButton.button == sf::Mouse::Left)	//if left button
 			{
-				mouseData.x = PRESSED;							//set the left mouse data to pressed
+				mouseInfo.setLeftButtonData(PRESSED);			//set the left mouse data to pressed
 			}
 			if (fevent.mouseButton.button == sf::Mouse::Right)	//if right button
 			{
-				mouseData.y = PRESSED;							//set right mouse data to pressed
+				mouseInfo.setRightButtonData(PRESSED);			//set right mouse data to pressed
 			}
 			break;
 		}
@@ -76,11 +76,11 @@ void App::checkEvents(sf::Event& fevent)
 		{
 			if (fevent.mouseButton.button == sf::Mouse::Left)	//if left mouse is released
 			{
-				mouseData.x = RELEASED;							//left mouse data turns to released
+				mouseInfo.setLeftButtonData(RELEASED);			//left mouse data turns to released
 			}
 			if (fevent.mouseButton.button == sf::Mouse::Right)	//if left button is released
 			{
-				mouseData.y = RELEASED;							//right mouse data turns to released	
+				mouseInfo.setRightButtonData(RELEASED);			//right mouse data turns to released	
 			}
 			break;
 		}
@@ -117,7 +117,7 @@ void App::draw()							//draw all objects
 /*------------------------------------------------------------------------------------
 -------------------------------resetMouseData-------------------------------------------
 ------------------------------------------------------------------------------------*/
-void App::resetMouseData()			//resets mouse data
+void App::resetMouseData()									//resets mouse data
 {
 
 
@@ -129,31 +129,31 @@ void App::resetMouseData()			//resets mouse data
 
 	//--------------------------------------------------------------
 	//for left mouse button:
-	if (mouseData.x == PRESSED)				//if left mouse button was just pressed this cycle...
+	if (mouseInfo.getLeftButtonData() == PRESSED)			//if left mouse button was just pressed this cycle...
 	{
-		mouseData.x = HELD;					//the user is now holding the mouse down.
+		mouseInfo.setLeftButtonData(HELD);					//the user is now holding the mouse down.
 	}
 
 
 
-	else if (mouseData.x == RELEASED)		//if left mouse button was just released this cycle...
+	else if (mouseInfo.getLeftButtonData() == RELEASED)		//if left mouse button was just released this cycle...
 	{
-		mouseData.x = UNHELD;				//the user has let go of the left mouse button.
+		mouseInfo.setLeftButtonData(UNHELD);				//the user has let go of the left mouse button.
 	}
 
 
 	//------------------------------------------------------------
 	//for right mouse button:
-	if (mouseData.y == PRESSED)
+	if (mouseInfo.getRightButtonData() == PRESSED)
 	{
-		mouseData.y = HELD;
+		mouseInfo.setRightButtonData(HELD);	
 	}
 
 
 
-	else if (mouseData.y == RELEASED)
+	else if (mouseInfo.getRightButtonData() == RELEASED)
 	{
-		mouseData.y = UNHELD;
+		mouseInfo.setRightButtonData(UNHELD);
 	}
 
 
@@ -166,10 +166,16 @@ void App::resetMouseData()			//resets mouse data
 /*------------------------------------------------------------------------------------
 -------------------------------getKeyboardData-------------------------------------------
 ------------------------------------------------------------------------------------*/
-void App::getKeyboardData()			//retrieve keyboard data
+void App::getKeyboardData()													//retrieve keyboard data
 {
-
-
+	keys.clear();															//empty the key vector
+	for (int i = 0; i < sf::Keyboard::KeyCount; i++)						//KeyCount is the number of Keys; this is intended to check every key
+	{
+		if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(i)))	//trying to typecast int i as a Key enum 
+		{
+			keys.push_back(i);
+		}
+	}
 }
 
 
@@ -177,12 +183,22 @@ void App::getKeyboardData()			//retrieve keyboard data
 /*------------------------------------------------------------------------------------
 -------------------------------doPerFrame-------------------------------------------
 ------------------------------------------------------------------------------------*/
-void App::doPerFrame()				//do the above five functions every update cycle
+void App::doPerFrame()							//do the above four functions every update cycle
 {
 	getKeyboardData();
 	update();
 	draw();
 	resetMouseData();
+}
+
+
+/*------------------------------------------------------------------------------------
+-------------------------------setupResourceManager-----------------------------------
+------------------------------------------------------------------------------------*/
+void App::setupResourceManager()				//adds all the files to the resource manager
+{
+	//generalResourceManager.addFile("defaultFont.ttf", "defaultFont");
+
 }
 
 

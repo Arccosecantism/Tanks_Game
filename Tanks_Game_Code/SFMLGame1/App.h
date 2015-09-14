@@ -19,12 +19,13 @@ private:
 	void getKeyboardData();									//gets keyboard data
 	void resetMouseData();									//resets mouse data
 
+	void setupResourceManager();
 
 
-	sf::Vector2i mouseData;									//holds a left and right button value
-	sf::Vector2i mousePosition;								//where the mouse is
+
+	MouseData mouseInfo;
 		
-	enum mouseDataCases { UNHELD = 0, PRESSED = 1, HELD = 2, RELEASED = 3 };	
+	enum mouseInfoCases { UNHELD = 0, PRESSED = 1, HELD = 2, RELEASED = 3 };	
 															/*unheld is not pressing any buttons, pressed is the first frame 
 															when the a button is pressed, held is when you hold a button, 
 															and released is when you release a button*/
@@ -37,6 +38,8 @@ private:
 
 
 	sf::RenderWindow* window;								//pointer to a render window
+
+	ResourceManager generalResourceManager;
 
 
 };

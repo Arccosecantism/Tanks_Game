@@ -1,5 +1,5 @@
 #pragma once
-#include "IncludeMe.h"
+#include "SFMLbase.h"
 
 class ResourceManager						//This is unimpressive. IT DOES NOT CURRENTLY load all files from a directory.
 {
