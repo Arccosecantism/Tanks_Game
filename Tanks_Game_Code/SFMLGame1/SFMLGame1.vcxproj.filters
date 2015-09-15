@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\MenuTools">
+      <UniqueIdentifier>{b39171fb-3536-4554-a709-2c767162108b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MenuTools">
+      <UniqueIdentifier>{d0429a26-96bb-4677-860d-dcb966ca6498}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -21,13 +27,19 @@
     <ClCompile Include="App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MouseData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MenuElement.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\MenuTools</Filter>
     </ClCompile>
-    <ClCompile Include="MouseData.cpp">
+    <ClCompile Include="BasicButton.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,13 +53,22 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MouseData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SFMLbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuElement.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuToolsInclude.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicButton.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
