@@ -158,7 +158,7 @@ void ResourceManager::addEmptyResourceSet(std::string name)
 
 
 /*------------------------------------------------------------------------------------
--------------------------------addRS---------------------------------------------
+-------------------------------addRS--------------------------------------------------
 ------------------------------------------------------------------------------------*/
 void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string name)
 {
@@ -171,7 +171,7 @@ void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string nam
 	
 	
 /*------------------------------------------------------------------------------------
--------------------------------addTextoRS---------------------------------------------
+-------------------------------addTexturetoRS-----------------------------------------
 ------------------------------------------------------------------------------------*/
 void addTexturetoResourceSet(std::string rsName, std::string texName)
 {
@@ -188,6 +188,8 @@ void addTexturetoResourceSet(std::string rsName, std::string texName)
 		indextx++;
 	}
 	
+	resourceSets[indexrs].addTexture(getFontPointerByName(texName));
+	
 	
 	
 	
@@ -200,6 +202,20 @@ void addTexturetoResourceSet(std::string rsName, std::string texName)
 void addFonttoResourceSet(std::string rsName, std::string fontName)
 {
 	
+	int indexrs = searchNameVector(rsName, ResourceSet_Names);
+	int indexfn = searchNameVector(texName, Font_Names);
+	
+	if (indexrs == -1)
+	{
+		indexrs++;
+	}
+	
+	if (indextfn == -1)
+	{
+		indexfn++;
+	}
+	
+	resourceSets[indexrs].addFont(getFontPointerByName(fontName));
 	
 }
 
