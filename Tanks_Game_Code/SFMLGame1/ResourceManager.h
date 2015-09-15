@@ -13,7 +13,14 @@ public:
 	sf::Texture* getTexturePointerByName(std::string name);
 	//sf::SoundBuffer* getSoundBufPointerByName(std::string name);
 
-	void addResourceSet();
+	void addEmptyResourceSet(std::string name);
+	void addResourceSet(ResourceGroup fresourceSet, std::string name);
+	//void addResourceSet(Texture* texPArray[], Font* fontPArray[] /*, soundBufPArray[] */, std::string name);
+	
+	void addTexturetoResourceSet(std::string rsName, std::string texName);
+	void addFonttoResourceSet(std::string rsName, std::string fontName);
+	//void addSoundBuftoResourceSet(std::string rsName, std::string sbName);
+	
 
 private:
 
@@ -34,6 +41,8 @@ private:
 	std::vector<ResourceGroup> resourceSets;
 
 	std::vector<std::string> nameVectors[4];
+	
+	enum nameVectorIndeces {Texture_Names = 0, Font_Names = 1, SoundBuf_Names = 2, ResourceSet_Names = 3};
 
 
 	

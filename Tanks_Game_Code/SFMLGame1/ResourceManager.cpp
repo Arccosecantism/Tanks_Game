@@ -45,7 +45,7 @@ void ResourceManager::addFile(std::string fileName, std::string name)
 	if (tail == "ttf")
 	{
 		addFont(fileName);
-		addName(name, 0);
+		addName(name, Texture_Names);
 	}
 
 
@@ -56,7 +56,7 @@ void ResourceManager::addFile(std::string fileName, std::string name)
 				tail == "bmp")
 	{
 		addTexture(fileName);
-		addName(name, 1);
+		addName(name, Font_Names);
 	}
 
 
@@ -68,7 +68,7 @@ void ResourceManager::addFile(std::string fileName, std::string name)
 	//			tail == "raw")
 	//{
 	//	addSoundBuf(fileName);
-	//	addName(name, 2);
+	//	addName(name, SoundBuf_Names);
 	//}
 
 
@@ -142,6 +142,75 @@ sf::Texture* ResourceManager::getTexturePointerByName(std::string name)
 //}
 
 
+
+/*------------------------------------------------------------------------------------
+-------------------------------addEmptyRS---------------------------------------------
+------------------------------------------------------------------------------------*/
+void ResourceManager::addEmptyResourceSet(std::string name)
+{
+	resourceGroup empt;
+	resourceSets.push_back(empt);
+	
+	nameVectors[ResourceSet_Names].push_back(name);
+}
+
+
+
+
+/*------------------------------------------------------------------------------------
+-------------------------------addRS---------------------------------------------
+------------------------------------------------------------------------------------*/
+void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string name)
+{
+	resourceSets.push_back(fresourceSet);
+	nameVectors[ResourceSet_Names].push_back(name);
+	
+}
+	
+	
+	
+	
+/*------------------------------------------------------------------------------------
+-------------------------------addTextoRS---------------------------------------------
+------------------------------------------------------------------------------------*/
+void addTexturetoResourceSet(std::string rsName, std::string texName)
+{
+	int indexrs = searchNameVector(rsName, ResourceSet_Names);
+	int indextx = searchNameVector(texName, Texture_Names);
+	
+	if (indexrs == -1)
+	{
+		indexrs++;
+	}
+	
+	if (indextx == -1)
+	{
+		indextx++;
+	}
+	
+	
+	
+	
+	
+}
+
+/*------------------------------------------------------------------------------------
+-------------------------------addFontoRS---------------------------------------------
+------------------------------------------------------------------------------------*/
+void addFonttoResourceSet(std::string rsName, std::string fontName)
+{
+	
+	
+}
+
+/*------------------------------------------------------------------------------------
+-------------------------------addSoundBuftoRS----------------------------------------
+------------------------------------------------------------------------------------*/
+//void addSoundBuftoResourceSet(std::string rsName, std::string sbName);
+	
+	
+	
+	
 /*------------------------------------------------------------------------------------
 -------------------------------searchNameVector---------------------------------------
 ------------------------------------------------------------------------------------*/
