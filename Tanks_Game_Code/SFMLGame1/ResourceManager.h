@@ -1,48 +1,83 @@
 #pragma once
 #include "ResourceGroup.h"
 
-class ResourceManager						//This is unimpressive. IT DOES NOT CURRENTLY load all files from a directory.
-{
+
+
+class ResourceManager														/*This class will basically hold all textures, fonts, and soundBufs.*/
+{																			/*Part of this is unimpressive -- IT DOES NOT CURRENTLY
+																			load all files from a directory.*/
+
+/*---------------------------------------------------------------------------------------------------------
+
+NOTES: SoundBuffer doesnt work yet, so elements that pertain to them are likely commented out for now.
+
+----------------------------------------------------------------------------------------------------------*/
+
+
 public:
 
-	ResourceManager();
+	ResourceManager();														//Constructor
 
-	void addFile(std::string fileName, std::string name);
 
-	sf::Font* getFontPointerByName(std::string name);
-	sf::Texture* getTexturePointerByName(std::string name);
+	void addFile(std::string fileName, std::string name);					//Adds a generic file
+
+
+
+	sf::Texture* getTexturePointerByName(std::string name);					//retrieves a pointer to a texture
+	sf::Font* getFontPointerByName(std::string name);						//Retrieves a pointer to a font
 	//sf::SoundBuffer* getSoundBufPointerByName(std::string name);
 
-	void addEmptyResourceSet(std::string name);
-	void addResourceSet(ResourceGroup fresourceSet, std::string name);
+
+
+	void addEmptyResourceSet(std::string name);								//sets a new empty resourceGroup to resourceSet
+	void addResourceSet(ResourceGroup fresourceSet, std::string name);		//sets a currently filled resourceGroup to resourceSet
 	//void addResourceSet(Texture* texPArray[], Font* fontPArray[] /*, soundBufPArray[] */, std::string name);
 	
-	void addTexturetoResourceSet(std::string rsName, std::string texName);
-	void addFonttoResourceSet(std::string rsName, std::string fontName);
+
+
+	void addTexturetoResourceSet(std::string rsName, std::string texName);	//adds a Texture to a resourceSet
+	void addFonttoResourceSet(std::string rsName, std::string fontName);	//adds a Font to a resourceSet
 	//void addSoundBuftoResourceSet(std::string rsName, std::string sbName);
 	
 
+
 private:
 
-	void addFont(std::string fileName);
-	void addTexture(std::string fileName);
-	//void addSoundBuf(std::string fileName);
-
-	void addName(std::string name, int num);
 
 
-	int searchNameVector(std::string name, int num);
 
-	std::vector<sf::Font> fontVector;
-	std::vector<sf::Texture> textureVector;
+	void addTexture(std::string fileName);									//adds a Texture
+	void addFont(std::string fileName);										//adds a Font
+	//void addSoundBuf(std::string fileName);								//adds a SoundBuf
+
+
+
+	void addName(std::string name, int num);								//adds a name;
+
+
+
+	int searchNameVector(std::string name, int num);						//searches through a vector to find a name
+
+
+
+	std::vector<sf::Texture> textureVector;									//vector of Textures that will be used in the program
+	std::vector<sf::Font> fontVector;										//vector of Fonts that will be used in the whole program
 	//std::vector<sf::SoundBuffer> soundBufVector;
 
 
-	std::vector<ResourceGroup> resourceSets;
 
-	std::vector<std::string> nameVectors[4];
+	std::vector<ResourceGroup> resourceSets;								/*presets for certain things like BasicButton. BasicButton will use
+																			the preset Textures, Fonts, and SoundBuffers for BasicButton*/
+
+
+
+	std::vector<std::string> nameVectors[4];								/*array of vector of names; it will usually
+																			be accessed by the nameVectorIndeces enum*/
+
+
 	
-	enum nameVectorIndeces {Texture_Names = 0, Font_Names = 1, SoundBuf_Names = 2, ResourceSet_Names = 3};
+	enum nameVectorIndeces {Texture_Names = 0, Font_Names = 1, SoundBuf_Names = 2, ResourceSet_Names = 3}; 
+																			//enum for accessing vectors more intuitively
 
 
 	

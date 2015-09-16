@@ -4,7 +4,7 @@
 /*------------------------------------------------------------------------------------
 -------------------------------Constructor--------------------------------------------
 ------------------------------------------------------------------------------------*/
-ResourceManager::ResourceManager()
+ResourceManager::ResourceManager()											//Constructor
 {
 
 }
@@ -16,31 +16,38 @@ ResourceManager::ResourceManager()
 /*------------------------------------------------------------------------------------
 -------------------------------addFile------------------------------------------------
 ------------------------------------------------------------------------------------*/
-void ResourceManager::addFile(std::string fileName, std::string name)
+void ResourceManager::addFile(std::string fileName, std::string name)		//adds a generic file
 {
-	std::string reverseTail = "";
-	std::string tail = "";
 
-	for (int i = fileName.size() - 1; i >= 0; i--)
+
+
+	std::string reverseTail = "";											//will be a reversed file extension
+	std::string tail = "";													//will be the actual file extension
+
+	for (int i = fileName.size() - 1; i >= 0; i--)							/*cycles from the back of the file name
+																			and records the reversed file extension*/
 	{
-		if (fileName[i] == '.')
+		if (fileName[i] == '.')												//goes to the dot
 		{
 			break;
 		}
 		else
 		{
-			reverseTail += fileName[i];
+			reverseTail += fileName[i];										//otherwise, record the letter -- will be backwards when done in succession
 		}
 	}
 
 
-	for (int i = reverseTail.size() - 1; i >= 0; i--)
+	for (int i = reverseTail.size() - 1; i >= 0; i--)						//reverses the file extension
 	{
 		tail += reverseTail[i];
 	}
 
 
 
+	//---------------------------------------------
+	//Now we interpret the file extension.
+	//----------------------------------------------
 
 	if (tail == "ttf")
 	{
@@ -77,12 +84,38 @@ void ResourceManager::addFile(std::string fileName, std::string name)
 
 
 
+
+
+
+/*------------------------------------------------------------------------------------
+-------------------------------getTexturePointer--------------------------------------
+------------------------------------------------------------------------------------*/
+sf::Texture* ResourceManager::getTexturePointerByName(std::string name)					//returns a pointer to a Texture
+{
+
+	int index = searchNameVector(name, Texture_Names);
+	sf::Texture* returnMe;
+
+	if (index == -1)
+	{
+		index++;
+	}
+
+	returnMe = &textureVector[index];
+
+	return returnMe;
+}
+
+
+
+
+
 /*------------------------------------------------------------------------------------
 -------------------------------getFontPointer-----------------------------------------
 ------------------------------------------------------------------------------------*/
-sf::Font* ResourceManager::getFontPointerByName(std::string name)
+sf::Font* ResourceManager::getFontPointerByName(std::string name)						//returns a pointer to a Font
 {
-	int index = searchNameVector(name, 0);
+	int index = searchNameVector(name, Font_Names);
 	sf::Font* returnMe;
 
 	if (index == -1)
@@ -99,35 +132,13 @@ sf::Font* ResourceManager::getFontPointerByName(std::string name)
 
 
 
-
-/*------------------------------------------------------------------------------------
--------------------------------getTexturePointer--------------------------------------
-------------------------------------------------------------------------------------*/
-sf::Texture* ResourceManager::getTexturePointerByName(std::string name)
-{
-
-	int index = searchNameVector(name, 0);
-	sf::Texture* returnMe;
-
-	if (index == -1)
-	{
-		index++;
-	}
-
-	returnMe = &textureVector[index];
-
-	return returnMe;
-}
-
-
-
 /*------------------------------------------------------------------------------------
 -------------------------------getSBPointer-------------------------------------------
 ------------------------------------------------------------------------------------*/
-//sf::SoundBuffer* ResourceManager::getSoundBufPointerByName(std::string name)
+//sf::SoundBuffer* ResourceManager::getSoundBufPointerByName(std::string name)			//returns a pointer to a SoundBuf
 //{
 //
-//	int index = searchNameVector(name, 0);
+//	int index = searchNameVector(name, SoundBuf_Names);
 //	sf::SoundBuffer* returnMe;
 //
 //	if (index == -1)
@@ -146,9 +157,9 @@ sf::Texture* ResourceManager::getTexturePointerByName(std::string name)
 /*------------------------------------------------------------------------------------
 -------------------------------addEmptyRS---------------------------------------------
 ------------------------------------------------------------------------------------*/
-void ResourceManager::addEmptyResourceSet(std::string name)
+void ResourceManager::addEmptyResourceSet(std::string name)								//adds an empty resourceGroup and give it a name
 {
-	resourceGroup empt;
+	ResourceGroup empt;
 	resourceSets.push_back(empt);
 	
 	nameVectors[ResourceSet_Names].push_back(name);
@@ -160,7 +171,7 @@ void ResourceManager::addEmptyResourceSet(std::string name)
 /*------------------------------------------------------------------------------------
 -------------------------------addRS--------------------------------------------------
 ------------------------------------------------------------------------------------*/
-void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string name)
+void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string name)		//adds an already created resourceGroup and name it
 {
 	resourceSets.push_back(fresourceSet);
 	nameVectors[ResourceSet_Names].push_back(name);
@@ -173,7 +184,7 @@ void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string nam
 /*------------------------------------------------------------------------------------
 -------------------------------addTexturetoRS-----------------------------------------
 ------------------------------------------------------------------------------------*/
-void addTexturetoResourceSet(std::string rsName, std::string texName)
+void ResourceManager::addTexturetoResourceSet(std::string rsName, std::string texName)	//adds a Texture to a resourceSet by name
 {
 	int indexrs = searchNameVector(rsName, ResourceSet_Names);
 	int indextx = searchNameVector(texName, Texture_Names);
@@ -188,29 +199,29 @@ void addTexturetoResourceSet(std::string rsName, std::string texName)
 		indextx++;
 	}
 	
-	resourceSets[indexrs].addTexture(getFontPointerByName(texName));
-	
-	
-	
+	resourceSets[indexrs].addTexture(getTexturePointerByName(texName));
 	
 	
 }
 
+
+
+
 /*------------------------------------------------------------------------------------
 -------------------------------addFontoRS---------------------------------------------
 ------------------------------------------------------------------------------------*/
-void addFonttoResourceSet(std::string rsName, std::string fontName)
+void ResourceManager::addFonttoResourceSet(std::string rsName, std::string fontName)	//adds a Font to a resourceSet by name
 {
 	
 	int indexrs = searchNameVector(rsName, ResourceSet_Names);
-	int indexfn = searchNameVector(texName, Font_Names);
+	int indexfn = searchNameVector(fontName, Font_Names);
 	
 	if (indexrs == -1)
 	{
 		indexrs++;
 	}
 	
-	if (indextfn == -1)
+	if (indexfn == -1)
 	{
 		indexfn++;
 	}
@@ -219,10 +230,30 @@ void addFonttoResourceSet(std::string rsName, std::string fontName)
 	
 }
 
+
+
+
+
 /*------------------------------------------------------------------------------------
 -------------------------------addSoundBuftoRS----------------------------------------
 ------------------------------------------------------------------------------------*/
-//void addSoundBuftoResourceSet(std::string rsName, std::string sbName);
+/*void addSoundBuftoResourceSet(std::string rsName, std::string sbName)					//adds a SoundBuf to a resourceSet by name
+{
+	int indexrs = searchNameVector(rsName, ResourceSet_Names);
+	int indexsb = searchNameVector(sbName, SoundBuf_Names);
+	
+	if (indexrs == -1)
+	{
+		indexrs++;
+	}
+	
+	if (indexsb == -1)
+	{
+		indexsb++;
+	}
+	
+	resourceSets[indexrs].addSoundBuf(getFontPointerByName(sbName));
+}*/
 	
 	
 	
@@ -230,7 +261,7 @@ void addFonttoResourceSet(std::string rsName, std::string fontName)
 /*------------------------------------------------------------------------------------
 -------------------------------searchNameVector---------------------------------------
 ------------------------------------------------------------------------------------*/
-int ResourceManager::searchNameVector(std::string name, int num)
+int ResourceManager::searchNameVector(std::string name, int num)						//searches an element in a vector by name
 {
 	int returnMe = -1;
 	for (int i = 0; i < nameVectors[num].size(); i++)
@@ -246,25 +277,12 @@ int ResourceManager::searchNameVector(std::string name, int num)
 	return returnMe;
 }
 
-/*------------------------------------------------------------------------------------
--------------------------------addFont------------------------------------------------
-------------------------------------------------------------------------------------*/
-void ResourceManager::addFont(std::string fileName)
-{
-	sf::Font font;
-	if (!font.loadFromFile(fileName))
-	{
-		// error...
-	}
-	fontVector.push_back(font);
-}
-
 
 
 /*------------------------------------------------------------------------------------
 -------------------------------addTexture---------------------------------------------
 ------------------------------------------------------------------------------------*/
-void ResourceManager::addTexture(std::string fileName)
+void ResourceManager::addTexture(std::string fileName)									////private function; adds a Texture to the TextureVector
 {
 	sf::Texture texture;
 	if (!texture.loadFromFile(fileName))
@@ -279,9 +297,25 @@ void ResourceManager::addTexture(std::string fileName)
 
 
 /*------------------------------------------------------------------------------------
+-------------------------------addFont------------------------------------------------
+------------------------------------------------------------------------------------*/
+void ResourceManager::addFont(std::string fileName)										//private function; adds a font to the FontVector
+{
+	sf::Font font;
+	if (!font.loadFromFile(fileName))
+	{
+		// error...
+	}
+	fontVector.push_back(font);
+}
+
+
+
+
+/*------------------------------------------------------------------------------------
 -------------------------------addSoundBuf-------------------------------------------
 ------------------------------------------------------------------------------------*/
-//void ResourceManager::addSoundBuf(std::string fileName)
+//void ResourceManager::addSoundBuf(std::string fileName)								//private function; adds a soundBuf to the soundBufVector
 //{
 //
 //	sf::SoundBuffer buffer;
@@ -294,10 +328,14 @@ void ResourceManager::addTexture(std::string fileName)
 //}
 
 
+
+
+
+
 /*------------------------------------------------------------------------------------
 -------------------------------addName------------------------------------------------
 ------------------------------------------------------------------------------------*/
-void ResourceManager::addName(std::string name, int num)
+void ResourceManager::addName(std::string name, int num)								//adds a name to one of the namevectors
 {
 	bool sameName = true;
 	bool firstDuplicate = true;
@@ -309,21 +347,23 @@ void ResourceManager::addName(std::string name, int num)
 		{
 			if (firstDuplicate == true)
 			{
-				name += "2";
+				name += "2";							/*if there exists a "RedTexture" already, and you try to add another one,
+														it will become "RedTexture2"*/
 			}
 			else
 			{
-				name[name.size() - 1]++;
+				name[name.size() - 1]++;				/*if there exists a "RedTexture2" already, and you try to add another one,
+														it will become "RedTexture3"*/
 			}
 		}
 
 		else
 		{
-			sameName = false;
+			sameName = false;							//if therer is no same name, exit the while loop
 		}
 
 	}
 
-	nameVectors[num].push_back(name);
+	nameVectors[num].push_back(name);					//then add the altered (or not) name
 
 }

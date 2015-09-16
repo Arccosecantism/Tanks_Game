@@ -5,6 +5,6 @@ class BasicButton
 {
 public:
 	BasicButton();
-	BasicButton(sf::Texture)
+	BasicButton(sf::Texture);
 };
 
