@@ -12,7 +12,7 @@ public:
 
 	bool getRequiresMouseData();
 
-private:
+protected:
 
 	bool requiresMouseData;
 };
