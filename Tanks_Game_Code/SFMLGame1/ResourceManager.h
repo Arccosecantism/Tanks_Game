@@ -39,6 +39,8 @@ public:
 	void addFonttoResourceSet(std::string rsName, std::string fontName);	//adds a Font to a resourceSet
 	//void addSoundBuftoResourceSet(std::string rsName, std::string sbName);
 	
+	ResourceGroup getResourceSetByName(std::string fname); 
+	
 
 
 private:
