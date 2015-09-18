@@ -1,5 +1,7 @@
 #pragma once
 #include "SFMLbase.h"
+
+
 class MouseData
 {
 public:

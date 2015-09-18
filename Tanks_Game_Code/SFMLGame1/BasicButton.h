@@ -3,12 +3,19 @@
 
 class BasicButton: public MenuElement
 {
+
+
 public:
 
-	BasicButton();
-	BasicButton(	sf::Vector2f fposition,		ResourceGroup& fResourceGroup,
-					std::string ftextName,		sf::Color ftextColor,
-					double ftextSize, 			double fspriteSize);
+	
+	
+	BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
+
+					std::string ftextName, sf::Color ftextColor,
+
+					double ffontSize, sf::Vector2f fspriteSize,
+
+					sf::Vector2f ftextSize);
 				
 				
 	void update();
@@ -18,10 +25,10 @@ public:
 	void draw(sf::RenderWindow& frenderWindow);
 	
 	
-	
+
 	void setResources(ResourceGroup& rgroup);
 	
-	void setTextSize(int fsize);
+	/*void setTextSize(int fsize);
 	
 	void setTextColor(sf::Color fcolor);
 	
@@ -29,42 +36,51 @@ public:
 	
 	void setPosition(sf::Vector2f fposition);
 	
-	void setSpriteSize(double fsize);
+	void setSpriteSize(sf::Vector2f  fsize);*/
 	
 	
 	
 	int getButtonState();
-	
-	
 
 private:
-
-
-	void setExtremeValues();
 	
 	void updateButtonState(MouseData& fmousedata);
 	
 	
-	sf::Sprite buttonStateSprites[6];
+	std::vector<sf::Sprite> buttonStateSprites;
+
 	sf::Text buttonText; 
+
 	//sf::soundBuffer soundFX[2];
 	
+	sf::Vector2f textSize;
+
 	std::string buttonString;
-	sf::Color textColor;
-	double textSize;
 	
 	sf::Vector2f spriteSize;
 	
 	int buttonState;
-	
-	
-	
-	enum buttonStatePossibilities {Unheld, Hovered, Held, Unheld_Pressed, Hovered_Pressed, Held_Pressed, Clicked, Released};
-	
-	
+
 	sf::Vector2f position;
-	
+
+
+
+
+
 	sf::Vector2f extremeCorners[2];
+	
+	sf::Vector2f halfDimensions;
+
+
+
+	int lastMouseHeld;
+
+	
+	
+	enum buttonStatePossibilities {Unheld, Hovered, Held, Unheld_Pressed, Hovered_Pressed, Held_Pressed, States_Number = 6, Clicked, Released};
+	
+	
+
 	
 };
 

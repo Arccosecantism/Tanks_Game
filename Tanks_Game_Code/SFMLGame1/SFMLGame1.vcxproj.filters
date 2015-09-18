@@ -13,18 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\MenuTools">
+      <UniqueIdentifier>{f74338cf-10c8-43f1-b3bc-af2a4fafd6be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MenuTools">
+      <UniqueIdentifier>{1ddad752-faaf-4621-ac9d-bd4b50f9b5df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="App.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MouseData.cpp">
@@ -36,21 +36,18 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BasicButton.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuElement.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasicButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IncludeMe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuToolsInclude.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MouseData.h">
@@ -64,6 +61,15 @@
     </ClInclude>
     <ClInclude Include="SFMLbase.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicButton.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuToolsInclude.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuElement.h">
+      <Filter>Header Files\MenuTools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
