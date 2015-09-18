@@ -259,6 +259,24 @@ void ResourceManager::addFonttoResourceSet(std::string rsName, std::string fontN
 	
 	
 /*------------------------------------------------------------------------------------
+-------------------------------getResourceSetByName-----------------------------------
+------------------------------------------------------------------------------------*/
+ResourceGroup ResourceManager::getResourceSetByName(std::string fname)					//retrives a resourceGroup by name
+{
+	int index = searchNameVector(fname, ResourceSet_Names);
+	
+	if (index == -1)
+	{
+		index++;
+	}
+	
+	return resourceSets[index];
+	
+}
+	
+	
+	
+/*------------------------------------------------------------------------------------
 -------------------------------searchNameVector---------------------------------------
 ------------------------------------------------------------------------------------*/
 int ResourceManager::searchNameVector(std::string name, int num)						//searches an element in a vector by name
