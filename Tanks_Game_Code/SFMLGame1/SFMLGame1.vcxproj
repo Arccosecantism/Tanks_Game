@@ -168,13 +168,13 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="BasicButton.h" />
-    <ClInclude Include="MenuToolsInclude.h" />
-    <ClInclude Include="ResourceGroup.h" />
-    <ClInclude Include="SFMLbase.h" />
     <ClInclude Include="IncludeMe.h" />
     <ClInclude Include="MenuElement.h" />
+    <ClInclude Include="MenuToolsInclude.h" />
     <ClInclude Include="MouseData.h" />
+    <ClInclude Include="ResourceGroup.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SFMLbase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

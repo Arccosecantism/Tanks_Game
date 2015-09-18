@@ -6,7 +6,7 @@ class BasicButton: public MenuElement
 public:
 
 	BasicButton();
-	BasicButton(	sf::vector2f fposition,		ResourceGroup& fResourceGroup,
+	BasicButton(	sf::Vector2f fposition,		ResourceGroup& fResourceGroup,
 					std::string ftextName,		sf::Color ftextColor,
 					double ftextSize, 			double fspriteSize);
 				
@@ -27,7 +27,7 @@ public:
 	
 	void setTextString(std::string fstring);
 	
-	void setPosition(sf::vector2f fposition);
+	void setPosition(sf::Vector2f fposition);
 	
 	void setSpriteSize(double fsize);
 	
@@ -53,7 +53,7 @@ private:
 	sf::Color textColor;
 	double textSize;
 	
-	double spriteSize;
+	sf::Vector2f spriteSize;
 	
 	int buttonState;
 	
@@ -62,9 +62,9 @@ private:
 	enum buttonStatePossibilities {Unheld, Hovered, Held, Unheld_Pressed, Hovered_Pressed, Held_Pressed, Clicked, Released};
 	
 	
-	sf::vector2f position;
+	sf::Vector2f position;
 	
-	sf::vector2f extremeCorners[2];
+	sf::Vector2f extremeCorners[2];
 	
 };
 

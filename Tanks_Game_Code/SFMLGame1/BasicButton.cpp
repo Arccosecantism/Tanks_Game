@@ -25,10 +25,14 @@ void BasicButton::draw(sf::RenderWindow& frenderWindow)
 	
 }
 
-void BasicButton::setTextures(ResourceGroup& rgroup)
+void BasicButton::setResources(ResourceGroup& rgroup)
 {
 	
 	
 }
 
-int BasicButton::getButtonState();
+int BasicButton::getButtonState()
+{
+
+	return buttonState;
+}
