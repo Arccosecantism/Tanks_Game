@@ -5,9 +5,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 							std::string ftextName, sf::Color ftextColor,
 
-							unsigned int ffontSize, sf::Vector2f fspriteSize,
-
-							sf::Vector2f ftextSize)
+							sf::Vector2f fspriteSize,	sf::Vector2f ftextSize)
 {
 
 	buttonState = Unheld;
@@ -67,13 +65,11 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 	
 	buttonText.setString(buttonString);
 
-	buttonText.setCharacterSize(ffontSize);
-
 	buttonText.setColor(ftextColor);
 
 	tempDimensions = sf::Vector2f(buttonText.getLocalBounds().width, buttonText.getLocalBounds().height);
 
-	buttonText.setOrigin(tempDimensions.x / 2, tempDimensions.y / 2);
+	buttonText.setOrigin(tempDimensions.x / 2, tempDimensions.y);
 
 	buttonText.setScale(textSize.x / tempDimensions.x, textSize.y / tempDimensions.y);
 
@@ -129,11 +125,9 @@ void BasicButton::draw(sf::RenderWindow& frenderWindow)
 //void BasicButton::setResources(ResourceGroup& rgroup)
 //{
 //
-//
+//	
 //}
-//
-//
-//
+
 //void BasicButton::setTextSize(int fsize)
 //{
 //

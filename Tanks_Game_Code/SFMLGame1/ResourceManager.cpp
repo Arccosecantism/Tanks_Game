@@ -276,25 +276,25 @@ ResourceGroup ResourceManager::getResourceSetByName(std::string fname)					//ret
 	
 	
 	
-/*------------------------------------------------------------------------------------
--------------------------------searchNameVector---------------------------------------
-------------------------------------------------------------------------------------*/
-int ResourceManager::searchNameVector(std::string name, int num)						//searches an element in a vector by name
-{
-	int returnMe = -1;
-	for (int i = 0; i < nameVectors[num].size(); i++)
-	{
-		if (name == nameVectors[num][i])
-		{
-			returnMe = i;
-			break;
-		}
-
-	}
-	
-	return returnMe;
-}
-
+///*------------------------------------------------------------------------------------
+//-------------------------------searchNameVector---------------------------------------
+//------------------------------------------------------------------------------------*/
+//int ResourceManager::searchNameVector(std::string name, int num)						//searches an element in a vector by name
+//{
+//	int returnMe = -1;
+//	for (int i = 0; i < nameVectors[num].size(); i++)
+//	{
+//		if (name == nameVectors[num][i])
+//		{
+//			returnMe = i;
+//			break;
+//		}
+//
+//	}
+//	
+//	return returnMe;
+//}
+//
 
 
 /*------------------------------------------------------------------------------------

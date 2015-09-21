@@ -58,11 +58,12 @@ private:
 
 
 
-	int searchNameVector(std::string name, int num);						//searches through a vector to find a name
+	//int searchNameVector(std::string name, int num);						//searches through a vector to find a name
 
 
 
 	std::vector<sf::Texture> textureVector;									//vector of Textures that will be used in the program
+
 	std::vector<sf::Font> fontVector;										//vector of Fonts that will be used in the whole program
 	//std::vector<sf::SoundBuffer> soundBufVector;
 
@@ -73,7 +74,7 @@ private:
 
 
 
-	std::vector<std::string> nameVectors[4];								/*array of vector of names; it will usually
+	std::map<std::string, int>	nameMaps[4]									/*array of vector of names; it will usually
 																			be accessed by the nameVectorIndeces enum*/
 
 

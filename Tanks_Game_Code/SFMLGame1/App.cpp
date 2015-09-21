@@ -116,8 +116,8 @@ void App::update()							//update all objects and menus
 ------------------------------------------------------------------------------------*/
 void App::draw()							//draw all objects
 {
-	BasicButton tempButton(sf::Vector2f(400,400), generalResourceManager.getResourceSetByName("GreenButtonRG"),
-							"Test", sf::Color::White, 50, sf::Vector2f(300,500), sf::Vector2f (150, 300));
+	BasicButton tempButton(sf::Vector2f(400, 300), generalResourceManager.getResourceSetByName("GreenButtonRG"),
+							"Test", sf::Color::White, sf::Vector2f(500,300), sf::Vector2f (300, 150));
 	tempButton.draw(*window);
 
 }

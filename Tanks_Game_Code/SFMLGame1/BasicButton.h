@@ -13,9 +13,7 @@ public:
 
 					std::string ftextName, sf::Color ftextColor,
 
-					unsigned int ffontSize, sf::Vector2f fspriteSize,
-
-					sf::Vector2f ftextSize);
+					sf::Vector2f fspriteSize,	sf::Vector2f ftextSize);
 				
 				
 	void update();
@@ -26,7 +24,7 @@ public:
 	
 	
 
-	void setResources(ResourceGroup& rgroup);
+	//void setResources(ResourceGroup& rgroup);
 	
 	/*void setTextSize(int fsize);
 	
@@ -60,8 +58,6 @@ private:
 	sf::Vector2f spriteSize;
 	
 	int buttonState;
-
-	sf::Vector2f position;
 
 
 

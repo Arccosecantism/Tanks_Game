@@ -1,0 +1,71 @@
+---------------------------------------------------------
+Things accomplished in last work session (1 week):
+---------------------------------------------------------
+
+
+	I worked on BasicButton and got an error on Saturday that I couldn't resolve.
+
+
+---------------------------------------------------------
+
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
+
+---------------------------------------------------------
+Previous Goals met:
+---------------------------------------------------------
+
+	Previous Goals:
+
+	*I would like to have all the MenuTools somewhat finsished and functioning. 
+
+
+
+
+
+	*I would like to end the week with a MainMenu screen.
+
+
+
+
+
+	*If I get the MainMenu screen, I will start working on getting a tank to move across the screen.
+
+
+
+	I completed none of these. My hopes were far too ambitious. However, I was sick for the weekend, so I wasn't very productive.
+
+Hopefully, I can use this information to learn how productive I can be in a week.
+
+---------------------------------------------------------
+
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
+
+
+
+----------------------------------------------------
+Things I'd like to accomplish by Tuesday, 9/28/2015:
+----------------------------------------------------
+
+
+	*I would like to have all the MenuTools somewhat finsished and functioning. 
+
+
+
+
+
+	*I would like to end the week with a MainMenu screen.
+
+
+
+
+-----------------------------------------------------
+
+	
