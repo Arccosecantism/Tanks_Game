@@ -37,10 +37,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BasicButton.cpp">
-      <Filter>Source Files\MenuTools</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MenuElement.cpp">
-      <Filter>Source Files\MenuTools</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,13 +63,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BasicButton.h">
-      <Filter>Header Files\MenuTools</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuToolsInclude.h">
-      <Filter>Header Files\MenuTools</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MenuElement.h">
-      <Filter>Header Files\MenuTools</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuToolsInclude.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

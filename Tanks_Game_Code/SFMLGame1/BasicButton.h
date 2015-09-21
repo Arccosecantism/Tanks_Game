@@ -1,7 +1,7 @@
 #pragma once
 #include "MenuElement.h"
 
-class BasicButton: public MenuElement
+class BasicButton : public MenuElement
 {
 
 
@@ -13,7 +13,7 @@ public:
 
 					std::string ftextName, sf::Color ftextColor,
 
-					double ffontSize, sf::Vector2f fspriteSize,
+					unsigned int ffontSize, sf::Vector2f fspriteSize,
 
 					sf::Vector2f ftextSize);
 				

@@ -20,7 +20,16 @@ App::App(sf::RenderWindow& fwindow)								/*basic counstructor for App. App mus
 ------------------------------------------------------------------------------------*/
 void App::setup()												//initialize all objects
 {
+	generalResourceManager.addFile("Resources\\GreenButton.png", "GreenButton");
+	generalResourceManager.addFile("Resources\\AlexandriaFLF.ttf", "DefaultFont");
+	ResourceGroup tempGroup;
+	tempGroup.addFont(generalResourceManager.getFontPointerByName("DefaultFont"));
+	for (int i = 0; i < 6; i++)
+	{
+		tempGroup.addTexture(generalResourceManager.getTexturePointerByName("GreenButton"));
+	}
 
+	generalResourceManager.addResourceSet(tempGroup, "GreenButtonRG");
 
 }
 
@@ -107,7 +116,9 @@ void App::update()							//update all objects and menus
 ------------------------------------------------------------------------------------*/
 void App::draw()							//draw all objects
 {
-
+	BasicButton tempButton(sf::Vector2f(400,400), generalResourceManager.getResourceSetByName("GreenButtonRG"),
+							"Test", sf::Color::White, 50, sf::Vector2f(300,500), sf::Vector2f (150, 300));
+	tempButton.draw(*window);
 
 }
 

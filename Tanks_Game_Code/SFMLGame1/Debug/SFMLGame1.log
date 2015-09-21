@@ -1,15 +1,24 @@
-﻿Build started 9/17/2015 8:37:12 PM.
+﻿Build started 9/19/2015 5:05:30 PM.
      1>Project "C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BasicButton.cpp
-         BasicButton.cpp
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\basicbutton.cpp(6): error C3867: 'BasicButton::normalSetup': function call missing argument list; use '&BasicButton::normalSetup' to create a pointer to member
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\basicbutton.cpp(18): error C2761: '{ctor}' : member function redeclaration not allowed
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\basicbutton.cpp(19): error C2447: '{' : missing function header (old-style formal list?)
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\basicbutton.cpp(162): error C2039: 'setExtremeValues' : is not a member of 'BasicButton'
-                 c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\basicbutton.h(4) : see declaration of 'BasicButton'
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt App.cpp Main.cpp
+         App.cpp
+         Generating Code...
+         Compiling...
+         Main.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML\SFML-2.1\Libs\Debug" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.lib" /MACHINE:X86 Debug\App.obj
+         Debug\BasicButton.obj
+         Debug\Main.obj
+         Debug\MenuElement.obj
+         Debug\MouseData.obj
+         Debug\ResourceGroup.obj
+         Debug\ResourceManager.obj
+     1>BasicButton.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall BasicButton::setResources(class ResourceGroup &)" (?setResources@BasicButton@@UAEXAAVResourceGroup@@@Z)
+     1>C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.exe : fatal error LNK1120: 1 unresolved externals
      1>Done Building Project "C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:04.92
+Time Elapsed 00:00:02.94

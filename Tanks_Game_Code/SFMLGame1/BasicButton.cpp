@@ -5,7 +5,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 							std::string ftextName, sf::Color ftextColor,
 
-							double ffontSize, sf::Vector2f fspriteSize,
+							unsigned int ffontSize, sf::Vector2f fspriteSize,
 
 							sf::Vector2f ftextSize)
 {
