@@ -54,7 +54,7 @@ private:
 
 
 
-	void addName(std::string name, int num);								//adds a name;
+	void addName(std::string name, int Mapnum, int elnum);								//adds a name;
 
 
 
@@ -74,7 +74,7 @@ private:
 
 
 
-	std::map<std::string, int>	nameMaps[4]									/*array of vector of names; it will usually
+	std::map<std::string, int>	nameMaps[4];								/*array of vector of names; it will usually
 																			be accessed by the nameVectorIndeces enum*/
 
 

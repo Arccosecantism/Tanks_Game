@@ -115,15 +115,10 @@ sf::Texture* ResourceManager::getTexturePointerByName(std::string name)					//re
 ------------------------------------------------------------------------------------*/
 sf::Font* ResourceManager::getFontPointerByName(std::string name)						//returns a pointer to a Font
 {
-	int index = searchNameVector(name, Font_Names);
+
 	sf::Font* returnMe;
 
-	if (index == -1)
-	{
-		index++;
-	}
-
-	returnMe = &fontVector[index];
+	returnMe = &fontVector[nameMaps[ResourceSet_Names][name]];
 
 	return returnMe;
 	
@@ -157,12 +152,12 @@ sf::Font* ResourceManager::getFontPointerByName(std::string name)						//returns
 /*------------------------------------------------------------------------------------
 -------------------------------addEmptyRS---------------------------------------------
 ------------------------------------------------------------------------------------*/
-void ResourceManager::addEmptyResourceSet(std::string name)								//adds an empty resourceGroup and give it a name
+void ResourceManager::addEmptyResourceSet(std::string fname)								//adds an empty resourceGroup and give it a name
 {
 	ResourceGroup empt;
 	resourceSets.push_back(empt);
 	
-	nameVectors[ResourceSet_Names].push_back(name);
+	nameMaps[ResourceSet_Names][fname] = resourceSets.size() - 1;
 }
 
 
@@ -171,10 +166,10 @@ void ResourceManager::addEmptyResourceSet(std::string name)								//adds an emp
 /*------------------------------------------------------------------------------------
 -------------------------------addRS--------------------------------------------------
 ------------------------------------------------------------------------------------*/
-void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string name)		//adds an already created resourceGroup and name it
+void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string fname)		//adds an already created resourceGroup and name it
 {
 	resourceSets.push_back(fresourceSet);
-	nameVectors[ResourceSet_Names].push_back(name);
+	nameMaps[ResourceSet_Names][fname] = resourceSets.size() - 1;
 	
 }
 	
@@ -186,22 +181,8 @@ void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string nam
 ------------------------------------------------------------------------------------*/
 void ResourceManager::addTexturetoResourceSet(std::string rsName, std::string texName)	//adds a Texture to a resourceSet by name
 {
-	int indexrs = searchNameVector(rsName, ResourceSet_Names);
-	int indextx = searchNameVector(texName, Texture_Names);
 	
-	if (indexrs == -1)
-	{
-		indexrs++;
-	}
-	
-	if (indextx == -1)
-	{
-		indextx++;
-	}
-	
-	resourceSets[indexrs].addTexture(getTexturePointerByName(texName));
-	
-	
+	resourceSets[nameMaps[ResourceSet_Names][rsName]].addTexture(getTexturePointerByName(texName));	
 }
 
 
@@ -213,20 +194,7 @@ void ResourceManager::addTexturetoResourceSet(std::string rsName, std::string te
 void ResourceManager::addFonttoResourceSet(std::string rsName, std::string fontName)	//adds a Font to a resourceSet by name
 {
 	
-	int indexrs = searchNameVector(rsName, ResourceSet_Names);
-	int indexfn = searchNameVector(fontName, Font_Names);
-	
-	if (indexrs == -1)
-	{
-		indexrs++;
-	}
-	
-	if (indexfn == -1)
-	{
-		indexfn++;
-	}
-	
-	resourceSets[indexrs].addFont(getFontPointerByName(fontName));
+	resourceSets[nameMaps[ResourceSet_Names][rsName]].addFont(getFontPointerByName(fontName));
 	
 }
 
@@ -263,14 +231,8 @@ void ResourceManager::addFonttoResourceSet(std::string rsName, std::string fontN
 ------------------------------------------------------------------------------------*/
 ResourceGroup ResourceManager::getResourceSetByName(std::string fname)					//retrives a resourceGroup by name
 {
-	int index = searchNameVector(fname, ResourceSet_Names);
-	
-	if (index == -1)
-	{
-		index++;
-	}
-	
-	return resourceSets[index];
+
+	return resourceSets[nameMaps[ResourceSet_Names][fname]];
 	
 }
 	
@@ -353,7 +315,7 @@ void ResourceManager::addFont(std::string fileName)										//private function;
 /*------------------------------------------------------------------------------------
 -------------------------------addName------------------------------------------------
 ------------------------------------------------------------------------------------*/
-void ResourceManager::addName(std::string name, int num)								//adds a name to one of the namevectors
+void ResourceManager::addName(std::string name, int Mapnum, int elnum)								//adds a name to one of the namevectors
 {
 	bool sameName = true;
 	bool firstDuplicate = true;
@@ -361,7 +323,7 @@ void ResourceManager::addName(std::string name, int num)								//adds a name to
 	while (sameName == true)
 	{
 		
-		if (searchNameVector(name, num) != -1)
+		if (nameMaps[Mapnum].count(name) == 1)
 		{
 			if (firstDuplicate == true)
 			{
@@ -382,6 +344,6 @@ void ResourceManager::addName(std::string name, int num)								//adds a name to
 
 	}
 
-	nameVectors[num].push_back(name);					//then add the altered (or not) name
+	nameMaps[Mapnum][name] = elnum;						//then add the altered (or not) name
 
 }
