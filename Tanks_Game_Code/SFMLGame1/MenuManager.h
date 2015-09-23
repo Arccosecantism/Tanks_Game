@@ -5,9 +5,12 @@
 class MenuManager
 {
 public:
+
 	MenuManager();
 
+
 	void addMenu(Menu fmenu, std::string fname);
+
 	Menu* getMenuPointerByName(std::string fname);
 
 
@@ -27,8 +30,12 @@ private:
 
 	void addMenuName(std::string fname);
 
+
 	std::vector<Menu> menuVector;
+
 	std::vector<sf::Vector2f> drawPositions;
+
 	std::map<std::string, int> menuNames;
+
 };
 

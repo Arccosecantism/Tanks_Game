@@ -161,6 +161,7 @@
     <ClCompile Include="BasicButton.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuBackground.cpp" />
     <ClCompile Include="MenuElement.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MouseData.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="BasicButton.h" />
     <ClInclude Include="IncludeMe.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuBackground.h" />
     <ClInclude Include="MenuElement.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuToolsInclude.h" />

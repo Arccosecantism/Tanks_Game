@@ -18,8 +18,26 @@ public:
 	void move(sf::Vector2f velocity);
 
 
+
+	bool getRequiresMouseData();
+
+	void setRequiresMouseData(bool frequiresMouseData);
+
+
+	void hide();
+
+	void unhide();
+
+	bool getIsHidden();
+
+
 protected:
 
 		sf::Vector2f position;
+
+
+		bool requiresMouseData;
+
+		bool isHidden;
 };
 

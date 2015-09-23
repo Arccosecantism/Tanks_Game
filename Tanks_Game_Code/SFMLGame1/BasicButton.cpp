@@ -8,11 +8,18 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 							sf::Vector2f fspriteSize,	sf::Vector2f ftextSize)
 {
 
+
+	position = fposition;
+
+	requiresMouseData = true;
+
+	isHidden = false;
+
+
+
 	buttonState = Unheld;
 
 	lastMouseHeld = 0;
-
-	position = fposition;
 
 	buttonString = ftextName;
 
@@ -32,6 +39,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 
 
+
 	sf::Sprite tempSprite;
 
 	sf::Vector2f tempDimensions;
@@ -39,7 +47,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 
 
-	for (int i = 0; i < States_Number; i++)
+	for (unsigned int i = 0; i < States_Number; i++)
 	{
 
 		tempSprite.setTexture(*fResourceGroup.getTexturePointer(i));

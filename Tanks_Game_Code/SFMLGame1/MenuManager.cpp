@@ -16,6 +16,7 @@ void MenuManager::addMenu(Menu fmenu, std::string fname)
 Menu* MenuManager::getMenuPointerByName(std::string fname)
 {
 	Menu* tmpMenuPointer = &menuVector[menuNames[fname]];
+	return tmpMenuPointer;
 }
 
 
@@ -46,4 +47,36 @@ void MenuManager::draw(sf::RenderWindow& frenderwindow)
 	{
 		menuVector[i].draw(frenderwindow, drawPositions[i]);
 	}
+}
+
+void MenuManager::addMenuName(std::string fname)
+{
+	bool sameName = true;
+	bool firstDuplicate = true;
+
+	while (sameName == true)
+	{
+
+		if (menuNames.count(fname) == 1)
+		{
+			if (firstDuplicate == true)
+			{
+				fname += "2";										/*if there exists a "OptionsMenu" already, and you try to add another one,
+																	it will become "OptionsMenu2"*/
+			}
+			else
+			{
+				fname[fname.size() - 1]++;							/*if there exists a "OptionsMenu2" already, and you try to add another one,
+																	it will become "OptionsMenu3"*/
+			}
+		}
+
+		else
+		{
+			sameName = false;										//if there is no same name, exit the while loop
+		}
+
+	}
+
+	menuNames[fname] = menuVector.size() - 1;					//then add the altered (or not) name
 }

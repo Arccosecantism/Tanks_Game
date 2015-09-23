@@ -111,7 +111,14 @@ void Menu::update(MouseData& fmousedata)
 {
 	for (unsigned int i = 0; i < elementVector.size(); i++)
 	{
-		elementVector[i]->update(fmousedata);
+		if (elementVector[i]->getRequiresMouseData())
+		{
+			elementVector[i]->update(fmousedata);
+		}
+		else
+		{
+			elementVector[i]->update();
+		}
 	}
 }
 
@@ -125,7 +132,10 @@ void Menu::draw(sf::RenderWindow& frenderwindow, sf::Vector2f drawPosition)
 	position += drawPosition;
 	for (unsigned int i = 0; i < elementVector.size(); i++)
 	{
-		elementVector[i]->draw(frenderwindow, position);
+		if (!elementVector[i]->getIsHidden())
+		{
+			elementVector[i]->draw(frenderwindow, position);
+		}
 	}
 	position -= drawPosition;
 }
