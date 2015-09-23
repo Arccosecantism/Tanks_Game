@@ -20,7 +20,20 @@ public:
 	
 	void update(MouseData& fmouseData);
 	
-	void draw(sf::RenderWindow& frenderWindow);
+	void draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition);
+
+
+
+	void setRelativeSpritePosition(int findex, sf::Vector2f fpos);
+
+	void setRelativeTextPosition(sf::Vector2f fpos);
+
+
+	void moveRelativeSpritePosition(int findex, sf::Vector2f fvel);
+
+	void moveRelativeTextPosition(sf::Vector2f fvel);
+
+
 	
 	
 
@@ -39,6 +52,9 @@ public:
 	
 	
 	int getButtonState();
+
+
+
 
 private:
 	

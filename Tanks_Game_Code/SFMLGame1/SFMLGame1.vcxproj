@@ -162,6 +162,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuElement.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MouseData.cpp" />
     <ClCompile Include="ResourceGroup.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="IncludeMe.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuElement.h" />
+    <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuToolsInclude.h" />
     <ClInclude Include="MouseData.h" />
     <ClInclude Include="ResourceGroup.h" />

@@ -50,7 +50,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 		tempSprite.setScale(spriteSize.x / tempDimensions.x, spriteSize.y / tempDimensions.y);
 
-		tempSprite.setPosition(position);
+		tempSprite.setPosition(0,0);
 
 
 
@@ -73,7 +73,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	buttonText.setScale(textSize.x / tempDimensions.x, textSize.y / tempDimensions.y);
 
-	buttonText.setPosition(position);
+	buttonText.setPosition(0,0);
 
 
 
@@ -101,8 +101,12 @@ void BasicButton::update(MouseData& fmouseData)
 
 
 
-void BasicButton::draw(sf::RenderWindow& frenderWindow)
+void BasicButton::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)
 {
+	position += drawPosition;
+
+
+
 	int drawState = buttonState;
 	if (drawState == Clicked)
 	{
@@ -114,10 +118,76 @@ void BasicButton::draw(sf::RenderWindow& frenderWindow)
 	}
 
 
+
+	buttonStateSprites[drawState].move(position);
+
 	frenderWindow.draw(buttonStateSprites[drawState]);
+
+	buttonStateSprites[drawState].move(-position);
+
+
+
+	buttonText.move(position);
+
 	frenderWindow.draw(buttonText);
 
+	buttonText.move(-position);
 
+
+
+	position -= drawPosition;
+
+
+}
+
+
+
+
+void BasicButton::setRelativeSpritePosition(int findex, sf::Vector2f fpos)
+{
+	if (findex >= States_Number)
+	{
+		findex = States_Number - 1;
+	}
+
+	else if (findex < 0)
+	{
+		findex = 0;
+	}
+
+
+	buttonStateSprites[findex].setPosition(fpos);
+}
+
+
+
+
+void BasicButton::setRelativeTextPosition(sf::Vector2f fpos)
+{
+	buttonText.setPosition(fpos);
+}
+
+
+void BasicButton::moveRelativeSpritePosition(int findex, sf::Vector2f fvel)
+{
+	if (findex >= States_Number)
+	{
+		findex = States_Number - 1;
+	}
+
+	else if (findex < 0)
+	{
+		findex = 0;
+	}
+
+
+	buttonStateSprites[findex].move(fvel);
+}
+
+
+void BasicButton::moveRelativeTextPosition(sf::Vector2f fvel)
+{
+	buttonText.move(fvel);
 }
 
 

@@ -116,9 +116,10 @@ void App::update()							//update all objects and menus
 ------------------------------------------------------------------------------------*/
 void App::draw()							//draw all objects
 {
-	BasicButton tempButton(sf::Vector2f(400, 300), generalResourceManager.getResourceSetByName("GreenButtonRG"),
-							"Test", sf::Color::White, sf::Vector2f(500,300), sf::Vector2f (300, 150));
-	tempButton.draw(*window);
+	BasicButton tempButton(sf::Vector2f(0,0), generalResourceManager.getResourceSetByName("GreenButtonRG"),
+							"Test", sf::Color::White, sf::Vector2f(600,300), sf::Vector2f (300, 150));
+	tempButton.setRelativeTextPosition(sf::Vector2f(0, 0));
+	tempButton.draw(*window, sf::Vector2f(400, 300));
 
 }
 

@@ -52,7 +52,7 @@ void ResourceManager::addFile(std::string fileName, std::string name)		//adds a 
 	if (tail == "ttf")
 	{
 		addFont(fileName);
-		addName(name, Texture_Names);
+		addName(name, Texture_Names, textureVector.size() - 1);
 	}
 
 
@@ -63,7 +63,7 @@ void ResourceManager::addFile(std::string fileName, std::string name)		//adds a 
 				tail == "bmp")
 	{
 		addTexture(fileName);
-		addName(name, Font_Names);
+		addName(name, Texture_Names, textureVector.size() - 1);
 	}
 
 
@@ -92,16 +92,9 @@ void ResourceManager::addFile(std::string fileName, std::string name)		//adds a 
 ------------------------------------------------------------------------------------*/
 sf::Texture* ResourceManager::getTexturePointerByName(std::string name)					//returns a pointer to a Texture
 {
-
-	int index = searchNameVector(name, Texture_Names);
 	sf::Texture* returnMe;
 
-	if (index == -1)
-	{
-		index++;
-	}
-
-	returnMe = &textureVector[index];
+	returnMe = &textureVector[nameMaps[Texture_Names][name]];
 
 	return returnMe;
 }
@@ -118,7 +111,7 @@ sf::Font* ResourceManager::getFontPointerByName(std::string name)						//returns
 
 	sf::Font* returnMe;
 
-	returnMe = &fontVector[nameMaps[ResourceSet_Names][name]];
+	returnMe = &fontVector[nameMaps[Font_Names][name]];
 
 	return returnMe;
 	
