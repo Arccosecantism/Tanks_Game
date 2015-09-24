@@ -27,9 +27,9 @@ public:
 
 
 
-	void setRelativeSpritePosition(int findex, sf::Vector2f fpos);			//set the sprite position relative to the button poisiton. It's a bit weird but generalized
+	void setRelativeSpritePosition(sf::Vector2f fpos);			//set the sprite position relative to the button poisiton. It's a bit weird but generalized
 
-	void moveRelativeSpritePosition(int findex, sf::Vector2f fvel);			//change the sprite position releative to the button position
+	void moveRelativeSpritePosition(sf::Vector2f fvel);			//change the sprite position releative to the button position
 
 
 
@@ -73,8 +73,6 @@ private:
 	
 	sf::Vector2f textSize;													//the size of the text in terms of height and width
 
-	std::string buttonString;												//this string that is displayed by the Text
-	
 	sf::Vector2f spriteSize;												//the size of all the sprites in terms of height and width
 	
 	
