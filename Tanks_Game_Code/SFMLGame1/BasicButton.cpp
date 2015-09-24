@@ -22,40 +22,43 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 							sf::Vector2f fspriteSize,	sf::Vector2f ftextSize)
 {
 
+	//setting inherited protected stuff------------------
+	
+	position = fposition;																//set the inherited protected position to the entered position; this will be the position of the button relative to a menu
 
-	position = fposition;
+	requiresMouseData = true;															//set the inherited protected bool requiresMouseData to true because BasicButton requires mouse data
 
-	requiresMouseData = true;
+	isHidden = false;																	//set the inherited protected bool isHidden to false because BasicButton should be drawn by default
+	
+	//done-----------------------------------------------
+	
+	
+	buttonState = Unheld;																//buttonState is unheld at the start of BasicButton's existence	
 
-	isHidden = false;
+	lastMouseHeld = 0;																	//lastMouseHeld starts off as not having a hold value
+
+	buttonString = ftextName;															//set the string drawn by the Text in the BasicButton
+
+	spriteSize = fspriteSize;															//set the desired size of the Sprite of the BasicButton
+
+	textSize = ftextSize;																//set the desired size of the Text of the BasicButton
 
 
-
-	buttonState = Unheld;
-
-	lastMouseHeld = 0;
-
-	buttonString = ftextName;
-
-	spriteSize = fspriteSize;
-
-	textSize = ftextSize;
-
-
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 2; i++)															//cycle through extreme corner indices
 	{
 		extremeCorners[i] = sf::Vector2f(position.x + (2 * i - 1) * spriteSize.x / 2, position.y + (2 * i - 1) * spriteSize.y / 2);
+																						//set the extreme corner position; note: f: x -> (2x - 1) maps 0 to -1 and 1 to 1
 	}
 
 
 
 
-	sf::Sprite tempSprite;
+	sf::Sprite tempSprite;																//declare a temporary Sprite to be pushed back
 
-	sf::Vector2f tempDimensions;
+	sf::Vector2f tempDimensions;														//declare temporary helper dimensioins of the sprite
 
 
-	for (unsigned int i = 0; i < States_Number; i++)
+	for (unsigned int i = 0; i < States_Number; i++)									//cycle through 6 times
 	{
 
 		tempSprite.setTexture(*fResourceGroup.getTexturePointer(i));
