@@ -322,11 +322,14 @@ void ResourceManager::addName(std::string name, int Mapnum, int elnum)								//
 			{
 				name += "2";							/*if there exists a "RedTexture" already, and you try to add another one,
 														it will become "RedTexture2"*/
+
+				firstDuplicate = false;
 			}
 			else
 			{
 				name[name.size() - 1]++;				/*if there exists a "RedTexture2" already, and you try to add another one,
 														it will become "RedTexture3"*/
+
 			}
 		}
 

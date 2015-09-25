@@ -11,6 +11,7 @@ MouseData::MouseData()										//Empty Constructor
 }
 
 
+
 //----------------------------------------------------------------------------------------------------------------------------***************************
 
 
@@ -23,6 +24,7 @@ void MouseData::setMousePosition(sf::Vector2i fposition)	//sets the mousePositio
 	mousePosition = fposition;
 
 }
+
 
 
 //----------------------------------------------------------------------------------------------------------------------------***************************
@@ -49,6 +51,7 @@ void MouseData::setLeftButtonData(int fdata)				//sets the left mouse data to an
 	buttonData.x = fdata;
 
 }
+
 
 
 /*-----------------------------------------------------------------------

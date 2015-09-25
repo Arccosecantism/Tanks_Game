@@ -334,19 +334,19 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 	//here goes the click logic. There will be weird tabbing to match the if satements
 
 	if (mousePos.x > extremeCorners[0].x && mousePos.x < extremeCorners[1].x && mousePos.y > extremeCorners[0].y && mousePos.y < extremeCorners[1].y)
-																	//if the mousePosition was inside the extreme corners
+																//if the mousePosition was inside the extreme corners
 	{
 
-		if(leftData == 0)												//if the left mouse is unheld
+		if(leftData == 0)											//if the left mouse is unheld
 		{
-			if (pressedDown)												//if the button is currently in the down state
+			if (pressedDown)											//if the button is currently in the down state
 			{
-				buttonState = Hovered_Pressed;								//it's hovered and pressed
+				buttonState = Hovered_Pressed;							//it's hovered and pressed
 			}
 
-			else															//otherwise
+			else														//otherwise
 			{
-				buttonState = Hovered;										//it's only hovered
+				buttonState = Hovered;									//it's only hovered
 			}						
 		}
 
@@ -366,7 +366,7 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 					buttonState = Held;										//it's pressed
 				}
 
-				lastMouseHeld = 2;
+				lastMouseHeld = 2;		//if the mouse was being held over the button and wasn't previously held off of the button, the mouse is now last held obver the button
 			}
 
 
@@ -400,56 +400,61 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 				{
 					buttonState = Clicked;									//the button is clicked
 				}
-
-				lastMouseHeld = 0;			//when the mouse is relased, it is no longer held (only works for pressing initially on the button)
 			}
 
 
 
-			else
+			else														//otherwise if the mouse was pressed off of the Button
 			{
-				if (pressedDown)
+				if (pressedDown)											//if the button is held down
 				{
-					buttonState = Hovered_Pressed;
+					buttonState = Hovered_Pressed;							//the button is now hovered and pressed
 				}
 
-				else
+
+				else														//otherwise
 				{
-					buttonState = Hovered;
+					buttonState = Hovered;									//the button is hovered
 				}
-				lastMouseHeld = 0;
+
+				
 			}
+
+			lastMouseHeld = 0;			//when the mouse is released, it is no longer held
 		}
 
 	}
-	else
+
+	else															//else if the mouse was outside the button			
 	{
-		if (lastMouseHeld == 2)
+		if (lastMouseHeld == 2)											//if the mouse was last held on the button
 		{
-			if (pressedDown)
+			if (pressedDown)												//if the button was pressed down
 			{
-				buttonState = Hovered_Pressed;
+				buttonState = Hovered_Pressed;								//it's hovered and pressed even if the 
 			}
 
-			else
+			else															//otherwise
 			{
-				buttonState = Hovered;
+				buttonState = Hovered;										//it's only hovered
 			}
 		}
 
-		else if (leftData == 2 && lastMouseHeld != 1)
+		else if (leftData == 2 && lastMouseHeld != 1)					//else if the mouse was just held down and was not already held down off of the button
 		{
-			lastMouseHeld = 1;
+			lastMouseHeld = 1;											//the mouse was last held off of the button
 		}
 
-		if (pressedDown)
+
+
+		if (pressedDown)												//if the button was pressed down
 		{
-			buttonState = Unheld_Pressed;
+			buttonState = Unheld_Pressed;								//the button is now unheld and pressed
 		}
 
-		else
+		else															//otherwise
 		{
-			buttonState = Unheld;
+			buttonState = Unheld;										//the button is simply unheld
 		}
 	}
 
