@@ -6,38 +6,48 @@ class MenuElement
 {
 public:
 
-	virtual void update() = 0;
-	virtual void update(MouseData& fmouseData) = 0;
-	virtual void draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition) = 0;
-	//virtual void setResources(ResourceGroup& rgroup) = 0;
 
-	sf::Vector2f getPosition();
+	virtual void update() = 0;															//virtual; every menuElement will have a 0-argument update
 
-	void setPosition(sf::Vector2f fpos);
+	virtual void update(MouseData& fmouseData) = 0;										//and they will have a 1-argument mousedata update
 
-	void move(sf::Vector2f velocity);
+	virtual void draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition) = 0;	//and will draw, somehow
 
 
 
-	bool getRequiresMouseData();
-
-	void setRequiresMouseData(bool frequiresMouseData);
 
 
-	void hide();
+	
 
-	void unhide();
+	void setPosition(sf::Vector2f fpos);												//set the position of a menuElement
 
-	bool getIsHidden();
+	void move(sf::Vector2f velocity);													//move the menuElement
+
+	sf::Vector2f getPosition();															//retrieve the position of a menuElement
+		
+
+
+
+	void setRequiresMouseData(bool frequiresMouseData);									//set if something requires mouseData
+
+	bool getRequiresMouseData();														//retrieve mousedata
+
+
+
+	void hide();																		//hide a menuElement from drawing
+
+	void unhide();																		//unhide one
+
+	bool getIsHidden();																	//retrieve oif the thing wnats to be drawn
 
 
 protected:
 
-		sf::Vector2f position;
+		sf::Vector2f position;															//position of the menuElement
 
 
-		bool requiresMouseData;
+		bool requiresMouseData;															//if it requires mouseData
 
-		bool isHidden;
+		bool isHidden;																	//if it wants to be drawn
 };
 

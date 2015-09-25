@@ -1,6 +1,13 @@
 #include "ResourceManager.h"
 
 
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+//-----------------------------------------PUBLIC-----------------------------------------------------------------------------***************************
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+
 /*------------------------------------------------------------------------------------
 -------------------------------Constructor--------------------------------------------
 ------------------------------------------------------------------------------------*/
@@ -11,6 +18,7 @@ ResourceManager::ResourceManager()											//Constructor
 
 
 
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------
@@ -49,21 +57,23 @@ void ResourceManager::addFile(std::string fileName, std::string name)		//adds a 
 	//Now we interpret the file extension.
 	//----------------------------------------------
 
-	if (tail == "ttf")
+	if (tail == "ttf")														//.ttf is a font
 	{
-		addFont(fileName);
-		addName(name, Texture_Names, textureVector.size() - 1);
+		addFont(fileName);													//add the font
+
+		addName(name, Texture_Names, textureVector.size() - 1);				//add the name
 	}
 
 
 
 	else if (	tail == "png" || 
 				tail == "jpg" || 
-				tail == "jpeg" || 
-				tail == "bmp")
+				tail == "jpeg" ||	
+				tail == "bmp")												//these extensions are textures
 	{
-		addTexture(fileName);
-		addName(name, Texture_Names, textureVector.size() - 1);
+		addTexture(fileName);												//add the texture
+
+		addName(name, Texture_Names, textureVector.size() - 1);				//add the name
 	}
 
 
@@ -83,8 +93,7 @@ void ResourceManager::addFile(std::string fileName, std::string name)		//adds a 
 
 
 
-
-
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------
@@ -92,15 +101,16 @@ void ResourceManager::addFile(std::string fileName, std::string name)		//adds a 
 ------------------------------------------------------------------------------------*/
 sf::Texture* ResourceManager::getTexturePointerByName(std::string name)					//returns a pointer to a Texture
 {
-	sf::Texture* returnMe;
+	sf::Texture* returnMe;																//make a temporary pointer to a texture
 
-	returnMe = &textureVector[nameMaps[Texture_Names][name]];
+	returnMe = &textureVector[nameMaps[Texture_Names][name]];							//set it to the texture with the desired name  
 
-	return returnMe;
+	return returnMe;																	//return it
 }
 
 
 
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------
@@ -109,15 +119,17 @@ sf::Texture* ResourceManager::getTexturePointerByName(std::string name)					//re
 sf::Font* ResourceManager::getFontPointerByName(std::string name)						//returns a pointer to a Font
 {
 
-	sf::Font* returnMe;
+	sf::Font* returnMe;																	//make a temporary pointer to a font
 
-	returnMe = &fontVector[nameMaps[Font_Names][name]];
+	returnMe = &fontVector[nameMaps[Font_Names][name]];									//set it to the font with the desired name
 
-	return returnMe;
+	return returnMe;																	//return it
 	
 }
 
 
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------
@@ -142,18 +154,24 @@ sf::Font* ResourceManager::getFontPointerByName(std::string name)						//returns
 
 
 
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
 /*------------------------------------------------------------------------------------
 -------------------------------addEmptyRS---------------------------------------------
 ------------------------------------------------------------------------------------*/
 void ResourceManager::addEmptyResourceSet(std::string fname)								//adds an empty resourceGroup and give it a name
 {
-	ResourceGroup empt;
-	resourceSets.push_back(empt);
+	ResourceGroup empt;																		//make an empty resource group
+
+	resourceSets.push_back(empt);															//add it
 	
-	nameMaps[ResourceSet_Names][fname] = resourceSets.size() - 1;
+	nameMaps[ResourceSet_Names][fname] = resourceSets.size() - 1;							//add the name
 }
 
 
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------
@@ -161,14 +179,18 @@ void ResourceManager::addEmptyResourceSet(std::string fname)								//adds an em
 ------------------------------------------------------------------------------------*/
 void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string fname)		//adds an already created resourceGroup and name it
 {
-	resourceSets.push_back(fresourceSet);
-	nameMaps[ResourceSet_Names][fname] = resourceSets.size() - 1;
+
+	resourceSets.push_back(fresourceSet);												//add the resourceGroup
+
+	nameMaps[ResourceSet_Names][fname] = resourceSets.size() - 1;						//add the name
 	
 }
-	
-	
-	
-	
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
 /*------------------------------------------------------------------------------------
 -------------------------------addTexturetoRS-----------------------------------------
 ------------------------------------------------------------------------------------*/
@@ -176,9 +198,12 @@ void ResourceManager::addTexturetoResourceSet(std::string rsName, std::string te
 {
 	
 	resourceSets[nameMaps[ResourceSet_Names][rsName]].addTexture(getTexturePointerByName(texName));	
+																						//literally just add the texture
 }
 
 
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------
@@ -188,11 +213,13 @@ void ResourceManager::addFonttoResourceSet(std::string rsName, std::string fontN
 {
 	
 	resourceSets[nameMaps[ResourceSet_Names][rsName]].addFont(getFontPointerByName(fontName));
+																						//literally just add the font
 	
 }
 
 
 
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------
@@ -215,58 +242,52 @@ void ResourceManager::addFonttoResourceSet(std::string rsName, std::string fontN
 	
 	resourceSets[indexrs].addSoundBuf(getFontPointerByName(sbName));
 }*/
-	
-	
-	
-	
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
 /*------------------------------------------------------------------------------------
 -------------------------------getResourceSetByName-----------------------------------
 ------------------------------------------------------------------------------------*/
 ResourceGroup ResourceManager::getResourceSetByName(std::string fname)					//retrives a resourceGroup by name
 {
 
-	return resourceSets[nameMaps[ResourceSet_Names][fname]];
+	return resourceSets[nameMaps[ResourceSet_Names][fname]];							//returns the resource set with the desired name
 	
 }
-	
-	
-	
-///*------------------------------------------------------------------------------------
-//-------------------------------searchNameVector---------------------------------------
-//------------------------------------------------------------------------------------*/
-//int ResourceManager::searchNameVector(std::string name, int num)						//searches an element in a vector by name
-//{
-//	int returnMe = -1;
-//	for (int i = 0; i < nameVectors[num].size(); i++)
-//	{
-//		if (name == nameVectors[num][i])
-//		{
-//			returnMe = i;
-//			break;
-//		}
-//
-//	}
-//	
-//	return returnMe;
-//}
-//
+
+
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+//-----------------------------------------PRIVATE----------------------------------------------------------------------------***************************
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
 
 
 /*------------------------------------------------------------------------------------
 -------------------------------addTexture---------------------------------------------
 ------------------------------------------------------------------------------------*/
-void ResourceManager::addTexture(std::string fileName)									////private function; adds a Texture to the TextureVector
+void ResourceManager::addTexture(std::string fileName)									//private function; adds a Texture to the TextureVector
 {
-	sf::Texture texture;
-	if (!texture.loadFromFile(fileName))
+	sf::Texture texture;																//make a temporary texture
+
+	if (!texture.loadFromFile(fileName))												//try to make it load from the file
 	{
-		// error...
+		// if it doesn't, there is an error
 	}
-	textureVector.push_back(texture);
+
+	textureVector.push_back(texture);													//add the texture
 
 }
 
 
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------
@@ -274,15 +295,19 @@ void ResourceManager::addTexture(std::string fileName)									////private funct
 ------------------------------------------------------------------------------------*/
 void ResourceManager::addFont(std::string fileName)										//private function; adds a font to the FontVector
 {
-	sf::Font font;
-	if (!font.loadFromFile(fileName))
+	sf::Font font;																		//make a temporary font
+
+	if (!font.loadFromFile(fileName))													//try to make it load from the file
 	{
-		// error...
+		// if ot doesn't there is an error
 	}
-	fontVector.push_back(font);
+
+	fontVector.push_back(font);															//add the font
 }
 
 
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------
@@ -302,7 +327,7 @@ void ResourceManager::addFont(std::string fileName)										//private function;
 
 
 
-
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------
@@ -343,3 +368,5 @@ void ResourceManager::addName(std::string name, int Mapnum, int elnum)								//
 	nameMaps[Mapnum][name] = elnum;						//then add the altered (or not) name
 
 }
+
+//----------------------------------------------------------------------------------------------------------------------------***************************

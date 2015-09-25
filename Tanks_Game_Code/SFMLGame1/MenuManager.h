@@ -2,40 +2,40 @@
 #include "Menu.h"
 
 
-class MenuManager
+class MenuManager															//holds menus
 {
 public:
 
-	MenuManager();
+	MenuManager();															//constructor
 
 
-	void addMenu(Menu fmenu, std::string fname);
+	void addMenu(Menu fmenu, std::string fname);							//adds a menu
 
-	Menu* getMenuPointerByName(std::string fname);
-
-
-
-	void setMenuDrawPositionByName(std::string fname, sf::Vector2f fpos);
-
-	void addMenuDrawPositionByName(std::string fname, sf::Vector2f fvel);
+	Menu* getMenuPointerByName(std::string fname);							//returns a pointer to a menu
 
 
 
-	void update(MouseData& fmousedata);
+	void setMenuDrawPositionByName(std::string fname, sf::Vector2f fpos);	//sets a menu's drawPosition by name
 
-	void draw(sf::RenderWindow& frenderwindow);
+	void addMenuDrawPositionByName(std::string fname, sf::Vector2f fvel);	//adds a menu's drawPosition by name
+
+
+
+	void update(MouseData& fmousedata);										//updates all of the menus
+
+	void draw(sf::RenderWindow& frenderwindow);								//draws all of the menus
 
 
 private:
 
-	void addMenuName(std::string fname);
+	void addMenuName(std::string fname);									//add a menus name to the name mapping
 
 
-	std::vector<Menu> menuVector;
+	std::vector<Menu> menuVector;											//vector of all the menus
 
-	std::vector<sf::Vector2f> drawPositions;
+	std::vector<sf::Vector2f> drawPositions;								//vector of all the draw positions; they indirectly correspond to menus
 
-	std::map<std::string, int> menuNames;
+	std::map<std::string, int> menuNames;									//maps names to indices for the menus;
 
 };
 

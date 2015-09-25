@@ -37,8 +37,6 @@ private:
 
 	sf::Vector2i mousePosition;						//poisition of the mouse
 
-
-
 	sf::Vector2i buttonData;						//data for the buttons; .x is the left mouse data, .y is the right mosue data
 	
 };

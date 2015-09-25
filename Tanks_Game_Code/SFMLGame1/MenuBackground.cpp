@@ -1,68 +1,91 @@
 #include "MenuBackground.h"
 
-MenuBackground::MenuBackground(sf::Vector2f fposition, ResourceGroup& fresourceGroup, sf::Vector2f fspriteSize)
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+//-----------------------------------------PUBLIC-----------------------------------------------------------------------------***************************
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+
+/*------------------------------------------------------------------------------------
+-------------------Constructor--------------------------------------------------------
+------------------------------------------------------------------------------------*/
+MenuBackground::MenuBackground(	sf::Vector2f fposition,
+								ResourceGroup& fresourceGroup,								
+								sf::Vector2f fspriteSize)						//position, resourceGroup, and spriteSize define a menubackground
 {
-	position = fposition;
+	position = fposition;														//set the position to the desired position
 
-	requiresMouseData = 0;
+	requiresMouseData = 0;														//menuBG does NOT require mouse data
 
-	isHidden = false;
-
-
-
-
-	spriteSize = fspriteSize;
-
-	halfDimensions = sf::Vector2f(fspriteSize.x / 2, fspriteSize.y / 2);
+	isHidden = false;															//menuBG is drawn usually
 
 
 
 
-	sf::Vector2f tempDimensions;
+	sf::Vector2f tempDimensions;												//declare temporary helper dimensions
 
-	backgroundSprite.setTexture(*fresourceGroup.getTexturePointer(0));
+	backgroundSprite.setTexture(*fresourceGroup.getTexturePointer(0));			//set the texture to the only texture in the resourceGroup
 
-	tempDimensions = sf::Vector2f(backgroundSprite.getLocalBounds().width, backgroundSprite.getLocalBounds().height);
+	tempDimensions = sf::Vector2f(	backgroundSprite.getLocalBounds().width,
+									backgroundSprite.getLocalBounds().height);	//set the temporary hleper dimensions
 	
-	backgroundSprite.setOrigin(tempDimensions.x / 2, tempDimensions.y / 2);
+	backgroundSprite.setOrigin(tempDimensions.x / 2, tempDimensions.y / 2);		//set the origin in the center of the rectangle
 
-	backgroundSprite.setScale(spriteSize.x / tempDimensions.x, spriteSize.y / tempDimensions.y);
+	backgroundSprite.setScale(	fspriteSize.x / tempDimensions.x,
+								fspriteSize.y / tempDimensions.y);				//set the scale such that the new size is the desired size
 
-	backgroundSprite.setPosition(0, 0);
+	backgroundSprite.setPosition(0, 0);											//set the position of the sprite at (0,0) relatively
 }
 
 
 
-void MenuBackground::update()
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+-------------------update-------------------------------------------------------------
+------------------------------------------------------------------------------------*/
+void MenuBackground::update()													//empty; inherited virtual
 {
 
 }
 
 
 
-void MenuBackground::update(MouseData& fmouseData)
+/*------------------------------------------------------------------------------------
+-------------------updatewithMouseData------------------------------------------------
+------------------------------------------------------------------------------------*/
+void MenuBackground::update(MouseData& fmouseData)								//empty; inherited virtual
 {
 
 }
 
 
 
-void MenuBackground::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+------------------------------draw---------------------------------------------------
+------------------------------------------------------------------------------------*/
+void MenuBackground::draw(	sf::RenderWindow& frenderWindow,
+							sf::Vector2f drawPosition)							//draws the Sprite
 {
-	position += drawPosition;
+	position += drawPosition;													//add the draw position to the position of the menuBG
 
 
 
-	backgroundSprite.move(position);
+	backgroundSprite.move(position);											//move the sprite by the position of the menuBG
 
-	frenderWindow.draw(backgroundSprite);
+	frenderWindow.draw(backgroundSprite);										//draw it
 
-	backgroundSprite.move(-position);
+	backgroundSprite.move(-position);											//move it back
 
 
 
-	position -= drawPosition;
+	position -= drawPosition;													//subtract the draw position because we added it.
 
 }
 
-
+//----------------------------------------------------------------------------------------------------------------------------***************************
