@@ -23,13 +23,15 @@ public:
 	
 	void draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition);	//drawing something requires a renderwindow and a position to draw at
 
+	void resetMD();
+
 	//------------------------------------------
 
 
 
-	void setRelativeSpritePosition(sf::Vector2f fpos);			//set the sprite position relative to the button poisiton. It's a bit weird but generalized
+	void setRelativeSpritePosition(sf::Vector2f fpos);						//set the sprite position relative to the button poisiton. It's a bit weird but generalized
 
-	void moveRelativeSpritePosition(sf::Vector2f fvel);			//change the sprite position releative to the button position
+	void moveRelativeSpritePosition(sf::Vector2f fvel);						//change the sprite position releative to the button position
 
 
 
@@ -38,8 +40,12 @@ public:
 	void moveRelativeTextPosition(sf::Vector2f fvel);						//change the text position releative to the button position
 
 
+
 	int getButtonState();													//returns the state of the BasicButton
-	
+
+
+
+	void addFunctionToDoOnButtonState(void (*function)(), int fbuttonState);//adds a function to do when the button is on a given buttonState
 	
 
 	//void setResources(ResourceGroup& rgroup);
@@ -63,6 +69,15 @@ private:
 	
 
 	void updateButtonState(MouseData& fmousedata);							//using mouse data, finds the current state of the button -- yes, click logic
+
+
+
+
+	void callbackOnButtonState(int fbuttonState);							//calls every function in the vector of functions assigned to a
+																			//button state when that button state is the current one
+
+	std::vector<std::vector<void(*)()>> doWhenButtonState;
+
 	
 	
 	std::vector<sf::Sprite> buttonStateSprites;								//vector of sprites; 1 for each of the buttton states
@@ -79,6 +94,8 @@ private:
 
 
 	sf::Vector2f extremeCorners[2];											//a click logic helper; the top-left and bottom-right corners.
+
+	sf::Vector2f lastDrawPosition;											//keeps track of where the button was told to draw
 	
 	int lastMouseHeld;														//a click logic helper; determines if the mouse was pressed down and held off of or on the button
 
@@ -86,7 +103,7 @@ private:
 
 	int buttonState;														//which state the BasicButton is in
 	
-	enum buttonStatePossibilities {Unheld, Hovered, Held, Unheld_Pressed, Hovered_Pressed, Held_Pressed, States_Number = 6, Clicked, Released};
+	enum buttonStatePossibilities { Unheld, Hovered, Held, Unheld_Pressed, Hovered_Pressed, Held_Pressed, States_Number = 6, Event_Number = 8, Clicked, Released, StateSize};
 																			//the '8' states of the button. States_Namber is just an index, and Clicked and Released are 
 																			//one-frame states that dont have separate sprites
 };

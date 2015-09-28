@@ -1,4 +1,5 @@
 #include "ResourceManager.h"
+#include <iostream>
 
 
 
@@ -278,7 +279,7 @@ void ResourceManager::addTexture(std::string fileName)									//private functio
 
 	if (!texture.loadFromFile(fileName))												//try to make it load from the file
 	{
-		// if it doesn't, there is an error
+		std::cout << fileName << " (Texture) failed to load." << std::endl;				// if it doesn't, there is an error
 	}
 
 	textureVector.push_back(texture);													//add the texture
@@ -299,7 +300,7 @@ void ResourceManager::addFont(std::string fileName)										//private function;
 
 	if (!font.loadFromFile(fileName))													//try to make it load from the file
 	{
-		// if ot doesn't there is an error
+		std::cout << fileName << " (Font) failed to load." << std::endl;				// if it doesn't, there is an error
 	}
 
 	fontVector.push_back(font);															//add the font

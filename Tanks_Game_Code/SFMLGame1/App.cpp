@@ -39,6 +39,8 @@ void App::setup()												//initialize all objects
 
 	setupResourceManager();										//set up the resource manager, adding all files
 
+	startingMenu.setup(generalResourceManager);					//set up the main menu
+
 }
 
 
@@ -141,6 +143,7 @@ void App::checkEvents(sf::Event& fevent)						//checks events like mouse clickin
 void App::update()											//update all objects and menus
 {
 
+	startingMenu.update(mouseInfo);
 
 }
 
@@ -154,13 +157,8 @@ void App::update()											//update all objects and menus
 ------------------------------------------------------------------------------------*/
 void App::draw()											//draw all objects
 {
-	//garbage! this is the wrong place for this stuff! Will be changed!
-	BasicButton tempButton(sf::Vector2f(0,0), generalResourceManager.getResourceSetByName("GreenButtonRG"),
-							"Test", sf::Color::White, sf::Vector2f(600,300), sf::Vector2f (300, 150));
 
-	tempButton.setRelativeTextPosition(sf::Vector2f(0, 0));
-
-	tempButton.draw(*window, sf::Vector2f(400, 300));
+	startingMenu.draw(*window);
 
 }
 
@@ -270,19 +268,37 @@ void App::doPerFrame()							//do the above four functions every update cycle
 void App::setupResourceManager()																//adds all the files to the resource manager
 {
 
-	generalResourceManager.addFile("Resources\\GreenButton.png", "GreenButton");				//adding texture
+	generalResourceManager.addFile("Resources\\GreenButtonUnpressed.png", "GreenButtonUnpressed");
+	generalResourceManager.addFile("Resources\\GreenButtonHovered.png", "GreenButtonHovered");
+	generalResourceManager.addFile("Resources\\GreenButtonHeld.png", "GreenButtonHeld");
+	generalResourceManager.addFile("Resources\\GreenButtonPressed.png", "GreenButtonPressed");
+	generalResourceManager.addFile("Resources\\GreenButtonHoveredPressed.png", "GreenButtonHoveredPressed");
+	generalResourceManager.addFile("Resources\\GreenButtonHeldPressed.png", "GreenButtonHeldPressed");
+
+
+	generalResourceManager.addFile("Resources\\WalrusBG.png", "WalrusBackground");
+
+	generalResourceManager.addFile("Resources\\GiraffeBG.png", "GiraffeBackground");
+
+
+
 
 	generalResourceManager.addFile("Resources\\AlexandriaFLF.ttf", "DefaultFont");				//adding font
+
+	
 
 	//-------NEW GROUP----------
 	ResourceGroup tempGroup;																	//creating a resource group WRONG PLACE
 
 	tempGroup.addFont(generalResourceManager.getFontPointerByName("DefaultFont"));				
 
-	for (int i = 0; i < 6; i++)
-	{
-		tempGroup.addTexture(generalResourceManager.getTexturePointerByName("GreenButton"));
-	}
+
+	tempGroup.addTexture(generalResourceManager.getTexturePointerByName("GreenButtonUnpressed"));
+	tempGroup.addTexture(generalResourceManager.getTexturePointerByName("GreenButtonHovered"));
+	tempGroup.addTexture(generalResourceManager.getTexturePointerByName("GreenButtonHeld"));
+	tempGroup.addTexture(generalResourceManager.getTexturePointerByName("GreenButtonPressed"));
+	tempGroup.addTexture(generalResourceManager.getTexturePointerByName("GreenButtonHoveredPressed"));
+	tempGroup.addTexture(generalResourceManager.getTexturePointerByName("GreenButtonHeldPressed"));
 
 	generalResourceManager.addResourceSet(tempGroup, "GreenButtonRG");
 

@@ -13,6 +13,8 @@ public:
 
 	virtual void draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition) = 0;	//and will draw, somehow
 
+	virtual void resetMD() = 0;															//reset on menu deactivation
+
 
 
 
@@ -40,14 +42,23 @@ public:
 
 	bool getIsHidden();																	//retrieve oif the thing wnats to be drawn
 
+	
+	void setResetsOnMD(bool fresetOnMD);
+
+	bool getResetsOnMD();
+
+
+
 
 protected:
 
-		sf::Vector2f position;															//position of the menuElement
+	sf::Vector2f position;																//position of the menuElement
 
 
-		bool requiresMouseData;															//if it requires mouseData
+	bool requiresMouseData;																//if it requires mouseData
 
-		bool isHidden;																	//if it wants to be drawn
+	bool isHidden;																		//if it wants to be drawn
+
+	bool resetsOnMD;																	//if it resets on Menu deactivation
 };
 

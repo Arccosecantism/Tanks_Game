@@ -32,6 +32,18 @@ void Menu::addMenuElement(MenuElement& fmenuElement, std::string fname)	//adds a
 
 
 
+/*------------------------------------------------------------------------------------
+--------------------------addMenuElement----------------------------------------------
+------------------------------------------------------------------------------------*/
+void Menu::addMenuElement(MenuElement* fmenuElement, std::string fname)
+{
+	elementVector.push_back(fmenuElement);								//adds a pointer to a menuElement
+
+	addElementName(fname);												//adds the name
+}
+
+
+
 //----------------------------------------------------------------------------------------------------------------------------***************************
 
 
@@ -77,6 +89,14 @@ void Menu::deactivate()													//deactivates the menu
 
 	isActive = false;													//isActive is turned to false
 
+	for (unsigned int i = 0; i < elementVector.size(); i++)
+	{
+		if (elementVector[i]->getResetsOnMD())
+		{
+			elementVector[i]->resetMD();
+		}
+	}
+
 }
 
 
@@ -99,7 +119,7 @@ void Menu::activate()													//activates the menu
 void Menu::switchActive()												//switches the activity of the menu
 {
 
-	isActive = !isActive;												//isActive becomes not(isactive)
+	setIsActive(!isActive);
 
 }
 
@@ -111,7 +131,14 @@ void Menu::switchActive()												//switches the activity of the menu
 void Menu::setIsActive(bool factive)									//sets the activity of the menu
 {
 
-	isActive = factive;													//isActive is true
+	if (factive)
+	{
+		activate();
+	}
+	else
+	{
+		deactivate();
+	}
 
 }
 

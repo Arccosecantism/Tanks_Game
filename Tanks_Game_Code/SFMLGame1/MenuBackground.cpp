@@ -11,8 +11,8 @@
 -------------------Constructor--------------------------------------------------------
 ------------------------------------------------------------------------------------*/
 MenuBackground::MenuBackground(	sf::Vector2f fposition,
-								ResourceGroup& fresourceGroup,								
-								sf::Vector2f fspriteSize)						//position, resourceGroup, and spriteSize define a menubackground
+								sf::Texture* ftexture,								
+								sf::Vector2f fspriteSize)						//position, texture, and spriteSize define a menubackground
 {
 	position = fposition;														//set the position to the desired position
 
@@ -20,12 +20,14 @@ MenuBackground::MenuBackground(	sf::Vector2f fposition,
 
 	isHidden = false;															//menuBG is drawn usually
 
+	resetsOnMD = false;															//menuBG does not need to reset
+
 
 
 
 	sf::Vector2f tempDimensions;												//declare temporary helper dimensions
 
-	backgroundSprite.setTexture(*fresourceGroup.getTexturePointer(0));			//set the texture to the only texture in the resourceGroup
+	backgroundSprite.setTexture(*ftexture);										//set the texture to the desired one
 
 	tempDimensions = sf::Vector2f(	backgroundSprite.getLocalBounds().width,
 									backgroundSprite.getLocalBounds().height);	//set the temporary hleper dimensions
@@ -87,5 +89,19 @@ void MenuBackground::draw(	sf::RenderWindow& frenderWindow,
 	position -= drawPosition;													//subtract the draw position because we added it.
 
 }
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+-----------------------------ResetMd--------------------------------------------------
+------------------------------------------------------------------------------------*/
+void MenuBackground::resetMD()
+{
+
+}
+
 
 //----------------------------------------------------------------------------------------------------------------------------***************************

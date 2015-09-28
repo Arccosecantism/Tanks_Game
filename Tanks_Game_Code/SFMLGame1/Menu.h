@@ -12,6 +12,10 @@ public:
 
 	void addMenuElement(MenuElement& fmenuElement, std::string fname);		//adds a menuElement and its name
 
+	void addMenuElement(MenuElement* fmenuElement, std::string fname);		//same thing, just no reference, replaced with pointer
+
+
+
 	void setRelativePosition(sf::Vector2f fpos);							//sets the relative position of the menu
 
 	void addRelativePosition(sf::Vector2f velocity);						//adds relative position

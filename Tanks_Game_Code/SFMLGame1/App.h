@@ -1,5 +1,5 @@
 #pragma once
-#include "BasicButton.h"
+#include "MainMenu.h"
 
 class App
 {
@@ -59,6 +59,10 @@ private:
 	sf::RenderWindow* window;								//pointer to a render window
 
 	ResourceManager generalResourceManager;					//the ResourceManager for everything in the App, which is almost everything
+
+
+	MainMenu startingMenu;
+	
 
 
 };

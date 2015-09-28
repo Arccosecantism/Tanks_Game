@@ -31,6 +31,8 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	isHidden = false;																	//set the inherited protected bool isHidden to false because BasicButton should be drawn by default
 	
+	resetsOnMD = true;																	//BasicButtons reset when their menu deactivates typically
+
 	//done-----------------------------------------------
 	
 	
@@ -76,6 +78,13 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 
 		buttonStateSprites.push_back(tempSprite);										//add the tempoarary sprite to the sprite vector
+
+
+		std::vector<void(*)()> tmpVectorOfFunctionPointers;								//create a temporary vector off function pointers
+		for (int i = 0; i < Event_Number; i++)
+		{
+			doWhenButtonState.push_back(tmpVectorOfFunctionPointers);					//add as many vectors as there are button states 
+		}
 	}
 
 
@@ -118,13 +127,22 @@ void BasicButton::update()															//Empty update -- inherited virtual
 
 
 /*------------------------------------------------------------------------------------
------------------------------------Monadic--upate-------------------------------------
+--------------------------Single--argument--upate-------------------------------------
 ------------------------------------------------------------------------------------*/
 void BasicButton::update(MouseData& fmouseData)										//mpouse data update -- inherited virtual
 {
 
 	updateButtonState(fmouseData);													//update the buttonState
 
+	for (int i = 0; i < StateSize; i++)		
+	{
+		if (i >= 6 && i <= 8)
+		{
+			i = 9;
+		}
+
+		callbackOnButtonState(i);													//do each button state's callback
+	}
 }
 
 
@@ -137,6 +155,7 @@ void BasicButton::update(MouseData& fmouseData)										//mpouse data update --
 ------------------------------------------------------------------------------------*/
 void BasicButton::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)	//draws the Button
 {
+	lastDrawPosition = drawPosition;
 
 	position += drawPosition;								//increase the position by thedesired draw position -- makes the position relative
 
@@ -175,6 +194,20 @@ void BasicButton::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPositio
 
 }
 
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+-------------------------------------resetMD------------------------------------------
+------------------------------------------------------------------------------------*/
+void BasicButton::resetMD()
+{
+
+	buttonState = Unheld;
+
+}
 
 
 //----------------------------------------------------------------------------------------------------------------------------***************************
@@ -261,51 +294,19 @@ int BasicButton::getButtonState()										//returns the buttonState
 //----------------------------------------------------------------------------------------------------------------------------***************************
 
 
+/*------------------------------------------------------------------------------------
+----------------------------AddFunctionToDoOnButtonState--------------------------------
+------------------------------------------------------------------------------------*/
+void BasicButton::addFunctionToDoOnButtonState(void (*function)(), int fbuttonState)		//adds a function to do when the button is a certain buttonState
+{
 
-//void BasicButton::setResources(ResourceGroup& rgroup)
-//{
-//
-//	
-//}
+	doWhenButtonState[fbuttonState].push_back(function);									//add the desired function
 
-//void BasicButton::setTextSize(int fsize)
-//{
-//
-//
-//}
-//
-//
-//
-//void BasicButton::setTextColor(sf::Color fcolor)
-//{
-//
-//
-//}
-//
-//
-//
-//void BasicButton::setTextString(std::string fstring)
-//{
-//
-//
-//}
-//
-//
-//
-//void BasicButton::setPosition(sf::Vector2f fposition)
-//{
-//
-//
-//}
-//
-//
-//
-//void BasicButton::setSpriteSize(sf::Vector2f  fsize)
-//{
-//
-//
-//}
+}
 
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 
@@ -323,11 +324,16 @@ int BasicButton::getButtonState()										//returns the buttonState
 ------------------------------------------------------------------------------------*/
 void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click logic...
 {
-	sf::Vector2i mousePos = fmousedata.getMousePosition();			//make a new vec2i, mousePos that is the mousePosition from the mouseData; only here to shorten and simplify code
+
+
+	sf::Vector2f mousePos = sf::Vector2f(fmousedata.getMousePosition().x, fmousedata.getMousePosition().y) - lastDrawPosition;	
+																	//make a new vec2i, mousePos that is the mousePosition from
+																	//the mouseData; only here to shorten and simplify code
 	int leftData = fmousedata.getLeftButtonData();
 
 	bool pressedDown = (buttonState == Clicked) || (buttonState == Unheld_Pressed) || (buttonState == Hovered_Pressed) || (buttonState == Held_Pressed);
-																	//if any of the above statements were true, pressed down should be true. This means that the mouse is being held down.
+																	//if any of the above statements were true, pressed down should be true.
+																	//This means that the mouse is being held down.
 
 
 
@@ -366,7 +372,6 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 					buttonState = Held;										//it's pressed
 				}
 
-				lastMouseHeld = 2;		//if the mouse was being held over the button and wasn't previously held off of the button, the mouse is now last held obver the button
 			}
 
 
@@ -423,6 +428,13 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 			lastMouseHeld = 0;			//when the mouse is released, it is no longer held
 		}
 
+		else if (leftData == 1)										//else if the mouse was just pressed on the button
+		{
+			lastMouseHeld = 2;										//last held was on the button
+		}
+
+
+
 	}
 
 	else															//else if the mouse was outside the button			
@@ -440,24 +452,49 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 			}
 		}
 
-		else if (leftData == 2 && lastMouseHeld != 1)					//else if the mouse was just held down and was not already held down off of the button
+		else if (leftData == 1)											//else if the mouse was just held down and was not already held down somewhere else
 		{
 			lastMouseHeld = 1;											//the mouse was last held off of the button
 		}
 
 
-
-		if (pressedDown)												//if the button was pressed down
+		if (leftData == 3)												//if the mouse was relased
 		{
-			buttonState = Unheld_Pressed;								//the button is now unheld and pressed
+			lastMouseHeld = 0;											//the mouse wasnt held
 		}
 
-		else															//otherwise
+
+		if (lastMouseHeld != 2)											//if the mouse was not dragged off of the button
 		{
-			buttonState = Unheld;										//the button is simply unheld
+			if (pressedDown)												//if the button was pressed down
+			{
+				buttonState = Unheld_Pressed;								//the button is now unheld and pressed
+				std::cout << "Button state:" << buttonState << std::endl;
+			}
+
+			else															//otherwise
+			{
+				buttonState = Unheld;										//the button is simply unheld
+			}
 		}
 	}
 
+}
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+--------------------------callbackClicked---------------------------------------------
+------------------------------------------------------------------------------------*/
+void BasicButton::callbackOnButtonState(int fbuttonState)							//do this when the button is clicked
+{
+	for (unsigned int i = 0; i < doWhenButtonState[fbuttonState].size(); i++)		//cycle through all functions to be called
+	{
+		doWhenButtonState[fbuttonState][i]();										//do all functions
+	}
 }
 
 

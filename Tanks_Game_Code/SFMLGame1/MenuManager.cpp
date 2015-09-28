@@ -38,6 +38,20 @@ void MenuManager::addMenu(Menu fmenu, std::string fname)							//adds a menu
 
 
 /*------------------------------------------------------------------------------------
+-------------------addMenu------------------------------------------------------------
+------------------------------------------------------------------------------------*/
+void MenuManager::addMenu(Menu fmenu, std::string fname, sf::Vector2f fdrawPosition)
+{
+	menuVector.push_back(fmenu);													//add the menu
+
+	addMenuName(fname);																//add the name of the menu
+
+	drawPositions.push_back(fdrawPosition);											//add the given drawPosition		
+}
+
+
+
+/*------------------------------------------------------------------------------------
 -------------------getMenuPointerByName-----------------------------------------------
 ------------------------------------------------------------------------------------*/
 Menu* MenuManager::getMenuPointerByName(std::string fname)							//returns a pointer to a menu
@@ -67,11 +81,39 @@ void MenuManager::setMenuDrawPositionByName(std::string fname, sf::Vector2f fpos
 
 
 /*------------------------------------------------------------------------------------
--------------------addMenuDrawpositionByName------------------------------------------
+-------------------moveMenuDrawpositionByName-----------------------------------------
 ------------------------------------------------------------------------------------*/
-void MenuManager::addMenuDrawPositionByName(std::string fname, sf::Vector2f fvel)	//add position to a drawPoisiton of a menu by name
+void MenuManager::moveMenuDrawPositionByName(std::string fname, sf::Vector2f fvel)	//add position to a drawPoisiton of a menu by name
 {
 	drawPositions[menuNames[fname]] += fvel;										//increment the drawPosition by the desired velocity
+}
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+--------------------------ActivateAllMenus--------------------------------------------
+------------------------------------------------------------------------------------*/
+void MenuManager::activateAllMenus()
+{
+	for (unsigned int i = 0; i < menuVector.size(); i++)
+	{
+		menuVector[i].activate();
+	}
+}
+
+
+/*------------------------------------------------------------------------------------
+-------------------------DeactivateAllMenus-------------------------------------------
+------------------------------------------------------------------------------------*/
+void MenuManager::deactivateAllMenus()
+{
+	for (unsigned int i = 0; i < menuVector.size(); i++)
+	{
+		menuVector[i].deactivate();
+	}
 }
 
 
