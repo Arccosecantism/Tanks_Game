@@ -168,7 +168,8 @@
     <ClCompile Include="MouseData.cpp" />
     <ClCompile Include="ResourceGroup.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="TextBox.cpp" />
+    <ClCompile Include="MultiTextBox.cpp" />
+    <ClCompile Include="SingleTextBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -184,7 +185,8 @@
     <ClInclude Include="ResourceGroup.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SFMLbase.h" />
-    <ClInclude Include="TextBox.h" />
+    <ClInclude Include="MultiTextBox.h" />
+    <ClInclude Include="SingleTextBox.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
