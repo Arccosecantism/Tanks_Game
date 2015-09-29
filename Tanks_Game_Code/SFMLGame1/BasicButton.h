@@ -3,7 +3,8 @@
 
 class BasicButton : public MenuElement										//BasicButton is a menuElement that is a button with states based on mouse logic and with text.
 {
-
+	typedef void(*function_pointer)(void*);
+	typedef std::pair<function_pointer, void*> memfunc_of_object;
 
 public:
 	
@@ -45,7 +46,7 @@ public:
 
 
 
-	void addFunctionToDoOnButtonState(void (*function)(), int fbuttonState);//adds a function to do when the button is on a given buttonState
+	void addFunctionToDoOnButtonState(function_pointer function, void* object, int fbuttonState);//adds a function to do when the button is on a given buttonState
 	
 
 	//void setResources(ResourceGroup& rgroup);
@@ -76,7 +77,7 @@ private:
 	void callbackOnButtonState(int fbuttonState);							//calls every function in the vector of functions assigned to a
 																			//button state when that button state is the current one
 
-	std::vector<std::vector<void(*)()>> doWhenButtonState;
+	std::vector<std::vector<memfunc_of_object>> doWhenButtonState;
 
 	
 	

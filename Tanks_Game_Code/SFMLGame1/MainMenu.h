@@ -32,21 +32,25 @@ public:
 private:
 	
 
-	void (MainMenu::* getPointerToFunctionByName(std::string fname))();
+	/*void (MainMenu::* getPointerToFunctionByName(std::string fname))();*/
 
-	void openNormalMenu();
+	static void openNormalMenu(void* fmainmenu);
+	void openNormalMenuCalled();
 
-	void closeNormalMenu();
+	static void closeNormalMenu(void* fmainmenu);
+	void closeNormalMenuCalled();
 
-	void openSecondMenu();
+	static void openSecondMenu(void* fmainmenu);
+	void openSecondMenuCalled();
 
-	void closeSecondMenu();
+	static void closeSecondMenu(void* fmainmenu);
+	void closeSecondMenuCalled();
 
 
 	MenuManager MainMenuManager;
 
 	bool isActive;
 
-	std::map<std::string, void(MainMenu::*)()> pointersToFunctions;
+	/*std::map<std::string, void(MainMenu::*)()> pointersToFunctions;*/
 };
 

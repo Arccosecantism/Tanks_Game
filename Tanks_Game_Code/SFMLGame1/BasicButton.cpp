@@ -80,10 +80,10 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 		buttonStateSprites.push_back(tempSprite);										//add the tempoarary sprite to the sprite vector
 
 
-		std::vector<void(*)()> tmpVectorOfFunctionPointers;								//create a temporary vector off function pointers
+		std::vector<memfunc_of_object> tmpVectorOfPairs;						//create a temporary vector of function pointers
 		for (int i = 0; i < Event_Number; i++)
 		{
-			doWhenButtonState.push_back(tmpVectorOfFunctionPointers);					//add as many vectors as there are button states 
+			doWhenButtonState.push_back(tmpVectorOfPairs);								//add as many vectors as there are button states 
 		}
 	}
 
@@ -141,7 +141,10 @@ void BasicButton::update(MouseData& fmouseData)										//mpouse data update --
 			i = 9;
 		}
 
-		callbackOnButtonState(i);													//do each button state's callback
+		if (buttonState == i)
+		{
+			callbackOnButtonState(i);													//do each button state's callback
+		}
 	}
 }
 
@@ -171,7 +174,7 @@ void BasicButton::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPositio
 	{
 		drawState = Hovered;
 	}
-
+	std::cout << buttonState << std::endl;
 
 
 	buttonStateSprites[drawState].move(position);			//add the button's position to the Sprite -- makes the sprites position relative
@@ -297,10 +300,10 @@ int BasicButton::getButtonState()										//returns the buttonState
 /*------------------------------------------------------------------------------------
 ----------------------------AddFunctionToDoOnButtonState--------------------------------
 ------------------------------------------------------------------------------------*/
-void BasicButton::addFunctionToDoOnButtonState(void (*function)(), int fbuttonState)		//adds a function to do when the button is a certain buttonState
+void BasicButton::addFunctionToDoOnButtonState(function_pointer function, void* object, int fbuttonState)		//adds a function to do when the button is a certain buttonState
 {
 
-	doWhenButtonState[fbuttonState].push_back(function);									//add the desired function
+	doWhenButtonState[fbuttonState].push_back(std::make_pair(function, object));									//add the desired function
 
 }
 
@@ -489,11 +492,14 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 /*------------------------------------------------------------------------------------
 --------------------------callbackClicked---------------------------------------------
 ------------------------------------------------------------------------------------*/
-void BasicButton::callbackOnButtonState(int fbuttonState)							//do this when the button is clicked
+void BasicButton::callbackOnButtonState(int fbuttonState)										//do this when the button is clicked
 {
-	for (unsigned int i = 0; i < doWhenButtonState[fbuttonState].size(); i++)		//cycle through all functions to be called
+	for (unsigned int i = 0; i < doWhenButtonState[fbuttonState].size(); i++)					//cycle through all functions to be called
 	{
-		doWhenButtonState[fbuttonState][i]();										//do all functions
+		if (doWhenButtonState[fbuttonState][i].first != NULL)
+		{
+			doWhenButtonState[fbuttonState][i].first(doWhenButtonState[fbuttonState][i].second);	//do all functions
+		}
 	}
 }
 

@@ -7,21 +7,6 @@ MainMenu::MainMenu()
 	isActive = true;
 
 
-	void(MainMenu::* tmpPointer)();
-
-	tmpPointer = &openNormalMenu;
-	pointersToFunctions["openNormalMenu"] = tmpPointer;
-
-	tmpPointer = &closeNormalMenu;
-	pointersToFunctions["closeNormalMenu"] = tmpPointer;
-
-	tmpPointer = &openSecondMenu;
-	pointersToFunctions["openSecondMenu"] = tmpPointer;
-
-	tmpPointer = &closeSecondMenu;
-	pointersToFunctions["closeSecondMenu"] = tmpPointer;
-
-
 }
 
 
@@ -40,6 +25,9 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 	BasicButton* p_greenButtonA = static_cast<BasicButton*>(greenButtonA);
 	p_greenButtonA->setRelativeTextPosition(sf::Vector2f(0, 0));
 
+	//BasicButton* p_greenButtonA = static_cast<BasicButton*>(greenButtonA);
+	//p_greenButtonA->addFunctionToDoOnButtonState(closeSecondMenu, this, 3);
+
 
 	
 
@@ -48,13 +36,19 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 	greenButtonB = new BasicButton(	sf::Vector2f(0, 150), fresourceManager.getResourceSetByName("GreenButtonRG"),
 									"Test2", sf::Color::White, sf::Vector2f(200, 100), sf::Vector2f(100, 50)	);
 
+	BasicButton* p_greenButtonB = static_cast<BasicButton*>(greenButtonB);
+	p_greenButtonB->addFunctionToDoOnButtonState(openSecondMenu, this, 9);
+	p_greenButtonB->addFunctionToDoOnButtonState(closeNormalMenu, this, 9);
+
+
 	MenuElement* greenButtonC;
 	greenButtonC = new BasicButton(	sf::Vector2f(0, -150), fresourceManager.getResourceSetByName("GreenButtonRG"),
 									"Test3", sf::Color::White, sf::Vector2f(200, 100), sf::Vector2f(100, 50));
 
-	BasicButton* p_greenButtonC = static_cast<BasicButton*>(greenButtonC);
 
-	p_greenButtonC->addFunctionToDoOnButtonState((getPointerToFunctionByName("closeSecondMenu")), 3);
+	BasicButton* p_greenButtonC = static_cast<BasicButton*>(greenButtonC);
+	p_greenButtonC->addFunctionToDoOnButtonState(closeSecondMenu, this, 9);
+	p_greenButtonC->addFunctionToDoOnButtonState(openNormalMenu, this, 9);
 
 	
 
@@ -82,12 +76,12 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 	secondMenu.addMenuElement(giraffeBG, "GiraffeBackground");
 	secondMenu.addMenuElement(greenButtonC, "TopGreenButtonS");
-	secondMenu.deactivate();
 	
 
 
 	MainMenuManager.addMenu(defaultMenu, "NormalMenu", sf::Vector2f(400, 300));
 	MainMenuManager.addMenu(secondMenu, "SecondMenu", sf::Vector2f(400, 300));
+	MainMenuManager.getMenuPointerByName("SecondMenu")->deactivate();
 
 
 
@@ -159,37 +153,65 @@ void MainMenu::draw(sf::RenderWindow& frenderwindow)
 }
 
 
-void (MainMenu::* MainMenu::getPointerToFunctionByName(std::string fname))()
+//void (MainMenu::* MainMenu::getPointerToFunctionByName(std::string fname))()
+//{
+//
+//	void(MainMenu::*tmpPointerToFunction)();
+//
+//	tmpPointerToFunction = pointersToFunctions[fname];
+//
+//	return tmpPointerToFunction;
+//
+//}
+
+
+
+void MainMenu::openNormalMenu(void* fmainmenu)
 {
-
-	void(MainMenu::*tmpPointerToFunction)();
-
-	tmpPointerToFunction = pointersToFunctions[fname];
-
-	return tmpPointerToFunction;
-
+	MainMenu* tmpThis = static_cast<MainMenu*>(fmainmenu);
+	tmpThis->openNormalMenuCalled();
 }
 
-
-void MainMenu::openNormalMenu()
+void MainMenu::openNormalMenuCalled()
 {
 	MainMenuManager.getMenuPointerByName("NormalMenu")->activate();
 }
 
 
-void MainMenu::closeNormalMenu()
+
+void MainMenu::closeNormalMenu(void* fmainmenu)
+{
+	MainMenu* tmpThis = static_cast<MainMenu*>(fmainmenu);
+	tmpThis->closeNormalMenuCalled();
+}
+
+void MainMenu::closeNormalMenuCalled()
 {
 	MainMenuManager.getMenuPointerByName("NormalMenu")->deactivate();
 }
 
 
-void MainMenu::openSecondMenu()
+
+void MainMenu::openSecondMenu(void* fmainmenu)
+{
+	MainMenu* tmpThis = static_cast<MainMenu*>(fmainmenu);
+	tmpThis->openSecondMenuCalled();
+}
+
+void MainMenu::openSecondMenuCalled()
 {
 	MainMenuManager.getMenuPointerByName("SecondMenu")->activate();
 }
 
-void
-MainMenu::closeSecondMenu()
+
+
+void MainMenu::closeSecondMenu(void* fmainmenu)
+{
+	MainMenu* tmpThis = static_cast<MainMenu*>(fmainmenu);
+	tmpThis->closeSecondMenuCalled();
+}
+
+void MainMenu::closeSecondMenuCalled()
 {
 	MainMenuManager.getMenuPointerByName("SecondMenu")->deactivate();
 }

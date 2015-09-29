@@ -128,7 +128,10 @@ void MenuManager::update(MouseData& fmousedata)										//updates the menus
 {
 	for (unsigned int i = 0; i < menuVector.size(); i++)							//cycle through all the menus
 	{
-		menuVector[i].update(fmousedata);											//update them
+		if (menuVector[i].getIsActive())
+		{
+			menuVector[i].update(fmousedata);											//update them
+		}
 	}
 }
 
@@ -144,7 +147,10 @@ void MenuManager::draw(sf::RenderWindow& frenderwindow)								//draws all the m
 {
 	for (unsigned int i = 0; i < menuVector.size(); i++)							//cycle through all of the menus
 	{
-		menuVector[i].draw(frenderwindow, drawPositions[i]);						//draw them all at their respective drawPositions
+		if (menuVector[i].getIsActive())
+		{
+			menuVector[i].draw(frenderwindow, drawPositions[i]);						//draw them all at their respective drawPositions
+		}
 	}
 }
 
