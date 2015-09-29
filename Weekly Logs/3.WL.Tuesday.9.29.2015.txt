@@ -1,0 +1,62 @@
+---------------------------------------------------------
+Things accomplished in last work session (1 week):
+---------------------------------------------------------
+
+	
+	I made the callback from the buttons when they ar clicked event-based (using function pointers).
+
+Aside from that and getting the MainMenu to swap between menus, I got little else done.
+
+
+---------------------------------------------------------
+
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
+
+---------------------------------------------------------
+Previous Goals met:
+---------------------------------------------------------
+
+
+	*I would like to have all the MenuTools somewhat finsished and functioning. 
+
+
+
+
+
+	*I would like to end the week with a MainMenu screen.
+
+
+
+	I completed neither of these goals. my hopes again were still too ambitious. I know now that
+
+doing big steps like this taketime and lots of learning.
+
+
+---------------------------------------------------------
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
+
+
+----------------------------------------------------
+Things I'd like to accomplish by Monday, 9/29/2015:
+----------------------------------------------------
+
+
+
+	*I would like to have most of the Menu tools functioning
+
+
+
+
+	*This is idealistic, but I would like to have the MainMenu somewhat done
+
+
+
+-----------------------------------------------------
