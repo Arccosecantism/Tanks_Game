@@ -4,7 +4,7 @@
 class SingleTextBox : public MenuElement
 {
 public:
-	SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, sf::Vector2f fsize, sf::Color fcolor, sf::String fname);
+	SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, sf::Vector2f fsize, sf::Color fcolor);
 	~SingleTextBox();
 
 	void update();
@@ -25,7 +25,8 @@ public:
 
 private:
 
-	void resetSizeByName(int findex);
+	/*void wrapText();*/
+	void resetSize();
 
 	sf::Text textBody;
 	sf::Color textColor;

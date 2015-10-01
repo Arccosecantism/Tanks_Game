@@ -1,7 +1,7 @@
 #include "MultiTextBox.h"
 
 
-MultiTextBox::MultiTextBox(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, sf::Vector2f fsize, sf::Color fcolor, std::string fname)
+MultiTextBox::MultiTextBox()
 {
 
 	
@@ -17,13 +17,19 @@ MultiTextBox::~MultiTextBox()
 
 void MultiTextBox::update()
 {
-
+	for (unsigned int i = 0; i < textBoxVector.size(); i++)
+	{
+		textBoxVector[i].update();
+	}
 }
 
 
 void MultiTextBox::update(MouseData& fmouseData)
 {
-
+	for (unsigned int i = 0; i < textBoxVector.size(); i++)
+	{
+		textBoxVector[i].update(fmouseData);
+	}
 }
 
 
@@ -31,11 +37,10 @@ void MultiTextBox::draw(sf::RenderWindow& frenderwindow, sf::Vector2f drawPositi
 {
 	position += drawPosition;
 
-	textBody.move(position);
-
-	frenderwindow.draw(textBody);
-
-	textBody.move(-position);
+	for (unsigned int i = 0; i < textBoxVector.size(); i++)
+	{
+		textBoxVector[i].draw(frenderwindow, position);
+	}
 
 	position -= drawPosition;
 }
@@ -46,19 +51,15 @@ void MultiTextBox::resetMD()
 
 }
 
-
-void MultiTextBox::setTextStringByName(std::string fstring, std::string fname)
+void MultiTextBox::addTextBox(SingleTextBox fsingleTextBox, std::string fname)
 {
-
+	textBoxVector.push_back(fsingleTextBox);
+	nameMap[fname] = textBoxVector.size() - 1;
 }
 
-void MultiTextBox::setTextSizeByName(std::string fstring, std::string fname)
-{
 
-}
-
-void MultiTextBox::resetSizeByName(int findex)
+SingleTextBox* MultiTextBox::getTextBoxPointerByName(std::string fname)
 {
-	sf::Vector2f tempDimensions = sf::Vector2f(std::get<0>(textBodyVector.first[findex]).getLocalBounds().width, std::get<0>(textBodyVector.first[findex]).getLocalBounds().width);
-	std::get<0>(textBodyVector.first[findex]).setScale(std::get<2>(textBodyVector.first[findex]).x / tempDimensions.x, std::get<2>(textBodyVector.first[findex]).y / tempDimensions.y);
+	SingleTextBox* tmpTextBox = &textBoxVector[nameMap[fname]];
+	return tmpTextBox;
 }

@@ -18,6 +18,17 @@ MainMenu::~MainMenu()
 
 void MainMenu::setup(ResourceManager& fresourceManager)
 {
+
+
+	MenuElement* textBoxA;
+	textBoxA = new SingleTextBox(sf::Vector2f(0,-150), fresourceManager.getFontPointerByName("DefaultFont"), "Test post;\nplease ignore", sf::Vector2f(200, 150), sf::Color::Red);
+
+
+
+
+
+
+
 	MenuElement* greenButtonA;
 	greenButtonA = new BasicButton(		sf::Vector2f(0, -150), fresourceManager.getResourceSetByName("GreenButtonRG"),
 										"Test1", sf::Color::White, sf::Vector2f(200, 100), sf::Vector2f(100, 50)	);
@@ -71,6 +82,7 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 	defaultMenu.addMenuElement(walrusBG, "WalrusBackground");
 	defaultMenu.addMenuElement(greenButtonA, "TopGreenButton");
 	defaultMenu.addMenuElement(greenButtonB, "BottomGreenButton");
+	defaultMenu.addMenuElement(textBoxA, "TextBoxA");
 
 
 

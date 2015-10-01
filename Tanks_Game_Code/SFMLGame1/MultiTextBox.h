@@ -20,22 +20,17 @@ public:
 	void resetMD();
 
 
-	void setTextStringByName(std::string fstring, std::string name);
+	void addTextBox(SingleTextBox fsingleTextBox, std::string fname);
 
-	void setTextColorByName(sf::Color fcolor, std::string name);
-
-	void setTextSizeByName(sf::Vector2f )
-
-
-	void addTextBody(std::string fstring, sf::Color fcolor, sf::Vector2f fsize);
+	SingleTextBox* getTextBoxPointerByName(std::string fname);
 
 
 
 private:
 
 	
-
-	std::pair<std::vector<std::tuple<sf::Text, sf::Color, sf::Vector2f>>, std::map<std::string, int>> textBodyVector;
+	std::vector<SingleTextBox> textBoxVector;
+	std::map<std::string, int> nameMap;
 
 };
 

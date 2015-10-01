@@ -1,7 +1,7 @@
 #include "SingleTextBox.h"
 
 
-SingleTextBox::SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, sf::Vector2f fsize, sf::Color fcolor, sf::String fname)
+SingleTextBox::SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, sf::Vector2f fsize, sf::Color fcolor)
 {
 	requiresMouseData = false;
 
@@ -44,7 +44,7 @@ SingleTextBox::~SingleTextBox()
 
 
 void SingleTextBox::update()
-{
+{ 
 
 }
 
@@ -72,4 +72,40 @@ void SingleTextBox::draw(sf::RenderWindow& frenderwindow, sf::Vector2f drawPosit
 void SingleTextBox::resetMD()
 {
 
+}
+
+
+void SingleTextBox::setTextString(std::string fstring)
+{
+	textBody.setString(fstring);
+	resetSize();
+}
+
+void SingleTextBox::setTextColor(sf::Color fcolor)
+{
+	textBody.setColor(fcolor);
+}
+
+void SingleTextBox::setTextSize(sf::Vector2f fsize)
+{
+	textSize = fsize;
+	resetSize();
+}
+
+
+//void SingleTextBox::wrapText()
+//{
+//	sf::Text tmpText;
+//	tmpText.setFont(*textBody.getFont());
+//
+//	std::string tmpString = textBody.getString();
+//	tmpText.setString(tmpS)
+//
+//
+//}
+
+void SingleTextBox::resetSize()
+{
+	sf::Vector2f tempDimensions = sf::Vector2f(textBody.getGlobalBounds().width, textBody.getGlobalBounds().height);
+	textBody.setScale(textSize.x / tempDimensions.x, textSize.y / tempDimensions.y);
 }
