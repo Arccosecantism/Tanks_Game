@@ -109,3 +109,16 @@ void SingleTextBox::resetSize()
 	sf::Vector2f tempDimensions = sf::Vector2f(textBody.getGlobalBounds().width, textBody.getGlobalBounds().height);
 	textBody.setScale(textSize.x / tempDimensions.x, textSize.y / tempDimensions.y);
 }
+
+void SingleTextBox::getAverageHeight()
+{
+	double sum = 0;
+
+	std::string currentChar;
+
+	sf::Text tmpText;
+	tmpText.setFont(*textBody.getFont());
+	
+	for (int i = 0)
+
+}

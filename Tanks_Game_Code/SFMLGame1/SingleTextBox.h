@@ -27,6 +27,7 @@ private:
 
 	/*void wrapText();*/
 	void resetSize();
+	void getAverageHeight();
 
 	sf::Text textBody;
 	sf::Color textColor;
