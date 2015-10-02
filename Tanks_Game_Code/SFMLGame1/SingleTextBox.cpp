@@ -1,7 +1,7 @@
 #include "SingleTextBox.h"
 
 
-SingleTextBox::SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, sf::Vector2f fsize, sf::Color fcolor)
+SingleTextBox::SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, int ffontsize, double fmaxwidth, sf::Color fcolor)
 {
 	requiresMouseData = false;
 
@@ -13,7 +13,7 @@ SingleTextBox::SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::strin
 
 	position = fposition;
 
-	textSize = fsize;
+	characterSize = ffontsize;
 
 
 
@@ -104,21 +104,75 @@ void SingleTextBox::setTextSize(sf::Vector2f fsize)
 //
 //}
 
-void SingleTextBox::resetSize()
+//void SingleTextBox::resetSize()
+//{
+//	sf::Vector2f tempDimensions = sf::Vector2f(textBody.getGlobalBounds().width, textBody.getGlobalBounds().height);
+//	textBody.setScale(textSize.x / tempDimensions.x, textSize.y / tempDimensions.y);
+//}
+std::string SingleTextBox::wrapText()
 {
-	sf::Vector2f tempDimensions = sf::Vector2f(textBody.getGlobalBounds().width, textBody.getGlobalBounds().height);
-	textBody.setScale(textSize.x / tempDimensions.x, textSize.y / tempDimensions.y);
+	char letter;
+	std::string word = "";
+	std::string line = "";
+	std::string transline = "";
+	std::string rtstr = "";
+	bool notFirstWord = false;
+
+	for (unsigned int i = 0; i <= drawString.size(); i++)
+	{
+		if (i = drawString.size)
+		{
+
+		}
+		letter = drawString[i];
+		if (letter == ' ')
+		{
+
+
+
+			if (notFirstWord)
+			{
+				transline += ' ';
+			}
+
+			transline += word;
+			
+
+			if (getWidthOfString(transline) > width)
+			{
+				rtstr += line;
+				rtstr += "\n";
+				notFirstWord = false;
+			}
+			else
+			{
+				line = transline;
+
+			}
+
+			notFirstWord = true;
+			word = "";
+
+			
+
+			
+		}
+		else
+		{
+			word += letter;
+		}
+
+	}
 }
 
-void SingleTextBox::getAverageHeight()
-{
-	double sum = 0;
 
-	std::string currentChar;
+double SingleTextBox::getWidthOfString(std::string fstr)
+{
 
 	sf::Text tmpText;
 	tmpText.setFont(*textBody.getFont());
-	
-	for (int i = 0)
+	tmpText.setCharacterSize(characterSize);
+	tmpText.setString(fstr);
+	return tmpText.getGlobalBounds().width;
 
 }
