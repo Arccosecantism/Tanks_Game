@@ -1,10 +1,14 @@
 #pragma once
 #include "MenuElement.h"
+#include "SingleTextBox.h"
+#include "MultiMenuSprite.h"
 
 class BasicButton : public MenuElement										//BasicButton is a menuElement that is a button with states based on mouse logic and with text.
 {
 	typedef void(*function_pointer)(void*);
 	typedef std::pair<function_pointer, void*> memfunc_of_object;
+
+
 
 public:
 	
@@ -12,7 +16,7 @@ public:
 																			//You need position, a resourceGroup, a string for the text,
 					std::string ftextName, sf::Color ftextColor,			//a color for the text, a size for the sprites, and a
 																			//size for the text
-					sf::Vector2f fspriteSize,	sf::Vector2f ftextSize);	//-----------------
+					sf::Vector2f fspriteSize,	int ftextCharSize);		//-----------------
 				
 
 	//-------------------------------------------
@@ -68,6 +72,7 @@ public:
 
 private:
 	
+	int getChangedButtonState();
 
 	void updateButtonState(MouseData& fmousedata);							//using mouse data, finds the current state of the button -- yes, click logic
 
@@ -81,18 +86,18 @@ private:
 
 	
 	
-	std::vector<sf::Sprite> buttonStateSprites;								//vector of sprites; 1 for each of the buttton states
+	MultiMenuSprite buttonSprites;											//the Button's Sprites
 
-	sf::Text buttonText;													//Text (which is an sf:: object) for the button NOT A STRING
+	SingleTextBox buttonTextBox;											//the Button's textBox
 
 	//sf::soundBuffer soundFX[2];											//will be soundbuffers
 	
-	sf::Vector2f textSize;													//the size of the text in terms of height and width
 
-	sf::Vector2f spriteSize;												//the size of all the sprites in terms of height and width
-	
 	
 
+	
+	
+	int buttonStateCheckers[2];
 
 	sf::Vector2f extremeCorners[2];											//a click logic helper; the top-left and bottom-right corners.
 

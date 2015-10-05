@@ -4,8 +4,13 @@
 class SingleTextBox : public MenuElement
 {
 public:
+	SingleTextBox();
 	SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, int ffontsize, double fmaxwidth, sf::Color fcolor);
 	~SingleTextBox();
+	
+	void setup(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, int ffontsize, double fmaxwidth, sf::Color fcolor);
+
+
 
 	void update();
 
@@ -21,13 +26,18 @@ public:
 
 	void setTextColor(sf::Color fcolor);
 
-	void setTextSize(sf::Vector2f fsize);
+	void setFontSize(int fsize);
 
 private:
 
 	std::string wrapText();
+
 	void resetSize();
-	double getWidthOfString(std::string fstr);
+
+	sf::Vector2f getDimensionsOfString(std::string fstr);
+
+	void correctPosition();
+
 
 	sf::Text textBody;
 	sf::Color textColor;

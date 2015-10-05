@@ -1,5 +1,15 @@
 #include "SingleTextBox.h"
 
+SingleTextBox::SingleTextBox()
+{
+	requiresMouseData = false;
+
+	isHidden = false;
+
+	resetsOnMD = false;
+
+
+}
 
 SingleTextBox::SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, int ffontsize, double fmaxwidth, sf::Color fcolor)
 {
@@ -9,11 +19,29 @@ SingleTextBox::SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::strin
 
 	resetsOnMD = false;
 
+	setup(fposition, ffont, fstring, ffontsize, fmaxwidth, fcolor);
 
+
+}
+
+
+SingleTextBox::~SingleTextBox()
+{
+}
+
+
+void SingleTextBox::setup(sf::Vector2f fposition, sf::Font* ffont, std::string fstring, int ffontsize, double fmaxwidth, sf::Color fcolor)
+{
 
 	position = fposition;
 
 	characterSize = ffontsize;
+
+	textColor = fcolor;
+
+	width = fmaxwidth;
+
+	drawString = fstring;
 
 
 
@@ -24,6 +52,10 @@ SingleTextBox::SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::strin
 
 	textBody.setString(fstring);
 
+	textBody.setCharacterSize(ffontsize);
+
+	textBody.setString(wrapText());
+
 	textBody.setColor(fcolor);
 
 
@@ -31,17 +63,11 @@ SingleTextBox::SingleTextBox(sf::Vector2f fposition, sf::Font* ffont, std::strin
 
 	textBody.setOrigin(tempDimensions.x / 2, tempDimensions.y / 2);
 
-	textBody.setScale(textSize.x / tempDimensions.x, textSize.y / tempDimensions.y);
+	textBody.setPosition(0,0);
 
-	textBody.setPosition(0, 0);
+	correctPosition();
 
 }
-
-
-SingleTextBox::~SingleTextBox()
-{
-}
-
 
 void SingleTextBox::update()
 { 
@@ -78,7 +104,7 @@ void SingleTextBox::resetMD()
 void SingleTextBox::setTextString(std::string fstring)
 {
 	textBody.setString(fstring);
-	resetSize();
+	textBody.setString(wrapText());
 }
 
 void SingleTextBox::setTextColor(sf::Color fcolor)
@@ -86,10 +112,10 @@ void SingleTextBox::setTextColor(sf::Color fcolor)
 	textBody.setColor(fcolor);
 }
 
-void SingleTextBox::setTextSize(sf::Vector2f fsize)
+void SingleTextBox::setFontSize(int fsize)
 {
-	textSize = fsize;
-	resetSize();
+	textBody.setCharacterSize(fsize);
+	textBody.setString(wrapText());
 }
 
 
@@ -109,70 +135,134 @@ void SingleTextBox::setTextSize(sf::Vector2f fsize)
 //	sf::Vector2f tempDimensions = sf::Vector2f(textBody.getGlobalBounds().width, textBody.getGlobalBounds().height);
 //	textBody.setScale(textSize.x / tempDimensions.x, textSize.y / tempDimensions.y);
 //}
+
+
 std::string SingleTextBox::wrapText()
 {
+	std::string searchString;
+	for (unsigned int i = 0; i < drawString.size(); i++)
+	{
+		searchString = drawString[i];
+		if (searchString == "\n")
+		{
+			drawString[i] = ' ';
+		}
+	}
+
+
+	
+
+	int spaceIndex;
 	char letter;
 	std::string word = "";
 	std::string line = "";
 	std::string transline = "";
 	std::string rtstr = "";
 	bool notFirstWord = false;
+	bool notFirstLine = false;
 
 	for (unsigned int i = 0; i <= drawString.size(); i++)
 	{
-		if (i = drawString.size)
-		{
 
+		if (i == drawString.size())
+		{
+			letter = ' ';
 		}
-		letter = drawString[i];
+		else
+		{
+			letter = drawString[i];
+		}
+		
+
+
 		if (letter == ' ')
 		{
-
-
-
 			if (notFirstWord)
 			{
 				transline += ' ';
 			}
 
 			transline += word;
-			
 
-			if (getWidthOfString(transline) > width)
+			if (getDimensionsOfString(transline).x > width)
 			{
+				if (notFirstLine)
+				{
+					rtstr += "\n";
+				}
+
 				rtstr += line;
-				rtstr += "\n";
+
 				notFirstWord = false;
+				notFirstLine = true;
+
+				line = "";
+				transline = "";
+
+				i = spaceIndex;
+	
 			}
+
 			else
 			{
 				line = transline;
+				notFirstWord = true;
+				spaceIndex = i;
+
+				if (i == drawString.size())
+				{
+
+					if (notFirstLine)
+					{
+						rtstr += "\n";
+					}
+
+					rtstr += line;
+				}
 
 			}
-
-			notFirstWord = true;
+			
 			word = "";
-
-			
-
-			
+	
 		}
+
 		else
 		{
 			word += letter;
 		}
 
 	}
+
+	return rtstr;
 }
 
 
-double SingleTextBox::getWidthOfString(std::string fstr)
+sf::Vector2f SingleTextBox::getDimensionsOfString(std::string fstr)
 {
 
 	sf::Text tmpText;
 	tmpText.setFont(*textBody.getFont());
 	tmpText.setCharacterSize(characterSize);
 	tmpText.setString(fstr);
-	return tmpText.getGlobalBounds().width;
+	return sf::Vector2f(tmpText.getGlobalBounds().width, tmpText.getGlobalBounds().height);
 
+}
+
+void SingleTextBox::correctPosition()
+{
+	double maxHeight = 0;
+	std::string tmpString;
+	for (unsigned int i = 0; i < drawString.size(); i++)
+	{
+		tmpString = drawString[i];
+		if (tmpString == "\n")
+		{
+			break;
+		}
+		else if (getDimensionsOfString(tmpString).y > maxHeight)
+		{
+			maxHeight = getDimensionsOfString(tmpString).y;
+		}
+	}
+	textBody.move(sf::Vector2f(0, - maxHeight / 2));
 }

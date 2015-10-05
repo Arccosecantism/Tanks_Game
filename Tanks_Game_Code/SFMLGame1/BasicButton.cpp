@@ -4,8 +4,6 @@
 
 
 
-
-
 //----------------------------------------------------------------------------------------------------------------------------***************************
 //-----------------------------------------PUBLIC-----------------------------------------------------------------------------***************************
 //----------------------------------------------------------------------------------------------------------------------------***************************
@@ -19,7 +17,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 							std::string ftextName, sf::Color ftextColor,				//constructor; sets textures to sprites and other similar things 
 
-							sf::Vector2f fspriteSize,	sf::Vector2f ftextSize)
+							sf::Vector2f fspriteSize,	int ftextCharSize)
 {
 
 	//setting inherited protected stuff------------------
@@ -35,75 +33,52 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	//done-----------------------------------------------
 	
+	for (int i = 0; i < 2; i++)
+	{
+		buttonStateCheckers[i] = -1;
+	}
 	
 	buttonState = Unheld;																//buttonState is unheld at the start of BasicButton's existence	
 
 	lastMouseHeld = 0;																	//lastMouseHeld starts off as not having a hold value
 
-	spriteSize = fspriteSize;															//set the desired size of the Sprite of the BasicButton
-
-	textSize = ftextSize;																//set the desired size of the Text of the BasicButton
-
-
 	for (int i = 0; i < 2; i++)															//cycle through extreme corner indices
 	{
-		extremeCorners[i] = sf::Vector2f(position.x + (2 * i - 1) * spriteSize.x / 2, position.y + (2 * i - 1) * spriteSize.y / 2);
+		extremeCorners[i] = sf::Vector2f(position.x + (2 * i - 1) * fspriteSize.x / 2, position.y + (2 * i - 1) * fspriteSize.y / 2);
 																						//set the extreme corner position; note: f: x -> (2x - 1) maps 0 to -1 and 1 to 1
 	}
 
 
 	//Here, the Sprites are set----------------------------------------------------------------------------------------------------------------------------------------------------
 
-	sf::Sprite tempSprite;																//declare a temporary Sprite to be pushed back
+	MenuSprite tempSprite;																//declare a temporary Sprite to be pushed back
 
 	sf::Vector2f tempDimensions;														//declare temporary helper dimensioins of the sprite
 
 
 	for (unsigned int i = 0; i < States_Number; i++)									//cycle through 6 times
 	{
-
-		tempSprite.setTexture(*fResourceGroup.getTexturePointer(i));					//set Texture to the accoridng spot in the ResourceGroup
-
-		tempDimensions = sf::Vector2f(tempSprite.getLocalBounds().width, tempSprite.getLocalBounds().height);
-																						//set the temporary helper dimensions to the  current dimesions of the sprite
-
-		tempSprite.setOrigin(tempDimensions.x / 2, tempDimensions.y / 2);				//set the origin in the center of the rectangle
-
-		tempSprite.setScale(spriteSize.x / tempDimensions.x, spriteSize.y / tempDimensions.y);
-																						//set the scale equal to the desired sprite size divided by the current sprite size, essentially replacing the dimensions
-
-		tempSprite.setPosition(0,0);													//set the relative position at (0,0)
+		tempSprite.setup(*fResourceGroup.getTexturePointer(i), sf::Vector2f(0,0), fspriteSize);
 
 																						//now the Sprite should have the correct position, scaling, and origin
 
 
-		buttonStateSprites.push_back(tempSprite);										//add the tempoarary sprite to the sprite vector
+		buttonSprites.addMenuSprite(tempSprite, i);										//add the tempoarary sprite to the sprite vector
 
 
-		std::vector<memfunc_of_object> tmpVectorOfPairs;						//create a temporary vector of function pointers
-		for (int i = 0; i < Event_Number; i++)
-		{
-			doWhenButtonState.push_back(tmpVectorOfPairs);								//add as many vectors as there are button states 
-		}
+		
 	}
 
+	std::vector<memfunc_of_object> tmpVectorOfPairs;								//create a temporary vector of function pointers
+
+	for (int i = 0; i < Event_Number; i++)
+	{
+		doWhenButtonState.push_back(tmpVectorOfPairs);								//add as many vectors as there are button states 
+	}
 
 	//Now, the text is set----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	buttonText.setFont(*fResourceGroup.getFontPointer(0));								//set the font in the Text to the first font in the resourceGroup
-	
-	buttonText.setString(ftextName);													//set the drawn string to the desired string
-
-	buttonText.setColor(ftextColor);													//set the color of the Text to the desired color
-
-	tempDimensions = sf::Vector2f(buttonText.getLocalBounds().width, buttonText.getLocalBounds().height);
-																						//set the temporary helper dimensions equal to the current dimentsions of the Text
-
-	buttonText.setOrigin(tempDimensions.x / 2, tempDimensions.y);						//set the origin to the center of the rectangle
-
-	buttonText.setScale(textSize.x / tempDimensions.x, textSize.y / tempDimensions.y);	//set the scale to the desired size
-
-	buttonText.setPosition(0,0);														//set the relative position of the Text at (0,0)
+	buttonTextBox.setup(sf::Vector2f(0, 0), fResourceGroup.getFontPointer(0), ftextName, ftextCharSize, fspriteSize.x - 20, ftextColor);
 
 
 
@@ -134,6 +109,29 @@ void BasicButton::update(MouseData& fmouseData)										//mpouse data update --
 
 	updateButtonState(fmouseData);													//update the buttonState
 
+
+
+	buttonStateCheckers[0] = buttonStateCheckers[1];
+
+	buttonStateCheckers[1] = buttonState;
+	
+
+	int drawState = buttonState;								//draw the Sprite based on the current buttonState
+
+	if (getChangedButtonState() != -1)
+	{
+		if (drawState == Clicked)								//if it was clicked, draw the hovered_pressed state
+		{
+			drawState = Hovered_Pressed;
+		}
+		else if (drawState == Released)							//if it was released, draw the hovered state
+		{
+			drawState = Hovered;
+		}
+		buttonSprites.setCurrentMenuSpriteByIndex(drawState);
+	}
+
+
 	for (int i = 0; i < StateSize; i++)		
 	{
 		if (i >= 6 && i <= 8)
@@ -158,38 +156,18 @@ void BasicButton::update(MouseData& fmouseData)										//mpouse data update --
 ------------------------------------------------------------------------------------*/
 void BasicButton::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)	//draws the Button
 {
+	
 	lastDrawPosition = drawPosition;
 
 	position += drawPosition;								//increase the position by thedesired draw position -- makes the position relative
 
 
 
-	int drawState = buttonState;							//draw the Sprite based on the current buttonState
 
-	if (drawState == Clicked)								//if it was clicked, draw the hovered_pressed state
-	{
-		drawState = Hovered_Pressed;
-	}
-	else if (drawState == Released)							//if it was released, draw the hovered state
-	{
-		drawState = Hovered;
-	}
-	std::cout << buttonState << std::endl;
+	buttonSprites.draw(frenderWindow, drawPosition);						//draw the sprite
 
 
-	buttonStateSprites[drawState].move(position);			//add the button's position to the Sprite -- makes the sprites position relative
-
-	frenderWindow.draw(buttonStateSprites[drawState]);		//draw the sprite
-
-	buttonStateSprites[drawState].move(-position);			//subtract the button's position because we added it;
-
-
-
-	buttonText.move(position);								//same thing with Text
-
-	frenderWindow.draw(buttonText);
-
-	buttonText.move(-position);
+	buttonTextBox.draw(frenderWindow, position);
 
 
 
@@ -223,14 +201,12 @@ void BasicButton::setRelativeSpritePosition(sf::Vector2f fpos)		//sets the posit
 {
 	for (int i= 0; i < 2; i++)
 	{
-		extremeCorners[i] = extremeCorners[i] + fpos - buttonStateSprites[0].getPosition();
+		extremeCorners[i] = extremeCorners[i] + fpos - buttonSprites.getPosition();
 																	//set the extremeCorners to be around the new position;
 	}
 
-	for (int i = 0; i < States_Number; i++)
-	{
-		buttonStateSprites[i].setPosition(fpos);					//set the position (which will in draw() be relative) to the desired position
-	}
+
+	buttonSprites.setPosition(fpos);					//set the position (which will in draw() be relative) to the desired position
 	
 }
 
@@ -247,10 +223,9 @@ void BasicButton::moveRelativeSpritePosition(sf::Vector2f fvel)		//moves the pos
 		extremeCorners[i] += fvel;									//move the Extreme Corners by the velocity
 	}
 
-	for (int i = 0; i < States_Number; i++)
-	{
-		buttonStateSprites[i].move(fvel);							//move the Sprites by the desired velocity
-	}
+
+	buttonSprites.move(fvel);							//move the Sprites by the desired velocity
+
 }
 
 
@@ -261,7 +236,7 @@ void BasicButton::moveRelativeSpritePosition(sf::Vector2f fvel)		//moves the pos
 void BasicButton::setRelativeTextPosition(sf::Vector2f fpos)			//set the position of the text (relative to the button)
 {
 
-	buttonText.setPosition(fpos);										//move the Text to the desired position
+	buttonTextBox.setPosition(fpos);										//move the Text to the desired position
 
 }
 
@@ -273,7 +248,7 @@ void BasicButton::setRelativeTextPosition(sf::Vector2f fpos)			//set the positio
 void BasicButton::moveRelativeTextPosition(sf::Vector2f fvel)			//move the position of the text by the desired velocity
 {
 
-	buttonText.move(fvel);												//move it by the velocity
+	buttonTextBox.move(fvel);												//move it by the velocity
 
 }
 
@@ -320,6 +295,24 @@ void BasicButton::addFunctionToDoOnButtonState(function_pointer function, void* 
 //-----------------------------------------PRIVATE----------------------------------------------------------------------------***************************
 //----------------------------------------------------------------------------------------------------------------------------***************************
 
+
+
+/*------------------------------------------------------------------------------------
+--------------------------getChangedButtonState---------------------------------------
+------------------------------------------------------------------------------------*/
+int BasicButton::getChangedButtonState()
+{
+	int returnme = -1;
+	if (buttonStateCheckers[2] != buttonStateCheckers[1])
+	{
+		returnme = buttonStateCheckers[2];
+	}
+	return returnme;
+}
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
 
 /*------------------------------------------------------------------------------------

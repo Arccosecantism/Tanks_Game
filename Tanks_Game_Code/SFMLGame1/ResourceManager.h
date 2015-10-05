@@ -1,9 +1,10 @@
 #pragma once
 #include "ResourceGroup.h"
+#include "NameSearchable.h"
 
 
 
-class ResourceManager														/*This class will basically hold all textures, fonts, and soundBufs.*/
+class ResourceManager : public NameSearchable								/*This class will basically hold all textures, fonts, and soundBufs.*/
 {																			/*Part of this is unimpressive -- IT DOES NOT CURRENTLY
 																			load all files from a directory.*/
 
@@ -54,9 +55,6 @@ private:
 
 
 
-	void addName(std::string name, int Mapnum, int elnum);								//adds a name;
-
-
 
 	//int searchNameVector(std::string name, int num);						//searches through a vector to find a name
 
@@ -71,11 +69,6 @@ private:
 
 	std::vector<ResourceGroup> resourceSets;								/*presets for certain things like BasicButton. BasicButton will use
 																			the preset Textures, Fonts, and SoundBuffers for BasicButton*/
-
-
-
-	std::map<std::string, int>	nameMaps[4];								/*array of vector of names; it will usually
-																			be accessed by the nameVectorIndeces enum*/
 
 
 	

@@ -3,9 +3,13 @@
 
 MultiTextBox::MultiTextBox()
 {
+	setVectorSize(1);
 
-	
+	requiresMouseData = false;
 
+	isHidden = false;
+
+	resetsOnMD = false;
 }
 
 
@@ -51,15 +55,27 @@ void MultiTextBox::resetMD()
 
 }
 
+
+void MultiTextBox::setCurrentTextBoxByName(std::string fname)
+{
+	for (unsigned int i = 0; i < textBoxVector.size(); i++)
+	{
+		textBoxVector[i].hide();
+	}
+	textBoxVector[ntoi(fname)].unhide();
+}
+
+
 void MultiTextBox::addTextBox(SingleTextBox fsingleTextBox, std::string fname)
 {
+	fsingleTextBox.hide();
 	textBoxVector.push_back(fsingleTextBox);
-	nameMap[fname] = textBoxVector.size() - 1;
+	addName(fname, textBoxVector.size() - 1);
 }
 
 
 SingleTextBox* MultiTextBox::getTextBoxPointerByName(std::string fname)
 {
-	SingleTextBox* tmpTextBox = &textBoxVector[nameMap[fname]];
+	SingleTextBox* tmpTextBox = &textBoxVector[ntoi(fname)];
 	return tmpTextBox;
 }

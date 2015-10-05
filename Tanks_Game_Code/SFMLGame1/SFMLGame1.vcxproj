@@ -165,7 +165,10 @@
     <ClCompile Include="MenuBackground.cpp" />
     <ClCompile Include="MenuElement.cpp" />
     <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="MenuSprite.cpp" />
     <ClCompile Include="MouseData.cpp" />
+    <ClCompile Include="MultiMenuSprite.cpp" />
+    <ClCompile Include="NameSearchable.cpp" />
     <ClCompile Include="ResourceGroup.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="MultiTextBox.cpp" />
@@ -180,8 +183,11 @@
     <ClInclude Include="MenuBackground.h" />
     <ClInclude Include="MenuElement.h" />
     <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="MenuSprite.h" />
     <ClInclude Include="MenuToolsInclude.h" />
     <ClInclude Include="MouseData.h" />
+    <ClInclude Include="MultiMenuSprite.h" />
+    <ClInclude Include="NameSearchable.h" />
     <ClInclude Include="ResourceGroup.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SFMLbase.h" />

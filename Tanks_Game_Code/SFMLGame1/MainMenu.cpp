@@ -21,7 +21,7 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 
 	MenuElement* textBoxA;
-	textBoxA = new SingleTextBox(sf::Vector2f(0,-150), fresourceManager.getFontPointerByName("DefaultFont"), "Test post;\nplease ignore", sf::Vector2f(200, 150), sf::Color::Red);
+	textBoxA = new SingleTextBox(sf::Vector2f(0, 0), fresourceManager.getFontPointerByName("DefaultFont"), "Welcome to the Grand Walrus Menu!", 50, 300, sf::Color::White);
 
 
 
@@ -31,7 +31,7 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 	MenuElement* greenButtonA;
 	greenButtonA = new BasicButton(		sf::Vector2f(0, -150), fresourceManager.getResourceSetByName("GreenButtonRG"),
-										"Test1", sf::Color::White, sf::Vector2f(200, 100), sf::Vector2f(100, 50)	);
+										"Test1", sf::Color::White, sf::Vector2f(200, 100), 50	);
 
 	BasicButton* p_greenButtonA = static_cast<BasicButton*>(greenButtonA);
 	p_greenButtonA->setRelativeTextPosition(sf::Vector2f(0, 0));
@@ -45,7 +45,7 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 	MenuElement* greenButtonB;
 	greenButtonB = new BasicButton(	sf::Vector2f(0, 150), fresourceManager.getResourceSetByName("GreenButtonRG"),
-									"Test2", sf::Color::White, sf::Vector2f(200, 100), sf::Vector2f(100, 50)	);
+									"Test2", sf::Color::White, sf::Vector2f(200, 100), 50	);
 
 	BasicButton* p_greenButtonB = static_cast<BasicButton*>(greenButtonB);
 	p_greenButtonB->addFunctionToDoOnButtonState(openSecondMenu, this, 9);
@@ -54,7 +54,7 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 	MenuElement* greenButtonC;
 	greenButtonC = new BasicButton(	sf::Vector2f(0, -150), fresourceManager.getResourceSetByName("GreenButtonRG"),
-									"Test3", sf::Color::White, sf::Vector2f(200, 100), sf::Vector2f(100, 50));
+									"Test3", sf::Color::White, sf::Vector2f(200, 100), 50	);
 
 
 	BasicButton* p_greenButtonC = static_cast<BasicButton*>(greenButtonC);

@@ -2,7 +2,7 @@
 #include "SingleTextBox.h"
 
 
-class MultiTextBox : public MenuElement
+class MultiTextBox : public MenuElement, public NameSearchable
 {
 public:
 	MultiTextBox();
@@ -20,8 +20,11 @@ public:
 	void resetMD();
 
 
-	void addTextBox(SingleTextBox fsingleTextBox, std::string fname);
 
+	void setCurrentTextBoxByName(std::string fname);
+
+	void addTextBox(SingleTextBox fsingleTextBox, std::string fname);
+	
 	SingleTextBox* getTextBoxPointerByName(std::string fname);
 
 
@@ -30,7 +33,7 @@ private:
 
 	
 	std::vector<SingleTextBox> textBoxVector;
-	std::map<std::string, int> nameMap;
+
 
 };
 
