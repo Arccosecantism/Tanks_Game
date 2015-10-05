@@ -277,6 +277,14 @@ int BasicButton::getButtonState()										//returns the buttonState
 ------------------------------------------------------------------------------------*/
 void BasicButton::addFunctionToDoOnButtonState(function_pointer function, void* object, int fbuttonState)		//adds a function to do when the button is a certain buttonState
 {
+	if (fbuttonState == Clicked)
+	{
+		fbuttonState = 6;
+	}
+	else if (fbuttonState = Released)
+	{
+		fbuttonState = 7;
+	}
 
 	doWhenButtonState[fbuttonState].push_back(std::make_pair(function, object));									//add the desired function
 

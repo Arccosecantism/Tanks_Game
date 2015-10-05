@@ -9,7 +9,7 @@ MenuSprite::MenuSprite()
 	resetsOnMD = false;
 }
 
-MenuSprite::MenuSprite(sf::Texture ftexture, sf::Vector2f fposition, sf::Vector2f fsize)
+MenuSprite::MenuSprite(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize)
 {
 	requiresMouseData = false;
 
@@ -27,11 +27,11 @@ MenuSprite::~MenuSprite()
 }
 
 
-void MenuSprite::setup(sf::Texture ftexture, sf::Vector2f fposition, sf::Vector2f fsize)
+void MenuSprite::setup(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize)
 {
 	position = fposition;
 
-	menuImage.setTexture(ftexture);
+	menuImage.setTexture(*ftexture);
 
 	sf::Vector2f tempDimensions(sf::Vector2f(menuImage.getGlobalBounds().width, menuImage.getGlobalBounds().height));
 

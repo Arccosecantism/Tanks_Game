@@ -6,10 +6,10 @@ class MenuSprite : public MenuElement
 
 public:
 	MenuSprite();
-	MenuSprite(sf::Texture ftexture, sf::Vector2f fposition, sf::Vector2f fsize);
+	MenuSprite(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize);
 	~MenuSprite();
 
-	void setup(sf::Texture ftexture, sf::Vector2f fposition, sf::Vector2f fsize);
+	void setup(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize);
 
 
 

@@ -49,6 +49,7 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 	BasicButton* p_greenButtonB = static_cast<BasicButton*>(greenButtonB);
 	p_greenButtonB->addFunctionToDoOnButtonState(openSecondMenu, this, 9);
+
 	p_greenButtonB->addFunctionToDoOnButtonState(closeNormalMenu, this, 9);
 
 
