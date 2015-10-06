@@ -41,7 +41,11 @@ void MultiMenuSprite::draw(sf::RenderWindow& frenderwindow, sf::Vector2f drawPos
 
 	for (unsigned int i = 0; i < spriteVector.size(); i++)
 	{
-		spriteVector[i].draw(frenderwindow, position);
+		if (!spriteVector[i].getIsHidden())
+		{
+			spriteVector[i].draw(frenderwindow, position);
+		}
+		
 	}
 
 	position -= drawPosition;
@@ -59,6 +63,7 @@ void MultiMenuSprite::setCurrentMenuSpriteByName(std::string fname)
 	{
 		spriteVector[i].hide();
 	}
+
 	spriteVector[ntoi(fname)].unhide();
 }
 
@@ -73,7 +78,10 @@ void MultiMenuSprite::setCurrentMenuSpriteByIndex(int findex)
 
 void MultiMenuSprite::addMenuSprite(MenuSprite fmenuSprite, std::string fname)
 {
-	fmenuSprite.hide();
+	if (spriteVector.size() > 0)
+	{
+		fmenuSprite.hide();
+	}
 
 	spriteVector.push_back(fmenuSprite);
 
@@ -83,7 +91,10 @@ void MultiMenuSprite::addMenuSprite(MenuSprite fmenuSprite, std::string fname)
 
 void MultiMenuSprite::addMenuSprite(MenuSprite fmenuSprite, int fintname)
 {
-	fmenuSprite.hide();
+	if (spriteVector.size() > 0)
+	{
+		fmenuSprite.hide();
+	}
 
 	spriteVector.push_back(fmenuSprite);
 

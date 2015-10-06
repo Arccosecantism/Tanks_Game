@@ -136,7 +136,7 @@ void BasicButton::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPositio
 
 
 
-	buttonSprites.draw(frenderWindow, drawPosition);						//draw the sprite
+	buttonSprites.draw(frenderWindow, position);						//draw the sprite
 
 
 	buttonTextBox.draw(frenderWindow, position);

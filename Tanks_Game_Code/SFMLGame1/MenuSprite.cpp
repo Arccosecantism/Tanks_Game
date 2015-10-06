@@ -33,7 +33,7 @@ void MenuSprite::setup(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector
 
 	menuImage.setTexture(*ftexture);
 
-	sf::Vector2f tempDimensions(sf::Vector2f(menuImage.getGlobalBounds().width, menuImage.getGlobalBounds().height));
+	sf::Vector2f tempDimensions(sf::Vector2f(menuImage.getLocalBounds().width, menuImage.getLocalBounds().height));
 
 	menuImage.setOrigin(tempDimensions.x / 2, tempDimensions.y / 2);
 
