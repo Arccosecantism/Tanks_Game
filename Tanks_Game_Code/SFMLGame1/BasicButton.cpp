@@ -35,7 +35,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 	
 	for (int i = 0; i < 2; i++)
 	{
-		buttonStateCheckers[i] = -1;
+		buttonStateCheckers[i] = 0;
 	}
 	
 	buttonState = Unheld;																//buttonState is unheld at the start of BasicButton's existence	
@@ -51,30 +51,36 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	//Here, the Sprites are set----------------------------------------------------------------------------------------------------------------------------------------------------
 
+
 	MenuSprite tempSprite;																//declare a temporary Sprite to be pushed back
 
 	sf::Vector2f tempDimensions;														//declare temporary helper dimensioins of the sprite
 
 
-	for (unsigned int i = 0; i < States_Number; i++)									//cycle through 6 times
+
+	for (int i = 0; i < States_Number; i++)									//cycle through 6 times
 	{
-		tempSprite.setup(*fResourceGroup.getTexturePointer(i), sf::Vector2f(0,0), fspriteSize);
+
+		tempSprite.setup(fResourceGroup.getTexturePointer(i), sf::Vector2f(0,0), fspriteSize);
 
 																						//now the Sprite should have the correct position, scaling, and origin
 
-
 		buttonSprites.addMenuSprite(tempSprite, i);										//add the tempoarary sprite to the sprite vector
-
-
 		
 	}
 
+
+
+
 	std::vector<memfunc_of_object> tmpVectorOfPairs;								//create a temporary vector of function pointers
 
-	for (int i = 0; i < Event_Number; i++)
+	for (int i = 0; i < Events_Number; i++)
 	{
-		doWhenButtonState.push_back(tmpVectorOfPairs);								//add as many vectors as there are button states 
+		doWhenButtonEvent.push_back(tmpVectorOfPairs);								//add as many vectors as there are button states 
 	}
+
+
+
 
 	//Now, the text is set----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -108,42 +114,8 @@ void BasicButton::update(MouseData& fmouseData)										//mpouse data update --
 {
 
 	updateButtonState(fmouseData);													//update the buttonState
+	updateButtonEvent();
 
-
-
-	buttonStateCheckers[0] = buttonStateCheckers[1];
-
-	buttonStateCheckers[1] = buttonState;
-	
-
-	int drawState = buttonState;								//draw the Sprite based on the current buttonState
-
-	if (getChangedButtonState() != -1)
-	{
-		if (drawState == Clicked)								//if it was clicked, draw the hovered_pressed state
-		{
-			drawState = Hovered_Pressed;
-		}
-		else if (drawState == Released)							//if it was released, draw the hovered state
-		{
-			drawState = Hovered;
-		}
-		buttonSprites.setCurrentMenuSpriteByIndex(drawState);
-	}
-
-
-	for (int i = 0; i < StateSize; i++)		
-	{
-		if (i >= 6 && i <= 8)
-		{
-			i = 9;
-		}
-
-		if (buttonState == i)
-		{
-			callbackOnButtonState(i);													//do each button state's callback
-		}
-	}
 }
 
 
@@ -277,16 +249,8 @@ int BasicButton::getButtonState()										//returns the buttonState
 ------------------------------------------------------------------------------------*/
 void BasicButton::addFunctionToDoOnButtonState(function_pointer function, void* object, int fbuttonState)		//adds a function to do when the button is a certain buttonState
 {
-	if (fbuttonState == Clicked)
-	{
-		fbuttonState = 6;
-	}
-	else if (fbuttonState = Released)
-	{
-		fbuttonState = 7;
-	}
 
-	doWhenButtonState[fbuttonState].push_back(std::make_pair(function, object));									//add the desired function
+	doWhenButtonEvent[fbuttonState].push_back(std::make_pair(function, object));									//add the desired function
 
 }
 
@@ -303,20 +267,6 @@ void BasicButton::addFunctionToDoOnButtonState(function_pointer function, void* 
 //-----------------------------------------PRIVATE----------------------------------------------------------------------------***************************
 //----------------------------------------------------------------------------------------------------------------------------***************************
 
-
-
-/*------------------------------------------------------------------------------------
---------------------------getChangedButtonState---------------------------------------
-------------------------------------------------------------------------------------*/
-int BasicButton::getChangedButtonState()
-{
-	int returnme = -1;
-	if (buttonStateCheckers[2] != buttonStateCheckers[1])
-	{
-		returnme = buttonStateCheckers[2];
-	}
-	return returnme;
-}
 
 
 
@@ -402,12 +352,12 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 			{
 				if (pressedDown)											//if the button is pressed down
 				{
-					buttonState = Released;									//the button is released
+					callbackOnButtonEvent(Released);
 				}
 
 				else														//otherwise
 				{
-					buttonState = Clicked;									//the button is clicked
+					callbackOnButtonEvent(Clicked);
 				}
 			}
 
@@ -462,7 +412,7 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 		}
 
 
-		if (leftData == 3)												//if the mouse was relased
+		if (leftData == 3)												//if the mouse was released
 		{
 			lastMouseHeld = 0;											//the mouse wasnt held
 		}
@@ -473,7 +423,6 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 			if (pressedDown)												//if the button was pressed down
 			{
 				buttonState = Unheld_Pressed;								//the button is now unheld and pressed
-				std::cout << "Button state:" << buttonState << std::endl;
 			}
 
 			else															//otherwise
@@ -491,15 +440,51 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 
 
 /*------------------------------------------------------------------------------------
+--------------------------updateButtonEvent---------------------------------------------
+------------------------------------------------------------------------------------*/
+void BasicButton::updateButtonEvent()
+{
+	buttonStateCheckers[0] = buttonStateCheckers[1];
+
+	buttonStateCheckers[1] = buttonState;
+
+	if (buttonStateCheckers[0] != buttonStateCheckers[1])
+	{
+		for (int i = 0; i < States_Number; i++)
+		{
+			if (buttonStateCheckers[0] == i)
+			{
+
+				callbackOnButtonEvent(2 * i + 1);
+			}
+
+			if (buttonStateCheckers[1] == i)
+			{
+
+				buttonSprites.setCurrentMenuSpriteByIndex(i);
+
+				callbackOnButtonEvent(2 * i);
+
+			}
+		}
+	}
+}
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
 --------------------------callbackClicked---------------------------------------------
 ------------------------------------------------------------------------------------*/
-void BasicButton::callbackOnButtonState(int fbuttonState)										//do this when the button is clicked
+void BasicButton::callbackOnButtonEvent(int fbuttonState)										//do this when the button is clicked
 {
-	for (unsigned int i = 0; i < doWhenButtonState[fbuttonState].size(); i++)					//cycle through all functions to be called
+	for (unsigned int i = 0; i < doWhenButtonEvent[fbuttonState].size(); i++)					//cycle through all functions to be called
 	{
-		if (doWhenButtonState[fbuttonState][i].first != NULL)
+		if (doWhenButtonEvent[fbuttonState][i].first != NULL)
 		{
-			doWhenButtonState[fbuttonState][i].first(doWhenButtonState[fbuttonState][i].second);	//do all functions
+			doWhenButtonEvent[fbuttonState][i].first(doWhenButtonEvent[fbuttonState][i].second);	//do all functions
 		}
 	}
 }

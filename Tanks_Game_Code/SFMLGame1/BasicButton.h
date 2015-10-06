@@ -72,17 +72,17 @@ public:
 
 private:
 	
-	int getChangedButtonState();
+	void updateButtonEvent();
 
 	void updateButtonState(MouseData& fmousedata);							//using mouse data, finds the current state of the button -- yes, click logic
 
 
 
 
-	void callbackOnButtonState(int fbuttonState);							//calls every function in the vector of functions assigned to a
+	void callbackOnButtonEvent(int fbuttonState);							//calls every function in the vector of functions assigned to a
 																			//button state when that button state is the current one
 
-	std::vector<std::vector<memfunc_of_object>> doWhenButtonState;
+	std::vector<std::vector<memfunc_of_object>> doWhenButtonEvent;
 
 	
 	
@@ -109,8 +109,11 @@ private:
 
 	int buttonState;														//which state the BasicButton is in
 	
-	enum buttonStatePossibilities { Unheld, Hovered, Held, Unheld_Pressed, Hovered_Pressed, Held_Pressed, States_Number = 6, Event_Number = 8, Clicked, Released, StateSize};
-																			//the '8' states of the button. States_Namber is just an index, and Clicked and Released are 
-																			//one-frame states that dont have separate sprites
+	enum buttonStatePossibilities { Unheld, Hovered, Held, Unheld_Pressed, Hovered_Pressed, Held_Pressed, States_Number = 6};
+																			//the 6 states of the button. States_Namber is just an index,
+
+	enum buttonEventPossibitities { Enter_Unheld, Exit_Unheld, Enter_Hovered, Exit_Hovered, Enter_Held, Exit_Held, Enter_Unheld_Pressed,
+									Exit_Unheld_Pressed, Enter_Hovered_Pressed, Exit_Hovered_Pressed, Enter_Held_Pressed, Exit_Held_Pressed,
+									Clicked, Released, Events_Number = 14};
 };
 

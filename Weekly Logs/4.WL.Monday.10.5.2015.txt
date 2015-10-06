@@ -1,0 +1,73 @@
+---------------------------------------------------------
+Things accomplished in last work session (1 week):
+---------------------------------------------------------
+
+	
+	I worked on some button, text, and sprite generalzaiton. It's still not complete,
+but I got a solid start and, as of October 5th, I have good ideas. I added NameSearchable,
+MultiMenusprite, MultiTextBox, SingleTextbox, and MenuSprite.
+
+
+---------------------------------------------------------
+
+
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
+
+---------------------------------------------------------
+Previous Goals met:
+---------------------------------------------------------
+
+
+	*I would like to have all the MenuTools somewhat finsished and functioning. 
+
+
+
+
+
+	*I would like to end the week with a MainMenu screen.
+
+
+
+	I completed neither of these goals, as usual. Now that I am working on something very specific, I can create better goals for next week.
+Having four weeks of failures is not a bad thing, however. It tells me vital information on how complex something as simple as a mainMenu is. It also
+tells me my workpace somewhat objectively.
+
+
+---------------------------------------------------------
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
+
+
+----------------------------------------------------
+Things I'd like to accomplish by Monday, 10/05/2015:
+----------------------------------------------------
+
+
+
+	*I would like to have most of the Menu tools functioning
+
+
+
+
+	*This is idealistic, but I would like to have the MainMenu somewhat done
+
+
+
+	
+	*I want the BasicButton Updating logic clarified.
+
+
+
+
+	*I want to comment a lot of my code for the new classes I added this week.
+
+
+
+-----------------------------------------------------

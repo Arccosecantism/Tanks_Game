@@ -48,9 +48,9 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 									"Test2", sf::Color::White, sf::Vector2f(200, 100), 50	);
 
 	BasicButton* p_greenButtonB = static_cast<BasicButton*>(greenButtonB);
-	p_greenButtonB->addFunctionToDoOnButtonState(openSecondMenu, this, 9);
+	p_greenButtonB->addFunctionToDoOnButtonState(openSecondMenu, this, 12);
 
-	p_greenButtonB->addFunctionToDoOnButtonState(closeNormalMenu, this, 9);
+	p_greenButtonB->addFunctionToDoOnButtonState(closeNormalMenu, this, 12);
 
 
 	MenuElement* greenButtonC;
@@ -59,8 +59,8 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 
 	BasicButton* p_greenButtonC = static_cast<BasicButton*>(greenButtonC);
-	p_greenButtonC->addFunctionToDoOnButtonState(closeSecondMenu, this, 9);
-	p_greenButtonC->addFunctionToDoOnButtonState(openNormalMenu, this, 9);
+	p_greenButtonC->addFunctionToDoOnButtonState(closeSecondMenu, this, 12);
+	p_greenButtonC->addFunctionToDoOnButtonState(openNormalMenu, this, 12);
 
 	
 
