@@ -42,6 +42,8 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	lastMouseHeld = 0;																	//lastMouseHeld starts off as not having a hold value
 
+	pressedDown = 0;
+
 	for (int i = 0; i < 2; i++)															//cycle through extreme corner indices
 	{
 		extremeCorners[i] = sf::Vector2f(position.x + (2 * i - 1) * fspriteSize.x / 2, position.y + (2 * i - 1) * fspriteSize.y / 2);
@@ -159,6 +161,9 @@ void BasicButton::resetMD()
 {
 
 	buttonState = Unheld;
+	buttonSprites.setCurrentMenuSpriteByIndex(0);
+	pressedDown = false;
+
 
 }
 
@@ -285,7 +290,7 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 																	//the mouseData; only here to shorten and simplify code
 	int leftData = fmousedata.getLeftButtonData();
 
-	bool pressedDown = (buttonState == Clicked) || (buttonState == Unheld_Pressed) || (buttonState == Hovered_Pressed) || (buttonState == Held_Pressed);
+	/*bool pressedDown = (buttonState == Clicked) || (buttonState == Unheld_Pressed) || (buttonState == Hovered_Pressed) || (buttonState == Held_Pressed);*/
 																	//if any of the above statements were true, pressed down should be true.
 																	//This means that the mouse is being held down.
 
@@ -297,7 +302,38 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 																//if the mousePosition was inside the extreme corners
 	{
 
-		if(leftData == 0)											//if the left mouse is unheld
+
+		if (leftData == 3)											//if the mouse was being released
+		{
+			if (lastMouseHeld != 1)										//if the mouse was not last pressed outside of the button
+			{
+				pressedDown = !pressedDown;								//the pressedDown state changes
+			}
+
+
+
+			else														//otherwise if the mouse was pressed off of the Button
+			{
+				if (pressedDown)											//if the button is held down
+				{
+					buttonState = Unheld_Pressed;							//the button is now hovered and pressed
+				}
+
+
+				else														//otherwise
+				{
+					buttonState = Unheld;									//the button is hovered
+				}
+
+
+			}
+
+			lastMouseHeld = 0;			//when the mouse is released, it is no longer held
+		}
+
+
+
+		else if(leftData == 0)											//else if the left mouse is unheld
 		{
 			if (pressedDown)											//if the button is currently in the down state
 			{
@@ -346,41 +382,7 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 
 
 
-		else if (leftData == 3)										//else if the mouse was being released
-		{
-			if (lastMouseHeld != 1)										//if the mouse was not last pressed outside of the button
-			{
-				if (pressedDown)											//if the button is pressed down
-				{
-					callbackOnButtonEvent(Released);
-				}
 
-				else														//otherwise
-				{
-					callbackOnButtonEvent(Clicked);
-				}
-			}
-
-
-
-			else														//otherwise if the mouse was pressed off of the Button
-			{
-				if (pressedDown)											//if the button is held down
-				{
-					buttonState = Hovered_Pressed;							//the button is now hovered and pressed
-				}
-
-
-				else														//otherwise
-				{
-					buttonState = Hovered;									//the button is hovered
-				}
-
-				
-			}
-
-			lastMouseHeld = 0;			//when the mouse is released, it is no longer held
-		}
 
 		else if (leftData == 1)										//else if the mouse was just pressed on the button
 		{
@@ -450,6 +452,15 @@ void BasicButton::updateButtonEvent()
 
 	if (buttonStateCheckers[0] != buttonStateCheckers[1])
 	{
+		if (buttonStateCheckers[0] == Held && (buttonStateCheckers[1] == Unheld_Pressed || buttonStateCheckers[1] == Hovered_Pressed))
+		{
+			callbackOnButtonEvent(Clicked);
+		}
+		else if (buttonStateCheckers[0] == Held_Pressed && (buttonStateCheckers[1] == Unheld || buttonStateCheckers[1] == Hovered))
+		{
+			callbackOnButtonEvent(Released);
+		}
+
 		for (int i = 0; i < States_Number; i++)
 		{
 			if (buttonStateCheckers[0] == i)

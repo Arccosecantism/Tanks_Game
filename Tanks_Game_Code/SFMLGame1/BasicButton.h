@@ -105,6 +105,7 @@ private:
 	
 	int lastMouseHeld;														//a click logic helper; determines if the mouse was pressed down and held off of or on the button
 
+	bool pressedDown;
 
 
 	int buttonState;														//which state the BasicButton is in
