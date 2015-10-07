@@ -21,7 +21,7 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 
 	MenuElement* textBoxA;
-	textBoxA = new SingleTextBox(sf::Vector2f(0, 0), fresourceManager.getFontPointerByName("DefaultFont"), "Welcome to the Grand Walrus Menu!", 50, 300, sf::Color::White);
+	textBoxA = new SingleTextBox(sf::Vector2f(0, 0), fresourceManager.getFontPointerByName("DefaultFont"), "Welcome to the Grand Walrus Menu!", 50, 300, sf::Color::Red);
 
 
 

@@ -24,6 +24,8 @@ App::App(sf::RenderWindow& fwindow)								/*basic counstructor for App. App mus
 	window = &fwindow;											//setting a pointer to a renderwindow
 
 	mouseInfo.setButtonData(sf::Vector2i(UNHELD, UNHELD));		//starting the mouse as unheld
+
+	
 }
 
 
@@ -41,6 +43,7 @@ void App::setup()												//initialize all objects
 
 	startingMenu.setup(generalResourceManager);					//set up the main menu
 
+	//startingMenu.deactivate();
 }
 
 
