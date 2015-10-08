@@ -173,6 +173,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="MultiTextBox.cpp" />
     <ClCompile Include="SingleTextBox.cpp" />
+    <ClCompile Include="Slider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="SFMLbase.h" />
     <ClInclude Include="MultiTextBox.h" />
     <ClInclude Include="SingleTextBox.h" />
+    <ClInclude Include="Slider.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
