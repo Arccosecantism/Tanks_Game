@@ -51,6 +51,8 @@ private:
 
 	bool isActive;
 
+	double sliderVariable;
+
 	/*std::map<std::string, void(MainMenu::*)()> pointersToFunctions;*/
 };
 

@@ -2,7 +2,7 @@
 
 
 Slider::Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Vector2f bgDimensions, sf::Vector2f fnotchDimensions,
-				BasicButton& fsliderButton, sf::Vector2f fposition, double* fVariable, double fmaxBound, double fminBound, double fstartVal)
+				BasicButton& fsliderButton, sf::Vector2f fposition, double& fVariable, double fmaxBound, double fminBound, double fstartVal)
 {
 	position = fposition;
 
@@ -36,7 +36,7 @@ Slider::Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Vector2f
 
 
 
-	affectedNumber = fVariable;
+	affectedNumber = &fVariable;
 
 	bounds[0] = fminBound;
 

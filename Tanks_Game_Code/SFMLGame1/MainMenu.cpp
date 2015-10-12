@@ -43,6 +43,9 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 	
 
 
+
+
+
 	MenuElement* greenButtonB;
 	greenButtonB = new BasicButton(	sf::Vector2f(0, 150), fresourceManager.getResourceSetByName("GreenButtonRG"),
 									"Test2", sf::Color::White, sf::Vector2f(200, 100), 50	);
@@ -53,10 +56,14 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 	p_greenButtonB->addFunctionToDoOnButtonState(closeNormalMenu, this, 12);
 
 
+
+
+
+
+
 	MenuElement* greenButtonC;
 	greenButtonC = new BasicButton(	sf::Vector2f(0, -150), fresourceManager.getResourceSetByName("GreenButtonRG"),
 									"Test3", sf::Color::White, sf::Vector2f(200, 100), 50	);
-
 
 	BasicButton* p_greenButtonC = static_cast<BasicButton*>(greenButtonC);
 	p_greenButtonC->addFunctionToDoOnButtonState(closeSecondMenu, this, 12);
@@ -64,11 +71,24 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 	
 
+
+
+
+	BasicButton sliderButton(	sf::Vector2f(0, 0), fresourceManager.getResourceSetByName("SliderButtonRG"),
+								"", sf::Color::White, sf::Vector2f(20, 40), 5	);
+	MenuElement* testSlider;
+	testSlider = new Slider(	fresourceManager.getTexturePointerByName("SliderBackground"), fresourceManager.getTexturePointerByName("SliderNotch"),
+								sf::Vector2f(200,50), sf::Vector2f(150,20), sliderButton, sf::Vector2f(0, 150), sliderVariable, 0, 0, 50	); 
+
+
+
+
 	
 
 	MenuElement* walrusBG;
 	walrusBG = new MenuBackground(	sf::Vector2f(0, 0), fresourceManager.getTexturePointerByName("WalrusBackground"),
 									sf::Vector2f(800, 600)	);
+
 
 	MenuElement* giraffeBG;
 	giraffeBG = new MenuBackground(	sf::Vector2f(0, 0), fresourceManager.getTexturePointerByName("GiraffeBackground"),
@@ -89,6 +109,7 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 	secondMenu.addMenuElement(giraffeBG, "GiraffeBackground");
 	secondMenu.addMenuElement(greenButtonC, "TopGreenButtonS");
+	secondMenu.addMenuElement(testSlider, "TestSlider");
 	
 
 
