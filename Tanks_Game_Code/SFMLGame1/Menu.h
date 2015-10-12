@@ -41,7 +41,7 @@ public:
 	MenuElement* getPointerToElementByName(std::string fname);				//gets a pointer to a menuElement by name, NOT A CHILD CLASS
 
 
-	template<class C> C* getPointerToChildByName(std::string fname);		//gets a pointer to a child by name
+	//template<class C> C* getPointerToChildByName(std::string fname);		//gets a pointer to a child by name
 
 
 	void update(MouseData& fmousedata);										//updates all of the menuElements

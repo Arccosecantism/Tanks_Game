@@ -186,15 +186,15 @@ MenuElement* Menu::getPointerToElementByName(std::string fname)			//returns a po
 //----------------------------------------------------------------------------------------------------------------------------***************************
 
 
-/*------------------------------------------------------------------------------------
--------------------getPointerToChildByName--------------------------------------------
-------------------------------------------------------------------------------------*/
-template<class C> C* Menu::getPointerToChildByName(std::string fname)	//returns a pointer to a Child by name
-{
-
-	C* returnChild = (C*) elementVector[elementNames[fname]];			//typecasts a pointer to a parent as a pointer to a child
-
-}
+///*------------------------------------------------------------------------------------
+//-------------------getPointerToChildByName--------------------------------------------
+//------------------------------------------------------------------------------------*/
+//template<class C> C* Menu::getPointerToChildByName(std::string fname)	//returns a pointer to a Child by name
+//{
+//
+//	C* returnChild = (C*) elementVector[elementNames[fname]];			//typecasts a pointer to a parent as a pointer to a child
+//
+//}
 
 
 

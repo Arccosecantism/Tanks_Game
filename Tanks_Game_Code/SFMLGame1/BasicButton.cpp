@@ -11,7 +11,37 @@
 
 
 /*------------------------------------------------------------------------------------
-------------------------------------Constructor---------------------------------------
+------------------------------------Constructor1--------------------------------------
+------------------------------------------------------------------------------------*/
+BasicButton::BasicButton()
+{
+
+	//setting inherited protected stuff------------------
+
+	requiresMouseData = true;															//set the inherited protected bool requiresMouseData to true because BasicButton requires mouse data
+
+	isHidden = false;																	//set the inherited protected bool isHidden to false because BasicButton should be drawn by default
+
+	resetsOnMD = true;																	//BasicButtons reset when their menu deactivates typically
+
+	//done-----------------------------------------------
+
+	for (int i = 0; i < 2; i++)
+	{
+		buttonStateCheckers[i] = 0;
+	}
+
+	buttonState = Unheld;																//buttonState is unheld at the start of BasicButton's existence	
+
+	lastMouseHeld = 0;																	//lastMouseHeld starts off as not having a hold value
+
+	pressedDown = 0;
+}
+
+
+
+/*------------------------------------------------------------------------------------
+------------------------------------Constructor2--------------------------------------
 ------------------------------------------------------------------------------------*/
 BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
@@ -22,8 +52,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	//setting inherited protected stuff------------------
 	
-	position = fposition;																//set the inherited protected position to the entered position; this will be the position of the button
-																						//relative to a menu
+	
 
 	requiresMouseData = true;															//set the inherited protected bool requiresMouseData to true because BasicButton requires mouse data
 
@@ -44,10 +73,28 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	pressedDown = 0;
 
+	setup(fposition, fResourceGroup, ftextName, ftextColor, fspriteSize, ftextCharSize);
+}
+
+
+
+/*------------------------------------------------------------------------------------
+------------------------------------Setup---------------------------------------------
+------------------------------------------------------------------------------------*/
+void BasicButton::setup(	sf::Vector2f fposition, ResourceGroup& fResourceGroup,
+
+							std::string ftextName, sf::Color ftextColor,				//constructor; sets textures to sprites and other similar things 
+
+							sf::Vector2f fspriteSize, int ftextCharSize)
+{
+
+	position = fposition;																//set the inherited protected position to the entered position; this will be the position of the button
+																						//relative to a menu
+
 	for (int i = 0; i < 2; i++)															//cycle through extreme corner indices
 	{
 		extremeCorners[i] = sf::Vector2f(position.x + (2 * i - 1) * fspriteSize.x / 2, position.y + (2 * i - 1) * fspriteSize.y / 2);
-																						//set the extreme corner position; note: f: x -> (2x - 1) maps 0 to -1 and 1 to 1
+		//set the extreme corner position; note: f: x -> (2x - 1) maps 0 to -1 and 1 to 1
 	}
 
 
@@ -63,12 +110,12 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 	for (int i = 0; i < States_Number; i++)									//cycle through 6 times
 	{
 
-		tempSprite.setup(fResourceGroup.getTexturePointer(i), sf::Vector2f(0,0), fspriteSize);
+		tempSprite.setup(fResourceGroup.getTexturePointer(i), sf::Vector2f(0, 0), fspriteSize);
 
-																						//now the Sprite should have the correct position, scaling, and origin
+		//now the Sprite should have the correct position, scaling, and origin
 
 		buttonSprites.addMenuSprite(tempSprite, i);										//add the tempoarary sprite to the sprite vector
-		
+
 	}
 
 
@@ -93,7 +140,6 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	//soundBuffer stuff?
 }
-
 
 
 //----------------------------------------------------------------------------------------------------------------------------***************************
