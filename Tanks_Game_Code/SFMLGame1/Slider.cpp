@@ -12,7 +12,7 @@ Slider::Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Vector2f
 
 	isHidden = false;
 
-	recordMousePos = 0;
+	recordMousePos = false;
 
 
 
@@ -43,6 +43,8 @@ Slider::Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Vector2f
 	bounds[1] = fmaxBound;
 
 	*affectedNumber = fstartVal;
+
+	scalingFactor = (bounds[1] - bounds[0]) / notchSprite.getGlobalDimensions().y;
 }
 
 
@@ -64,16 +66,38 @@ void Slider::update(MouseData& fmouseData)
 
 	sliderButton.update(fmouseData);
 
-	if (sliderButton.getButtonState() == 2 || sliderButton.getButtonState() == 5)
+
+	if (recordMousePos)
 	{
+		double movePosx = inNotch(fmouseData.getMousePosition().x - position.x);
+
+		double movePosy = notchSprite.getPosition().y;
+
+		sliderButton.setPosition(sf::Vector2f(movePosx, movePosy));
+
+		*affectedNumber = bounds[0] + scalingFactor * (movePosx - bounds[0]);
 
 	}
-	
+
 
 }
 
 void Slider::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)
 {
+
+	position += drawPosition;
+
+
+
+	backgroundSprite.draw(frenderWindow, position);
+
+	notchSprite.draw(frenderWindow, position);
+
+	sliderButton.draw(frenderWindow, position);
+
+
+
+	position -= drawPosition;
 
 }
 
@@ -91,4 +115,27 @@ void Slider::switchRecordMousePos(void* fslider)
 void Slider::callSwitchRecordMousePos()
 {
 	recordMousePos = !recordMousePos;
+}
+
+double Slider::inNotch(double a)
+{
+	double returnMe = a;
+
+
+	double maxVal = notchSprite.getPosition().x - notchSprite.getGlobalDimensions().x / 2;
+
+	double minVal = notchSprite.getPosition().x + notchSprite.getGlobalDimensions().x / 2;
+
+
+	if (a < minVal)
+	{
+		returnMe = minVal;
+	}
+
+	else if (a > maxVal)
+	{
+		returnMe = maxVal;
+	}
+
+	return returnMe;
 }

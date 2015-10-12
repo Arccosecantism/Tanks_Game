@@ -22,6 +22,9 @@ private:
 	static void switchRecordMousePos(void* fslider);
 
 	void callSwitchRecordMousePos();
+	
+
+	double inNotch(double fpos);
 
 
 	BasicButton sliderButton;

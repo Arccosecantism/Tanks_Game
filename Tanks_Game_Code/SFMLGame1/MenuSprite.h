@@ -21,6 +21,10 @@ public:
 
 	void resetMD();
 
+	sf::Vector2f getGlobalDimensions();
+
+	sf::Vector2f getLocalDimensions();
+
 private:
 
 	sf::Sprite menuImage;

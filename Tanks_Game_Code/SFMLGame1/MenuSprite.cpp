@@ -77,3 +77,13 @@ void MenuSprite::resetMD()
 {
 
 }
+
+sf::Vector2f MenuSprite::getGlobalDimensions()
+{
+	return sf::Vector2f(menuImage.getGlobalBounds().width, menuImage.getGlobalBounds().height);
+}
+
+sf::Vector2f MenuSprite::getLocalDimensions()
+{
+	return sf::Vector2f(menuImage.getLocalBounds().width, menuImage.getLocalBounds().height);
+}
