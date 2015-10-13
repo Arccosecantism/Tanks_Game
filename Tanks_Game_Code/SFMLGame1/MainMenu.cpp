@@ -66,6 +66,7 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 									"Test3", sf::Color::White, sf::Vector2f(200, 100), 50	);
 
 	BasicButton* p_greenButtonC = static_cast<BasicButton*>(greenButtonC);
+	p_greenButtonC->addFunctionToDoOnButtonState(openNormalMenu, this, 12);
 	p_greenButtonC->addFunctionToDoOnButtonState(closeSecondMenu, this, 12);
 
 	
