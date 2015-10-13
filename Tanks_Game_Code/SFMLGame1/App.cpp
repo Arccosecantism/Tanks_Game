@@ -283,7 +283,7 @@ void App::setupResourceManager()																//adds all the files to the reso
 
 	generalResourceManager.addFile("Resources\\GiraffeBG.png", "GiraffeBackground");
 
-	generalResourceManager.addFile("Resources\\SliderBG.png", "SliderButton");
+	generalResourceManager.addFile("Resources\\SliderButton.png", "SliderButton");
 
 	generalResourceManager.addFile("Resources\\SliderNotch.png", "SliderNotch");
 
@@ -310,18 +310,6 @@ void App::setupResourceManager()																//adds all the files to the reso
 	tempGroup.addTexture(generalResourceManager.getTexturePointerByName("GreenButtonHeldPressed"));
 
 	generalResourceManager.addResourceSet(tempGroup, "GreenButtonRG");
-
-
-	ResourceGroup sliderGroup;
-
-	for (int i = 0; i < 6; i++)
-	{
-		sliderGroup.addTexture(generalResourceManager.getTexturePointerByName("SliderButton"));
-	}
-
-	sliderGroup.addFont(generalResourceManager.getFontPointerByName("DefaultFont"));
-
-	generalResourceManager.addResourceSet(sliderGroup, "SliderButtonRG");
 }
 
 

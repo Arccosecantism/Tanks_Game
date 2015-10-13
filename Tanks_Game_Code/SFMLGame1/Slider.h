@@ -4,8 +4,8 @@
 class Slider : public MenuElement
 {
 public:
-	Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Vector2f bgDimensions, sf::Vector2f fnotchDimensions,
-			BasicButton& fsliderButton, sf::Vector2f fposition, double& fVariable, double fmaxBound, double fminBound, double fstartVal);
+	Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Texture* sbTexture, sf::Vector2f bgDimensions, sf::Vector2f fnotchDimensions,
+			sf::Vector2f sbDimensions, sf::Vector2f fposition, double& fVariable, double fminBound, double fmaxBound, double fstartVal	);
 	~Slider();
 
 
@@ -18,16 +18,15 @@ public:
 	void resetMD();
 
 private:
-
-	static void switchRecordMousePos(void* fslider);
-
-	void callSwitchRecordMousePos();
 	
+	void updateElements();
+
+	void updateSliderState(MouseData& fmouseData);
 
 	double inNotch(double fpos);
 
 
-	BasicButton sliderButton;
+	MenuSprite sliderButton;
 
 	MenuSprite backgroundSprite;
 
@@ -40,5 +39,12 @@ private:
 	double scalingFactor;
 
 	bool recordMousePos;
+
+
+	sf::Vector2f lastDrawPosition;
+
+	sf::Vector2f extremeCorners[2];
+
+	int lastHeld;
 };
 

@@ -1,12 +1,12 @@
 #include "Slider.h"
 
 
-Slider::Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Vector2f bgDimensions, sf::Vector2f fnotchDimensions,
-				BasicButton& fsliderButton, sf::Vector2f fposition, double& fVariable, double fmaxBound, double fminBound, double fstartVal)
+Slider::Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Texture* sbTexture, sf::Vector2f bgDimensions, sf::Vector2f fnotchDimensions,
+				sf::Vector2f sbDimensions, sf::Vector2f fposition, double& fVariable, double fminBound, double fmaxBound, double fstartVal	)
 {
 	position = fposition;
 
-	resetsOnMD = true;
+	resetsOnMD = false;
 
 	requiresMouseData = true;															
 
@@ -14,25 +14,31 @@ Slider::Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Vector2f
 
 	recordMousePos = false;
 
+	lastHeld = 0;
+
+	lastDrawPosition = sf::Vector2f(0, 0);
+
+
+
+
+
+
+
 
 
 	backgroundSprite.setup(bgTexture, sf::Vector2f(0, 0), bgDimensions);
 
 	notchSprite.setup(fnotchTexture, sf::Vector2f(0, 0), fnotchDimensions);
 
-	sliderButton = fsliderButton;
+	sliderButton.setup(sbTexture, sf::Vector2f(0, 0), sbDimensions);
 
-	sliderButton.setPosition(sf::Vector2f(0, 0));
+	for (int i = 0; i < 2; i++)															//cycle through extreme corner indices
+	{
+		extremeCorners[i] = sf::Vector2f(sliderButton.getPosition().x + (2 * i - 1) * sbDimensions.x / 2, sliderButton.getPosition().y + (2 * i - 1) * sbDimensions.y / 2);
+		//set the extreme corner position; note: f: x -> (2x - 1) maps 0 to -1 and 1 to 1
+	}
 
-
-
-	sliderButton.addFunctionToDoOnButtonState(switchRecordMousePos, this, 4);
-
-	sliderButton.addFunctionToDoOnButtonState(switchRecordMousePos, this, 5);
-
-	sliderButton.addFunctionToDoOnButtonState(switchRecordMousePos, this, 10);
-
-	sliderButton.addFunctionToDoOnButtonState(switchRecordMousePos, this, 11);
+	
 
 
 
@@ -44,7 +50,9 @@ Slider::Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Vector2f
 
 	*affectedNumber = fstartVal;
 
-	scalingFactor = (bounds[1] - bounds[0]) / notchSprite.getGlobalDimensions().y;
+	scalingFactor = (bounds[1] - bounds[0]) / notchSprite.getGlobalDimensions().x;
+
+	sliderButton.setPosition(sf::Vector2f((fstartVal - bounds[0]) / scalingFactor - notchSprite.getGlobalDimensions().x / 2 + bounds[0], 0));
 }
 
 
@@ -60,30 +68,22 @@ void Slider::update()
 
 void Slider::update(MouseData& fmouseData)
 {
-	backgroundSprite.update();
+	updateElements();
 
-	notchSprite.update();
-
-	sliderButton.update(fmouseData);
-
-
-	if (recordMousePos)
-	{
-		double movePosx = inNotch(fmouseData.getMousePosition().x - position.x);
-
-		double movePosy = notchSprite.getPosition().y;
-
-		sliderButton.setPosition(sf::Vector2f(movePosx, movePosy));
-
-		*affectedNumber = bounds[0] + scalingFactor * (movePosx - bounds[0]);
-
-	}
-
-
+	updateSliderState(fmouseData);
 }
+
+
+
+
+
 
 void Slider::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)
 {
+	if (lastDrawPosition != drawPosition)
+	{
+		lastDrawPosition = drawPosition;
+	}
 
 	position += drawPosition;
 
@@ -101,30 +101,29 @@ void Slider::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)
 
 }
 
+
+
+
+
+
 void Slider::resetMD()
 {
-	sliderButton.resetMD();
+
 }
 
-void Slider::switchRecordMousePos(void* fslider)
-{
-	Slider* tmpThis = static_cast<Slider*>(fslider);
-	tmpThis->callSwitchRecordMousePos();
-}
 
-void Slider::callSwitchRecordMousePos()
-{
-	recordMousePos = !recordMousePos;
-}
+
+
+
 
 double Slider::inNotch(double a)
 {
 	double returnMe = a;
 
 
-	double maxVal = notchSprite.getPosition().x - notchSprite.getGlobalDimensions().x / 2;
+	double minVal = notchSprite.getPosition().x - notchSprite.getGlobalDimensions().x / 2;
 
-	double minVal = notchSprite.getPosition().x + notchSprite.getGlobalDimensions().x / 2;
+	double maxVal = notchSprite.getPosition().x + notchSprite.getGlobalDimensions().x / 2;
 
 
 	if (a < minVal)
@@ -138,4 +137,68 @@ double Slider::inNotch(double a)
 	}
 
 	return returnMe;
+}
+
+
+
+
+
+
+void Slider::updateElements()
+{
+	backgroundSprite.update();
+
+	notchSprite.update();
+
+	sliderButton.update();
+}
+
+
+
+
+void Slider::updateSliderState(MouseData& fmouseData)
+{
+	sf::Vector2f mousePos = sf::Vector2f(fmouseData.getMousePosition().x, fmouseData.getMousePosition().y) - lastDrawPosition;
+
+	sf::Vector2f buttonMousePos = mousePos - position - sliderButton.getPosition();
+
+	int leftData = fmouseData.getLeftButtonData();
+
+
+	if (buttonMousePos.x > extremeCorners[0].x && buttonMousePos.y > extremeCorners[0].y &&
+		buttonMousePos.x < extremeCorners[1].x && buttonMousePos.y < extremeCorners[1].y)
+	{
+
+		if (leftData == 1)
+		{
+			lastHeld = 2;
+		}
+	}
+
+	else if (leftData == 1)
+	{
+		lastHeld = 1;
+	}
+
+
+	if (leftData == 2 && lastHeld == 2)
+	{
+
+
+		double movePosx = inNotch(mousePos.x);
+
+		double movePosy = notchSprite.getPosition().y;
+
+		sliderButton.setPosition(sf::Vector2f(movePosx, movePosy));
+
+		*affectedNumber = bounds[0] + scalingFactor * (movePosx + notchSprite.getGlobalDimensions().x / 2 - bounds[0]);
+
+	}
+
+
+
+	if (leftData == 3)
+	{
+		lastHeld = 0;
+	}
 }

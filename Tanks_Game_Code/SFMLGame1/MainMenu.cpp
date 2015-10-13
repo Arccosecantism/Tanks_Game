@@ -67,18 +67,17 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 	BasicButton* p_greenButtonC = static_cast<BasicButton*>(greenButtonC);
 	p_greenButtonC->addFunctionToDoOnButtonState(closeSecondMenu, this, 12);
-	p_greenButtonC->addFunctionToDoOnButtonState(openNormalMenu, this, 12);
 
 	
 
 
 
 
-	BasicButton sliderButton(	sf::Vector2f(0, 0), fresourceManager.getResourceSetByName("SliderButtonRG"),
-								"", sf::Color::White, sf::Vector2f(20, 40), 5	);
+
 	MenuElement* testSlider;
 	testSlider = new Slider(	fresourceManager.getTexturePointerByName("SliderBackground"), fresourceManager.getTexturePointerByName("SliderNotch"),
-								sf::Vector2f(200,50), sf::Vector2f(150,20), sliderButton, sf::Vector2f(0, 150), sliderVariable, 0, 0, 50	); 
+								fresourceManager.getTexturePointerByName("SliderButton"), sf::Vector2f(200, 50), sf::Vector2f(150, 20), sf::Vector2f(20, 40),
+								sf::Vector2f(0, 150), sliderVariable, 0, 100, 80); 
 
 
 
@@ -174,7 +173,7 @@ bool MainMenu::getActivity()
 
 void MainMenu::update(MouseData& fmouseData)
 {
-
+	std::cout << sliderVariable << std::endl;
 	MainMenuManager.update(fmouseData);
 
 }
