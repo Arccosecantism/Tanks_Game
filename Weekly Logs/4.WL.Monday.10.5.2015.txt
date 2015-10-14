@@ -50,7 +50,6 @@ Things I'd like to accomplish by Monday, 10/05/2015:
 ----------------------------------------------------
 
 
-
 	*I would like to have most of the Menu tools functioning
 
 
@@ -67,7 +66,5 @@ Things I'd like to accomplish by Monday, 10/05/2015:
 
 
 	*I want to comment a lot of my code for the new classes I added this week.
-
-
 
 -----------------------------------------------------
