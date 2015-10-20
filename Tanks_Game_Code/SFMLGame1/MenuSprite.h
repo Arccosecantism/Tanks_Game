@@ -1,25 +1,32 @@
 #pragma once
 #include "MenuElement.h"
 
-class MenuSprite : public MenuElement
+class MenuSprite : public MenuElement												//This class is a sprite that is also a menuElement, essentially
 {
 
 public:
-	MenuSprite();
-	MenuSprite(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize);
-	~MenuSprite();
 
-	void setup(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize);
+	MenuSprite();																	//0-argument constructor
+
+	MenuSprite(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize);	//constructor with all elements
+
+	~MenuSprite();																	//destructor
 
 
+	void setup(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize);	//sets up the MenuSprite
 
+
+	//inherited virtuals
 	void update();
 
 	void update(MouseData& fmouseData);
 
 	void draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition);
 
-	void resetMD();
+	void resetMD();															
+
+
+
 
 	sf::Vector2f getGlobalDimensions();
 

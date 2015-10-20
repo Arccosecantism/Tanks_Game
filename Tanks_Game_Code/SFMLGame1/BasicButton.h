@@ -125,5 +125,6 @@ private:
 	enum buttonEventPossibitities { Enter_Unheld, Exit_Unheld, Enter_Hovered, Exit_Hovered, Enter_Held, Exit_Held, Enter_Unheld_Pressed,
 									Exit_Unheld_Pressed, Enter_Hovered_Pressed, Exit_Hovered_Pressed, Enter_Held_Pressed, Exit_Held_Pressed,
 									Clicked, Released, Events_Number = 14};
+																			//the 14 events the button can trigger. Events_Number is an index
 };
 
