@@ -1,7 +1,7 @@
 #pragma once
 #include "MenuElement.h"
 
-class SingleTextBox : public MenuElement
+class SingleTextBox : public MenuElement									//This class is simply text on the screen that has been wrapped a bit																	
 {
 public:
 	SingleTextBox();

@@ -2,17 +2,18 @@
 #include "MenuSprite.h"
 #include "MenuElement.h"
 
-class MultiMenuSprite : public MenuElement, public NameSearchable
+class MultiMenuSprite : public MenuElement, public NameSearchable			//This class is a named collection of menuSprites
 {
 public:
-	MultiMenuSprite();
-	~MultiMenuSprite();
+	MultiMenuSprite();														//constructor
 
-	void setup();
+	~MultiMenuSprite();														//destructor
+
+	void setup();															//setup
 
 
-
-	void update();
+	//inherited virtuals
+	void update();															
 
 	void update(MouseData& fmouseData);
 
@@ -21,22 +22,22 @@ public:
 	void resetMD();
 
 
-	void setCurrentMenuSpriteByName(std::string fname);
+	void setCurrentMenuSpriteByName(std::string fname);						//sets which menuSprite to draw; can only draw one at a time
 
-	void setCurrentMenuSpriteByIndex(int findex);
-
-
-	void addMenuSprite(MenuSprite fmenuSprite, std::string fname);
-
-	void addMenuSprite(MenuSprite fmenuSprite, int fintname);
+	void setCurrentMenuSpriteByIndex(int findex);							//same thing, but by index instead of by name
 
 
-	MenuSprite* getMenuSpritePointerByName(std::string fname);
+	void addMenuSprite(MenuSprite fmenuSprite, std::string fname);			//Adds a menusprite to the collection with a name
 
-	MenuSprite* getMenuSpritePointerByIndex(int findex);
+	void addMenuSprite(MenuSprite fmenuSprite, int fintname);				//same thing, but with an index that will be converted to a name -- useful in for loops
+
+
+	MenuSprite* getMenuSpritePointerByName(std::string fname);				//returns a pointer to a menuSprite by name
+
+	MenuSprite* getMenuSpritePointerByIndex(int findex);					//same, bu by index
 
 private:
 
-	std::vector<MenuSprite> spriteVector;
+	std::vector<MenuSprite> spriteVector;									//the collection of MenuSprites
 };
 

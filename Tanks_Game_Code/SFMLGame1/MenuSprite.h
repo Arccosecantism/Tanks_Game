@@ -28,13 +28,13 @@ public:
 
 
 
-	sf::Vector2f getGlobalDimensions();
+	sf::Vector2f getGlobalDimensions();												//returns the dimensions of the menuElement globally
 
-	sf::Vector2f getLocalDimensions();
+	sf::Vector2f getLocalDimensions();												//returns the dimensions of the menuElement locally
 
 private:
 
-	sf::Sprite menuImage;
+	sf::Sprite menuImage;															//the Sprite that Menusprite is just a wrappedd version of.
 
 };
 
