@@ -12,8 +12,6 @@ Slider::Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Texture*
 
 	isHidden = false;
 
-	recordMousePos = false;
-
 	lastHeld = 0;
 
 	lastDrawPosition = sf::Vector2f(0, 0);

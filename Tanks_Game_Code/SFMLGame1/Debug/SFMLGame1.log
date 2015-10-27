@@ -1,28 +1,17 @@
-﻿Build started 10/27/2015 9:29:39 AM.
+﻿Build started 10/27/2015 1:21:52 PM.
      1>Project "C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt App.cpp BasicButton.cpp Main.cpp MainMenu.cpp Menu.cpp MenuBackground.cpp MenuElement.cpp MenuManager.cpp MenuSprite.cpp MultiMenuSprite.cpp MultiTextBox.cpp NameSearchable.cpp ResourceManager.cpp SingleTextBox.cpp Slider.cpp
-         SingleTextBox.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\singletextbox.cpp(267): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-         ResourceManager.cpp
-         NameSearchable.cpp
-         MultiTextBox.cpp
-         MenuElement.cpp
-         MenuBackground.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt App.cpp Main.cpp MainMenu.cpp Menu.cpp MenuManager.cpp Slider.cpp
+         Slider.cpp
+     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(53): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(159): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(190): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
          Generating Code...
          Compiling...
-         Slider.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(55): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(161): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(192): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-         MultiMenuSprite.cpp
-         MenuSprite.cpp
          MenuManager.cpp
          Menu.cpp
          MainMenu.cpp
          Main.cpp
-         BasicButton.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\basicbutton.cpp(334): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
          App.cpp
          Generating Code...
        Link:
@@ -48,4 +37,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.36
+Time Elapsed 00:00:02.76

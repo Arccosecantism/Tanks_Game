@@ -2,15 +2,16 @@
 #include "SingleTextBox.h"
 
 
-class MultiTextBox : public MenuElement, public NameSearchable
+class MultiTextBox : public MenuElement, public NameSearchable				//a named collection of textboxes -- useful for changing text
 {
 public:
-	MultiTextBox();
 
-	~MultiTextBox();
+	MultiTextBox();															//constructor
 
+	~MultiTextBox();														//destructor
+		
 
-
+	//inherited virtual
 	void update();
 
 	void update(MouseData& fmouseData);
@@ -21,18 +22,18 @@ public:
 
 
 
-	void setCurrentTextBoxByName(std::string fname);
+	void setCurrentTextBoxByName(std::string fname);						//set the textbox being drawn -- can only draw one at a time
 
-	void addTextBox(SingleTextBox fsingleTextBox, std::string fname);
+	void addTextBox(SingleTextBox fsingleTextBox, std::string fname);		//adds a textbox to the collection
 	
-	SingleTextBox* getTextBoxPointerByName(std::string fname);
+	SingleTextBox* getTextBoxPointerByName(std::string fname);				//returns a pointer to a textbox by name
 
 
 
 private:
 
 	
-	std::vector<SingleTextBox> textBoxVector;
+	std::vector<SingleTextBox> textBoxVector;								//the collection of textboxes
 
 
 };
