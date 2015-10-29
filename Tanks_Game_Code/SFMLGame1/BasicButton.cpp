@@ -73,7 +73,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	pressedDown = 0;
 
-	setup(fposition, fResourceGroup, ftextName, ftextColor, fspriteSize, ftextCharSize);
+	setup(fposition, fResourceGroup, ftextName, ftextColor, fspriteSize, ftextCharSize);//call the setup
 }
 
 
@@ -107,7 +107,7 @@ void BasicButton::setup(	sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 
 
-	for (int i = 0; i < States_Number; i++)									//cycle through 6 times
+	for (int i = 0; i < States_Number; i++)												//cycle through 6 times
 	{
 
 		tempSprite.setup(fResourceGroup.getTexturePointer(i), sf::Vector2f(0, 0), fspriteSize);
@@ -119,14 +119,7 @@ void BasicButton::setup(	sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 	}
 
 
-
-
-	std::vector<memfunc_of_object> tmpVectorOfPairs;								//create a temporary vector of function pointers
-
-	for (int i = 0; i < Events_Number; i++)
-	{
-		doWhenButtonEvent.push_back(tmpVectorOfPairs);								//add as many vectors as there are button states 
-	}
+	doWhenButtonEvent.resize(Events_Number);											//resize the callback vector to the appropriate amount
 
 
 
@@ -134,6 +127,7 @@ void BasicButton::setup(	sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 	//Now, the text is set----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	buttonTextBox.setup(sf::Vector2f(0, 0), fResourceGroup.getFontPointer(0), ftextName, ftextCharSize, fspriteSize.x - 20, ftextColor);
+																						//setup the textbox
 
 
 
@@ -162,7 +156,8 @@ void BasicButton::update(MouseData& fmouseData)										//mpouse data update --
 {
 
 	updateButtonState(fmouseData);													//update the buttonState
-	updateButtonEvent();
+
+	updateButtonEvent();															//do callbacks
 
 }
 
@@ -177,17 +172,21 @@ void BasicButton::update(MouseData& fmouseData)										//mpouse data update --
 void BasicButton::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)	//draws the Button
 {
 	
-	lastDrawPosition = drawPosition;
+	if (lastDrawPosition != drawPosition)
+	{
+		lastDrawPosition = drawPosition;					//the last draw position becomes the draw position if it's not already
+	}
+	
 
 	position += drawPosition;								//increase the position by thedesired draw position -- makes the position relative
 
 
 
 
-	buttonSprites.draw(frenderWindow, position);						//draw the sprite
+	buttonSprites.draw(frenderWindow, position);			//draw the sprite
 
 
-	buttonTextBox.draw(frenderWindow, position);
+	buttonTextBox.draw(frenderWindow, position);			//draw the text
 
 
 
@@ -203,12 +202,14 @@ void BasicButton::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPositio
 /*------------------------------------------------------------------------------------
 -------------------------------------resetMD------------------------------------------
 ------------------------------------------------------------------------------------*/
-void BasicButton::resetMD()
+void BasicButton::resetMD()								//this is called when the menu deactivates
 {
 
-	buttonState = Unheld;
-	buttonSprites.setCurrentMenuSpriteByIndex(0);
-	pressedDown = false;
+	buttonState = Unheld;								//the button state becomes unheld
+
+	buttonSprites.setCurrentMenuSpriteByIndex(0);		//set the current state being drawn to the default
+
+	pressedDown = false;								//the button is no longer being pressed down
 
 
 }
