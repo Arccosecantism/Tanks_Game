@@ -54,18 +54,7 @@ void MenuSprite::setup(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector
 {
 	position = fposition;				//position is set
 
-	menuImage.setTexture(*ftexture);	//set the texture of the Sprite
-
-	sf::Vector2f tempDimensions(sf::Vector2f(menuImage.getLocalBounds().width, menuImage.getLocalBounds().height));
-										//make temporary helper dimensions
-
-	menuImage.setOrigin(tempDimensions.x / 2, tempDimensions.y / 2);
-										//set the origin in the center of the temp dimensions
-
-	menuImage.setScale(fsize.x / tempDimensions.x, fsize.y / tempDimensions.y);
-										//set the scale such that it is the correct size
-
-	menuImage.setPosition(0, 0);		//position is set (relatively) to (0,0)
+	menuImage.setup(ftexture, sf::Vector2f(0, 0), fsize, 0);
 }
 
 
@@ -109,12 +98,7 @@ void MenuSprite::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition
 		
 
 		
-	menuImage.move(position);		//move the menuImage
-
-	frenderWindow.draw(menuImage);	//draw the menuImage
-
-	menuImage.move(-position);		//move the menuImage back
-
+	menuImage.draw(frenderWindow, position);
 
 
 	position -= drawPosition;		//subtract the drawPosition because we added it
@@ -145,7 +129,7 @@ void MenuSprite::resetMD()			//resetMD()
 sf::Vector2f MenuSprite::getGlobalDimensions()													//all this function does is literally return the global
 																								//dimensions of the Sprite
 {
-	return sf::Vector2f(menuImage.getGlobalBounds().width, menuImage.getGlobalBounds().height);	//yep
+	return menuImage.getGlobalDimensions();
 }
 
 
@@ -155,7 +139,7 @@ sf::Vector2f MenuSprite::getGlobalDimensions()													//all this function d
 ------------------------------------------------------------------------------------*/
 sf::Vector2f MenuSprite::getLocalDimensions()													//same thing as above, except the dimensions are local
 {
-	return sf::Vector2f(menuImage.getLocalBounds().width, menuImage.getLocalBounds().height);
+	return menuImage.getLocalDimensions();
 }
 
 

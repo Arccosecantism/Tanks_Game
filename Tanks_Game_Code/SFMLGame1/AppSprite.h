@@ -1,0 +1,48 @@
+#pragma once
+#include "SFMLbase.h"
+#include "MouseData.h"
+
+class AppSprite																	//This class is a more useful sprite
+{
+
+public:
+
+	AppSprite();																	//0-argument constructor
+
+	AppSprite(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize, double frot);	//constructor with all elements
+
+	~AppSprite();																	//destructor
+
+
+	void setup(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize, double frot);	//sets up the MenuSprite
+	
+
+	void move(sf::Vector2f fdisp);
+
+	void setPosition(sf::Vector2f fpos);
+
+	
+	void rotate(double frot);
+
+	void setRotation(double frot);
+
+
+	void draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition);
+
+
+
+
+	sf::Vector2f getGlobalDimensions();												//returns the dimensions of the AppSprite globally
+
+	sf::Vector2f getLocalDimensions();												//returns the dimensions of the AppSprite locally
+
+private:
+
+	sf::Vector2f position;
+
+	sf::Sprite appImage;															//the Sprite that AppSprite	is just a wrappedd version of.
+
+	double rotation;
+
+};
+

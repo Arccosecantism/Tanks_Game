@@ -1,5 +1,6 @@
 #pragma once
 #include "MenuElement.h"
+#include "AppSprite.h"
 
 class MenuSprite : public MenuElement												//This class is a sprite that is also a menuElement, essentially
 {
@@ -28,13 +29,13 @@ public:
 
 
 
-	sf::Vector2f getGlobalDimensions();												//returns the dimensions of the menuElement globally
+	sf::Vector2f getGlobalDimensions();												//returns the dimensions of the MenuSprite globally
 
-	sf::Vector2f getLocalDimensions();												//returns the dimensions of the menuElement locally
+	sf::Vector2f getLocalDimensions();												//returns the dimensions of the MenuSprite locally
 
 private:
 
-	sf::Sprite menuImage;															//the Sprite that Menusprite is just a wrappedd version of.
+	AppSprite menuImage;															//the AppSprite that Menusprite is just a wrappedd version of.
 
 };
 
