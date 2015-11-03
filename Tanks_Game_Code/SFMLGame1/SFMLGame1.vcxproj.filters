@@ -19,6 +19,12 @@
     <Filter Include="Header Files\MenuTools">
       <UniqueIdentifier>{1ddad752-faaf-4621-ac9d-bd4b50f9b5df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameTools">
+      <UniqueIdentifier>{ab0bc1ec-087b-4593-bda0-ea93850020ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameTools">
+      <UniqueIdentifier>{13051b02-2c71-449a-83be-699074e6e25b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -36,40 +42,43 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasicButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuElement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuBackground.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiTextBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SingleTextBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuSprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiMenuSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NameSearchable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BasicButton.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuBackground.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuElement.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuManager.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuSprite.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiMenuSprite.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiTextBox.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTextBox.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
     <ClCompile Include="Slider.cpp">
+      <Filter>Source Files\MenuTools</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,44 +101,50 @@
     <ClInclude Include="SFMLbase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasicButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuToolsInclude.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuBackground.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MainMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiTextBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SingleTextBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuSprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiMenuSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NameSearchable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BasicButton.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuBackground.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuElement.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuManager.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuSprite.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuToolsInclude.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiMenuSprite.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiTextBox.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTextBox.h">
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
     <ClInclude Include="Slider.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\MenuTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\GameTools</Filter>
+    </ClInclude>
+    <ClInclude Include="GameToolsInclude.h">
+      <Filter>Header Files\GameTools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -169,6 +169,7 @@
     <ClCompile Include="MouseData.cpp" />
     <ClCompile Include="MultiMenuSprite.cpp" />
     <ClCompile Include="NameSearchable.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceGroup.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="MultiTextBox.cpp" />
@@ -178,6 +179,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="BasicButton.h" />
+    <ClInclude Include="GameToolsInclude.h" />
     <ClInclude Include="IncludeMe.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
@@ -189,6 +191,7 @@
     <ClInclude Include="MouseData.h" />
     <ClInclude Include="MultiMenuSprite.h" />
     <ClInclude Include="NameSearchable.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceGroup.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SFMLbase.h" />

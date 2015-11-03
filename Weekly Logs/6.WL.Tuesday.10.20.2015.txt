@@ -18,15 +18,19 @@ Things accomplished in last work session (2 week):
 Previous Goals met:
 ---------------------------------------------------------
 
+
 	*I would like to have Collidable started
 
 
 
 	*I would like to have all of my code commented
 
+
 	I have completed neither than these goals. My productivity really slipped the last weeks, probably due to having breaks from schoool and beginning to focus more
 
 on the Abstract Algerbra App
+
+
 
 
 
@@ -39,9 +43,8 @@ on the Abstract Algerbra App
 
 
 ----------------------------------------------------
-Things I'd like to accomplish by Monday, 10/03/2015:
+Things I'd like to accomplish by Monday, 11/03/2015:
 ----------------------------------------------------
-(same goals)
 
 	*I would like to have Collidable started
 

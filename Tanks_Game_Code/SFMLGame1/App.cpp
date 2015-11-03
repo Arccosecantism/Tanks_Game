@@ -234,8 +234,16 @@ void App::getKeyboardData()													//retrieve keyboard data
 		if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(i)))	//trying to typecast int i as a Key enum 
 		{
 			keys.push_back(i);												//add the pressed key index to the keys vector
+			
 		}
 	}
+
+
+	//for (unsigned int i = 0; i < keys.size(); i++)
+	//{
+	//	std::cout << keys[i] << ", ";
+	//}
+	//std::cout << std::endl;
 
 }
 
