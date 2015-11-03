@@ -7,6 +7,7 @@ public:
 	Slider(	sf::Texture* bgTexture, sf::Texture* fnotchTexture, sf::Texture* sbTexture, sf::Vector2f bgDimensions, sf::Vector2f fnotchDimensions,
 			sf::Vector2f sbDimensions, sf::Vector2f fposition, double& fVariable, double fminBound, double fmaxBound, double fstartVal	);
 																			//huge constuctor
+
 	~Slider();																//destructor
 
 
@@ -45,6 +46,7 @@ private:
 
 	sf::Vector2f extremeCorners[2];											//the top left and bottom right corners of the button slider
 
-	int lastHeld;															//an ad hoc trinary bool; determines if the mouse was last held on the sliderbutton, off the slider butgton, or not held at all 
+	int lastHeld;															//an ad hoc trinary bool; determines if the mouse was last held on the sliderbutton, 
+																			//off the slider button, or not held at all 
 };
 

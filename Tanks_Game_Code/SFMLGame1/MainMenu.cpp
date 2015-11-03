@@ -1,24 +1,42 @@
 #include "MainMenu.h"
 
 
+//----------------------------------------------------------------------------------------------------------------------------***************************
+//-----------------------------------------PUBLIC-----------------------------------------------------------------------------***************************
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+
+/*------------------------------------------------------------------------------------
+----------------------------constructor-----------------------------------------------
+------------------------------------------------------------------------------------*/
 MainMenu::MainMenu()
 {
 
-	isActive = true;
+	isActive = true;										//starts off as active
 
 
 }
 
 
+
+/*------------------------------------------------------------------------------------
+----------------------------destructor------------------------------------------------
+------------------------------------------------------------------------------------*/
 MainMenu::~MainMenu()
 {
 
 }
 
 
-void MainMenu::setup(ResourceManager& fresourceManager)
+
+/*------------------------------------------------------------------------------------
+----------------------------setup-----------------------------------------------------
+------------------------------------------------------------------------------------*/
+void MainMenu::setup(ResourceManager& fresourceManager)							//setup
 {
 
+	//makes a textbox
 
 	MenuElement* textBoxA;
 	textBoxA = new SingleTextBox(sf::Vector2f(0, 0), fresourceManager.getFontPointerByName("DefaultFont"), "Welcome to the Grand Walrus Menu!", 50, 300, sf::Color::Red);
@@ -27,46 +45,49 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 
 
-
+	//makes a BasicButton
 
 	MenuElement* greenButtonA;
 	greenButtonA = new BasicButton(		sf::Vector2f(0, -150), fresourceManager.getResourceSetByName("GreenButtonRG"),
 										"Test1", sf::Color::White, sf::Vector2f(200, 100), 50	);
-
-	BasicButton* p_greenButtonA = static_cast<BasicButton*>(greenButtonA);
-	p_greenButtonA->setRelativeTextPosition(sf::Vector2f(0, 0));
-
-	//BasicButton* p_greenButtonA = static_cast<BasicButton*>(greenButtonA);
-	//p_greenButtonA->addFunctionToDoOnButtonState(closeSecondMenu, this, 3);
 
 
 	
 
 
 
-
+	//makes a BasicButton
 
 	MenuElement* greenButtonB;
 	greenButtonB = new BasicButton(	sf::Vector2f(0, 150), fresourceManager.getResourceSetByName("GreenButtonRG"),
 									"Test2", sf::Color::White, sf::Vector2f(200, 100), 50	);
 
-	BasicButton* p_greenButtonB = static_cast<BasicButton*>(greenButtonB);
-	p_greenButtonB->addFunctionToDoOnButtonState(openSecondMenu, this, 12);
+	//gives the basic button callback functions
 
-	p_greenButtonB->addFunctionToDoOnButtonState(closeNormalMenu, this, 12);
-
+	BasicButton* p_greenButtonB = static_cast<BasicButton*>(greenButtonB);		//cast the menuElement as a basicButton
 
 
+	p_greenButtonB->addFunctionToDoOnButtonState(openSecondMenu, this, 12);		//add the openSecondMenu to the button on click
+
+	p_greenButtonB->addFunctionToDoOnButtonState(closeNormalMenu, this, 12);	//add the closeNormalMenu to the button on click
 
 
 
+
+
+	//same thing, essentially
 
 	MenuElement* greenButtonC;
+
 	greenButtonC = new BasicButton(	sf::Vector2f(0, -150), fresourceManager.getResourceSetByName("GreenButtonRG"),
 									"Test3", sf::Color::White, sf::Vector2f(200, 100), 50	);
 
+
 	BasicButton* p_greenButtonC = static_cast<BasicButton*>(greenButtonC);
+
+
 	p_greenButtonC->addFunctionToDoOnButtonState(openNormalMenu, this, 12);
+
 	p_greenButtonC->addFunctionToDoOnButtonState(closeSecondMenu, this, 12);
 
 	
@@ -74,8 +95,10 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 
 
+	//same thing but with a slider
 
 	MenuElement* testSlider;
+
 	testSlider = new Slider(	fresourceManager.getTexturePointerByName("SliderBackground"), fresourceManager.getTexturePointerByName("SliderNotch"),
 								fresourceManager.getTexturePointerByName("SliderButton"), sf::Vector2f(200, 50), sf::Vector2f(150, 20), sf::Vector2f(20, 40),
 								sf::Vector2f(0, 150), sliderVariable, 0, 100, 80); 
@@ -83,12 +106,14 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 
 
 
-	
+	//create a menu background
 
 	MenuElement* walrusBG;
 	walrusBG = new MenuBackground(	sf::Vector2f(0, 0), fresourceManager.getTexturePointerByName("WalrusBackground"),
 									sf::Vector2f(800, 600)	);
 
+
+	//again...
 
 	MenuElement* giraffeBG;
 	giraffeBG = new MenuBackground(	sf::Vector2f(0, 0), fresourceManager.getTexturePointerByName("GiraffeBackground"),
@@ -96,9 +121,14 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 	
 	
 
+	//make two menus
 
 	Menu defaultMenu;
+
 	Menu secondMenu;
+
+
+	//add the elements to one menu (order matters now)
 
 	defaultMenu.addMenuElement(walrusBG, "WalrusBackground");
 	defaultMenu.addMenuElement(greenButtonA, "TopGreenButton");
@@ -106,12 +136,15 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 	defaultMenu.addMenuElement(textBoxA, "TextBoxA");
 
 
+	//add the elements to the other menu (order matters now)
 
 	secondMenu.addMenuElement(giraffeBG, "GiraffeBackground");
 	secondMenu.addMenuElement(greenButtonC, "TopGreenButtonS");
 	secondMenu.addMenuElement(testSlider, "TestSlider");
 	
 
+
+	// add the menus to the menuManager (order matters)
 
 	MainMenuManager.addMenu(defaultMenu, "NormalMenu", sf::Vector2f(400, 300));
 	MainMenuManager.addMenu(secondMenu, "SecondMenu", sf::Vector2f(400, 300));
@@ -126,16 +159,28 @@ void MainMenu::setup(ResourceManager& fresourceManager)
 }
 
 
-void MainMenu::activate()
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+----------------------------activate--------------------------------------------------
+------------------------------------------------------------------------------------*/
+void MainMenu::activate()						//acitivate the main menu
 {
 
 	isActive = true;
 
-	MainMenuManager.activateAllMenus();
+	MainMenuManager.activateAllMenus();			//activates all menus
 
 }
 
-void MainMenu::deactivate()
+
+
+/*------------------------------------------------------------------------------------
+----------------------------deactivate------------------------------------------------
+------------------------------------------------------------------------------------*/
+void MainMenu::deactivate()						//deacitivate the main menu
 {
 
 	isActive = false;
@@ -144,14 +189,24 @@ void MainMenu::deactivate()
 
 }
 
-void MainMenu::switchActivity()
+
+
+/*------------------------------------------------------------------------------------
+----------------------------switchActivity--------------------------------------------
+------------------------------------------------------------------------------------*/
+void MainMenu::switchActivity()					//switch the activity of the main menu
 {
 
 	setActivity(!isActive);
 
 }
 
-void MainMenu::setActivity(bool factive)
+
+
+/*------------------------------------------------------------------------------------
+----------------------------setActivity-----------------------------------------------
+------------------------------------------------------------------------------------*/
+void MainMenu::setActivity(bool factive)		//set the activity of the main menu
 {
 	if (factive)
 	{
@@ -165,21 +220,41 @@ void MainMenu::setActivity(bool factive)
 }
 
 
-bool MainMenu::getActivity()
+
+/*------------------------------------------------------------------------------------
+---------------------------getActivity------------------------------------------------
+------------------------------------------------------------------------------------*/
+bool MainMenu::getActivity()					//return the activity of the main menu
 {
 
 	return isActive;
 
 }
 
-void MainMenu::update(MouseData& fmouseData)
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+----------------------------update----------------------------------------------------
+------------------------------------------------------------------------------------*/
+void MainMenu::update(MouseData& fmouseData)	//updates the mainMenuManager
 {
-	std::cout << sliderVariable << std::endl;
+	//std::cout << sliderVariable << std::endl;
 	MainMenuManager.update(fmouseData);
 
 }
 
-void MainMenu::draw(sf::RenderWindow& frenderwindow)
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+----------------------------draw------------------------------------------------------
+------------------------------------------------------------------------------------*/
+void MainMenu::draw(sf::RenderWindow& frenderwindow)	//draws the mainMenuManager
 {
 
 	MainMenuManager.draw(frenderwindow);
@@ -187,18 +262,25 @@ void MainMenu::draw(sf::RenderWindow& frenderwindow)
 }
 
 
-//void (MainMenu::* MainMenu::getPointerToFunctionByName(std::string fname))()
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+//-----------------------------------------PRIVATE----------------------------------------------------------------------------***************************
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+
+
+
+
+//this area is explained more in the heared file; it's essentially an easy way to convert between method pointer and generic funtion pointer
+
+/*------------------------------------------------------------------------------------
+----------------------------openNormalMenu--------------------------------------------
+------------------------------------------------------------------------------------*/
 //{
-//
-//	void(MainMenu::*tmpPointerToFunction)();
-//
-//	tmpPointerToFunction = pointersToFunctions[fname];
-//
-//	return tmpPointerToFunction;
-//
-//}
-
-
 
 void MainMenu::openNormalMenu(void* fmainmenu)
 {
@@ -206,12 +288,21 @@ void MainMenu::openNormalMenu(void* fmainmenu)
 	tmpThis->openNormalMenuCalled();
 }
 
+//^v^v^v^v^v^v^v^v^v^v^v^v^v^v^^v^v^v^v^v^v^v^v^v^v^v^v^v^v^^v^v^v^v^v^v^v^v^v^v^v^v^v^v^
+
 void MainMenu::openNormalMenuCalled()
 {
 	MainMenuManager.getMenuPointerByName("NormalMenu")->activate();
 }
 
+//}
 
+
+
+/*------------------------------------------------------------------------------------
+----------------------------openNormalMenu--------------------------------------------
+------------------------------------------------------------------------------------*/
+//{
 
 void MainMenu::closeNormalMenu(void* fmainmenu)
 {
@@ -219,12 +310,21 @@ void MainMenu::closeNormalMenu(void* fmainmenu)
 	tmpThis->closeNormalMenuCalled();
 }
 
+//^v^v^v^v^v^v^v^v^v^v^v^v^v^v^^v^v^v^v^v^v^v^v^v^v^v^v^v^v^^v^v^v^v^v^v^v^v^v^v^v^v^v^v^
+
 void MainMenu::closeNormalMenuCalled()
 {
 	MainMenuManager.getMenuPointerByName("NormalMenu")->deactivate();
 }
 
+//}
 
+
+
+/*------------------------------------------------------------------------------------
+----------------------------openNormalMenu--------------------------------------------
+------------------------------------------------------------------------------------*/
+//{
 
 void MainMenu::openSecondMenu(void* fmainmenu)
 {
@@ -232,12 +332,21 @@ void MainMenu::openSecondMenu(void* fmainmenu)
 	tmpThis->openSecondMenuCalled();
 }
 
+//^v^v^v^v^v^v^v^v^v^v^v^v^v^v^^v^v^v^v^v^v^v^v^v^v^v^v^v^v^^v^v^v^v^v^v^v^v^v^v^v^v^v^v^
+
 void MainMenu::openSecondMenuCalled()
 {
 	MainMenuManager.getMenuPointerByName("SecondMenu")->activate();
 }
 
+//}
 
+
+
+/*------------------------------------------------------------------------------------
+----------------------------openNormalMenu--------------------------------------------
+------------------------------------------------------------------------------------*/
+//{
 
 void MainMenu::closeSecondMenu(void* fmainmenu)
 {
@@ -245,7 +354,15 @@ void MainMenu::closeSecondMenu(void* fmainmenu)
 	tmpThis->closeSecondMenuCalled();
 }
 
+//^v^v^v^v^v^v^v^v^v^v^v^v^v^v^^v^v^v^v^v^v^v^v^v^v^v^v^v^v^^v^v^v^v^v^v^v^v^v^v^v^v^v^v^
+
 void MainMenu::closeSecondMenuCalled()
 {
 	MainMenuManager.getMenuPointerByName("SecondMenu")->deactivate();
 }
+
+//}
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************

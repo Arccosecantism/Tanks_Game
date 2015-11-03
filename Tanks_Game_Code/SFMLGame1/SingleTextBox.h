@@ -36,7 +36,7 @@ public:
 
 private:
 
-	std::string wrapText();													//wraps the text around the edge of the textbox
+	void wrapText();														//wraps the text around the edge of the textbox
 
 	//void resetSize();
 

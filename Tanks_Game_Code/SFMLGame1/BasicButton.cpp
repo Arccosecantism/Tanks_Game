@@ -35,7 +35,7 @@ BasicButton::BasicButton()
 
 	lastMouseHeld = 0;																	//lastMouseHeld starts off as not having a hold value
 
-	pressedDown = 0;
+	pressedDown = 0;																	//the button is initially not held down
 }
 
 
@@ -64,14 +64,14 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 	
 	for (int i = 0; i < 2; i++)
 	{
-		buttonStateCheckers[i] = 0;
+		buttonStateCheckers[i] = 0;														//button state checkers are both initially 0
 	}
 	
 	buttonState = Unheld;																//buttonState is unheld at the start of BasicButton's existence	
 
 	lastMouseHeld = 0;																	//lastMouseHeld starts off as not having a hold value
 
-	pressedDown = 0;
+	pressedDown = 0;																	//the button is initially not held down
 
 	setup(fposition, fResourceGroup, ftextName, ftextColor, fspriteSize, ftextCharSize);//call the setup
 }
@@ -111,6 +111,7 @@ void BasicButton::setup(	sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 	{
 
 		tempSprite.setup(fResourceGroup.getTexturePointer(i), sf::Vector2f(0, 0), fspriteSize);
+																						//setup the temporary sprite with the desired textures
 
 		//now the Sprite should have the correct position, scaling, and origin
 
@@ -134,6 +135,7 @@ void BasicButton::setup(	sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	//soundBuffer stuff?
 }
+
 
 
 //----------------------------------------------------------------------------------------------------------------------------***************************
@@ -230,7 +232,7 @@ void BasicButton::setRelativeSpritePosition(sf::Vector2f fpos)		//sets the posit
 	}
 
 
-	buttonSprites.setPosition(fpos);					//set the position (which will in draw() be relative) to the desired position
+	buttonSprites.setPosition(fpos);								//set the position (which will in draw() be relative) to the desired position
 	
 }
 
@@ -248,7 +250,7 @@ void BasicButton::moveRelativeSpritePosition(sf::Vector2f fvel)		//moves the pos
 	}
 
 
-	buttonSprites.move(fvel);							//move the Sprites by the desired velocity
+	buttonSprites.move(fvel);										//move the Sprites by the desired velocity
 
 }
 
@@ -260,7 +262,7 @@ void BasicButton::moveRelativeSpritePosition(sf::Vector2f fvel)		//moves the pos
 void BasicButton::setRelativeTextPosition(sf::Vector2f fpos)			//set the position of the text (relative to the button)
 {
 
-	buttonTextBox.setPosition(fpos);										//move the Text to the desired position
+	buttonTextBox.setPosition(fpos);									//move the Text to the desired position
 
 }
 
@@ -297,12 +299,12 @@ int BasicButton::getButtonState()										//returns the buttonState
 
 
 /*------------------------------------------------------------------------------------
-----------------------------AddFunctionToDoOnButtonState--------------------------------
+----------------------------AddFunctionToDoOnButtonState------------------------------
 ------------------------------------------------------------------------------------*/
 void BasicButton::addFunctionToDoOnButtonState(function_pointer function, void* object, int fbuttonState)		//adds a function to do when the button is a certain buttonState
 {
 
-	doWhenButtonEvent[fbuttonState].push_back(std::make_pair(function, object));									//add the desired function
+	doWhenButtonEvent[fbuttonState].push_back(std::make_pair(function, object));								//add the desired function
 
 }
 
@@ -489,39 +491,44 @@ void BasicButton::updateButtonState(MouseData& fmousedata)			//*groan* Click log
 
 
 /*------------------------------------------------------------------------------------
---------------------------updateButtonEvent---------------------------------------------
+--------------------------updateButtonEvent-------------------------------------------
 ------------------------------------------------------------------------------------*/
-void BasicButton::updateButtonEvent()
+void BasicButton::updateButtonEvent()										//This function calls the callback functions based on the event
 {
-	buttonStateCheckers[0] = buttonStateCheckers[1];
+	buttonStateCheckers[0] = buttonStateCheckers[1];						//keep track of last two button states...
 
 	buttonStateCheckers[1] = buttonState;
 
-	if (buttonStateCheckers[0] != buttonStateCheckers[1])
+	if (buttonStateCheckers[0] != buttonStateCheckers[1])					//if they are different...
 	{
 		if (buttonStateCheckers[0] == Held && (buttonStateCheckers[1] == Unheld_Pressed || buttonStateCheckers[1] == Hovered_Pressed))
-		{
-			callbackOnButtonEvent(Clicked);
-		}
-		else if (buttonStateCheckers[0] == Held_Pressed && (buttonStateCheckers[1] == Unheld || buttonStateCheckers[1] == Hovered))
-		{
-			callbackOnButtonEvent(Released);
+		{																	//if the button was held and is now either unheld pressed or hovered pressed, it was clicked 
+
+			callbackOnButtonEvent(Clicked);									//do the clicked callback
+
 		}
 
-		for (int i = 0; i < States_Number; i++)
+		else if (buttonStateCheckers[0] == Held_Pressed && (buttonStateCheckers[1] == Unheld || buttonStateCheckers[1] == Hovered))
+		{																	//similar logic -> released
+
+			callbackOnButtonEvent(Released);								//do the released callback
+		}
+
+		for (int i = 0; i < States_Number; i++)								//go through all of the button states
 		{
-			if (buttonStateCheckers[0] == i)
+			if (buttonStateCheckers[0] == i)								//if the previous button state was i
 			{
 
-				callbackOnButtonEvent(2 * i + 1);
+				callbackOnButtonEvent(2 * i + 1);							//do the exit callback of i
 			}
 
-			if (buttonStateCheckers[1] == i)
+			if (buttonStateCheckers[1] == i)								//if the current button sate was i
 			{
 
-				buttonSprites.setCurrentMenuSpriteByIndex(i);
+				buttonSprites.setCurrentMenuSpriteByIndex(i);				//set the current menuSpite to i
 
-				callbackOnButtonEvent(2 * i);
+
+				callbackOnButtonEvent(2 * i);								//do the entry callback of i
 
 			}
 		}
@@ -534,7 +541,7 @@ void BasicButton::updateButtonEvent()
 
 
 /*------------------------------------------------------------------------------------
---------------------------callbackClicked---------------------------------------------
+--------------------------callbackOnButtonEvent---------------------------------------
 ------------------------------------------------------------------------------------*/
 void BasicButton::callbackOnButtonEvent(int fbuttonState)										//do this when the button is clicked
 {

@@ -39,5 +39,8 @@ public:
 private:
 
 	std::vector<MenuSprite> spriteVector;									//the collection of MenuSprites
+
+	int CMSIndex;															//current menuSprite index
+
 };
 

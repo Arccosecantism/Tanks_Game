@@ -1,89 +1,162 @@
 #include "MenuSprite.h"
 
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+//-----------------------------------------PUBLIC-----------------------------------------------------------------------------***************************
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+
+/*------------------------------------------------------------------------------------
+----------------------------Argumentless-constructor----------------------------------
+------------------------------------------------------------------------------------*/
 MenuSprite::MenuSprite()
 {
-	requiresMouseData = false;
+	requiresMouseData = false;			//by default, the MenuSprite does not require mouse data
 
-	isHidden = false;
+	isHidden = false;					//it shall be drawn
 
-	resetsOnMD = false;
+	resetsOnMD = false;					//it does not reset when the menu deactivates
 }
 
+
+
+/*------------------------------------------------------------------------------------
+--------------------------Multi-Argument-constructor----------------------------------
+------------------------------------------------------------------------------------*/
 MenuSprite::MenuSprite(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize)
 {
-	requiresMouseData = false;
+	requiresMouseData = false;			//same stuff
 
 	isHidden = false;
 
 	resetsOnMD = false;
 
-	setup(ftexture, position, fsize);
+	setup(ftexture, position, fsize);	//setup	
 }
 
 
+
+/*------------------------------------------------------------------------------------
+--------------------------------deconstructor-----------------------------------------
+------------------------------------------------------------------------------------*/
 MenuSprite::~MenuSprite()
 {
 
 }
 
 
+
+/*------------------------------------------------------------------------------------
+---------------------------------setup------------------------------------------------
+------------------------------------------------------------------------------------*/
 void MenuSprite::setup(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize)
 {
-	position = fposition;
+	position = fposition;				//position is set
 
-	menuImage.setTexture(*ftexture);
+	menuImage.setTexture(*ftexture);	//set the texture of the Sprite
 
 	sf::Vector2f tempDimensions(sf::Vector2f(menuImage.getLocalBounds().width, menuImage.getLocalBounds().height));
+										//make temporary helper dimensions
 
 	menuImage.setOrigin(tempDimensions.x / 2, tempDimensions.y / 2);
+										//set the origin in the center of the temp dimensions
 
 	menuImage.setScale(fsize.x / tempDimensions.x, fsize.y / tempDimensions.y);
+										//set the scale such that it is the correct size
 
-	menuImage.setPosition(0, 0);
+	menuImage.setPosition(0, 0);		//position is set (relatively) to (0,0)
 }
 
 
 
-void MenuSprite::update()
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------update-----------------------------------------------
+------------------------------------------------------------------------------------*/
+void MenuSprite::update()	//empty
 {
 
 }
 
-void MenuSprite::update(MouseData& fmouseData)
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------update-----------------------------------------------
+------------------------------------------------------------------------------------*/
+void MenuSprite::update(MouseData& fmouseData)	//empty
 {
 
 }
 
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------draw------------------------------------------------
+------------------------------------------------------------------------------------*/
 void MenuSprite::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)
 {
 
-	position += drawPosition;
+	position += drawPosition;		//add the drawPosition  to make position relative
+		
+
+		
+	menuImage.move(position);		//move the menuImage
+
+	frenderWindow.draw(menuImage);	//draw the menuImage
+
+	menuImage.move(-position);		//move the menuImage back
 
 
 
-	menuImage.move(position);
-
-	frenderWindow.draw(menuImage);
-
-	menuImage.move(-position);
-
-
-
-	position -= drawPosition;
+	position -= drawPosition;		//subtract the drawPosition because we added it
 
 }
 
-void MenuSprite::resetMD()
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------resetMD----------------------------------------------
+------------------------------------------------------------------------------------*/
+void MenuSprite::resetMD()			//resetMD()
 {
 
 }
 
-sf::Vector2f MenuSprite::getGlobalDimensions()
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------getGlobalDimensions----------------------------------
+------------------------------------------------------------------------------------*/
+sf::Vector2f MenuSprite::getGlobalDimensions()													//all this function does is literally return the global
+																								//dimensions of the Sprite
 {
-	return sf::Vector2f(menuImage.getGlobalBounds().width, menuImage.getGlobalBounds().height);
+	return sf::Vector2f(menuImage.getGlobalBounds().width, menuImage.getGlobalBounds().height);	//yep
 }
 
-sf::Vector2f MenuSprite::getLocalDimensions()
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------getLocalDimensions-----------------------------------
+------------------------------------------------------------------------------------*/
+sf::Vector2f MenuSprite::getLocalDimensions()													//same thing as above, except the dimensions are local
 {
 	return sf::Vector2f(menuImage.getLocalBounds().width, menuImage.getLocalBounds().height);
 }
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************

@@ -14,9 +14,9 @@ protected:
 	
 	std::string intToString(int finput);					//useful function for converting between int to string
 
-	int ntoi(std::string fname);							//converts a name to an int (index is assumed to be 0)
+	int ntoi(std::string fname);							//converts a name to an index (vector index is assumed to be 0)
 
-	int ntoi(std::string fname, int findex);				//converts a name to an int using a specific index
+	int ntoi(std::string fname, int findex);				//converts a name to an index using a specific vector index
 
 	
 
@@ -32,7 +32,7 @@ protected:
 	void addName(std::string fname, int findex, int fend);	//adds a name into a certain map to correspond to a certain index
 	
 
-	std::vector<std::map<std::string, int> > nameMapVector;	//a vector of hashmaps that maps names to indices
+	std::vector<std::map<std::string, int> > nameMapVector;	//a vector of hashmaps that maps names to indices (maybe one for textures, one for fonts, etc.)
 
 };
 

@@ -292,7 +292,7 @@ void App::setupResourceManager()																//adds all the files to the reso
 
 
 
-	generalResourceManager.addFile("Resources\\AlexandriaFLF.ttf", "DefaultFont");				//adding font
+	generalResourceManager.addFile("Resources\\AlexandriaFLF.ttf", "DefaultFont");				//adding fonts
 
 	
 

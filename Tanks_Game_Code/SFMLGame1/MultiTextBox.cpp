@@ -1,81 +1,213 @@
 #include "MultiTextBox.h"
 
+//----------------------------------------------------------------------------------------------------------------------------***************************
+//-----------------------------------------PUBLIC-----------------------------------------------------------------------------***************************
+//----------------------------------------------------------------------------------------------------------------------------***************************
 
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------constructor------------------------------------------
+------------------------------------------------------------------------------------*/
 MultiTextBox::MultiTextBox()
 {
-	setVectorSize(1);
+	setVectorSize(1);										//only one name map
 
-	requiresMouseData = false;
+	requiresMouseData = false;								//does not require mouse data
 
-	isHidden = false;
+	isHidden = false;										//will be drawn
 
-	resetsOnMD = false;
+	resetsOnMD = false;										//does not reset on menu dectivation
+
+	CTBIndex = -1;											//th current TextBox index starts as -1
+
 }
 
 
+/*------------------------------------------------------------------------------------
+---------------------------------destructor-------------------------------------------
+------------------------------------------------------------------------------------*/
 MultiTextBox::~MultiTextBox()
 {
 
 }
 
 
-void MultiTextBox::update()
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------update(noMouseData)----------------------------------
+------------------------------------------------------------------------------------*/
+void MultiTextBox::update()									//update
 {
 	for (unsigned int i = 0; i < textBoxVector.size(); i++)
 	{
-		textBoxVector[i].update();
+		textBoxVector[i].update();							//update every textBox
 	}
 }
 
 
-void MultiTextBox::update(MouseData& fmouseData)
+/*------------------------------------------------------------------------------------
+---------------------------------update(mouseData)------------------------------------
+------------------------------------------------------------------------------------*/
+void MultiTextBox::update(MouseData& fmouseData)			//update with mouse data
 {
 	for (unsigned int i = 0; i < textBoxVector.size(); i++)
 	{
-		textBoxVector[i].update(fmouseData);
+		textBoxVector[i].update(fmouseData);				//update every textBox with mouse data
 	}
 }
 
 
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------draw-------------------------------------------------
+------------------------------------------------------------------------------------*/
 void MultiTextBox::draw(sf::RenderWindow& frenderwindow, sf::Vector2f drawPosition)
 {
-	position += drawPosition;
+	position += drawPosition;								//add the draw position to make textBoxes' positions relative
 
-	for (unsigned int i = 0; i < textBoxVector.size(); i++)
+	if (!textBoxVector[CTBIndex].getIsHidden())
 	{
-		textBoxVector[i].draw(frenderwindow, position);
+		textBoxVector[CTBIndex].draw(frenderwindow, position);	
+															// if the current TextBox isn't hidden, draw it
 	}
 
-	position -= drawPosition;
+
+	position -= drawPosition;								//take away the draw position because it was added
 }
 
 
-void MultiTextBox::resetMD()
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------resetMD----------------------------------------------
+------------------------------------------------------------------------------------*/
+void MultiTextBox::resetMD()								//empty
 {
 
 }
 
 
-void MultiTextBox::setCurrentTextBoxByName(std::string fname)
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------setCurrentTextBoxByName------------------------------
+------------------------------------------------------------------------------------*/
+void MultiTextBox::setCurrentTextBoxByName(std::string fname)	//set the current textBox to naother by name
 {
-	for (unsigned int i = 0; i < textBoxVector.size(); i++)
+	if (CTBIndex >= 0)
 	{
-		textBoxVector[i].hide();
+		textBoxVector[CTBIndex].hide();						//hide the old textBox; doesnt really matter; just for consistency
 	}
-	textBoxVector[ntoi(fname)].unhide();
+
+	CTBIndex = ntoi(fname);									//most important: the current TextBox index is the index associated with the name
+
+	textBoxVector[CTBIndex].unhide();						//unhide the one that was named; again, doesn't matter
+
+
 }
 
 
-void MultiTextBox::addTextBox(SingleTextBox fsingleTextBox, std::string fname)
+
+/*------------------------------------------------------------------------------------
+---------------------------------setCurrentTextBoxByIndex-----------------------------
+------------------------------------------------------------------------------------*/
+void MultiTextBox::setCurrentTextBoxByIndex(int findex)		//set the textbox being drawn by index 
 {
-	fsingleTextBox.hide();
-	textBoxVector.push_back(fsingleTextBox);
-	addName(fname, textBoxVector.size() - 1);
+
+	if (CTBIndex >= 0)
+	{
+		textBoxVector[CTBIndex].hide();
+	}
+
+	CTBIndex = findex;
+
+	textBoxVector[CTBIndex].unhide();						//unhide the one that was named
 }
 
 
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------addTextbox-(name)------------------------------------
+------------------------------------------------------------------------------------*/
+void MultiTextBox::addTextBox(SingleTextBox fsingleTextBox, std::string fname) 
+{
+	if (textBoxVector.size() > 0)
+	{
+		fsingleTextBox.hide();								//hide the textBox if it's not the first
+		
+	}
+	else
+	{	
+		CTBIndex = 0;										//only change the CTBIndex if it is the first
+	}
+	
+	textBoxVector.push_back(fsingleTextBox);				//add it to the collection
+
+	addName(fname, textBoxVector.size() - 1);				// add the name
+}
+
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------addTextbox-(int)-------------------------------------
+------------------------------------------------------------------------------------*/
+void MultiTextBox::addTextBox(SingleTextBox fsingleTextBox, int finame) 
+															//same thing, essentially as the previous one
+{
+	if (textBoxVector.size() > 0)
+	{
+		fsingleTextBox.hide();		
+
+	}
+	else
+	{
+		CTBIndex = 0;				
+	}
+
+	textBoxVector.push_back(fsingleTextBox);				
+
+	addName(finame, textBoxVector.size() - 1);				// add the inted name
+}
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------getTextboxPointerByName------------------------------
+------------------------------------------------------------------------------------*/
 SingleTextBox* MultiTextBox::getTextBoxPointerByName(std::string fname)
 {
-	SingleTextBox* tmpTextBox = &textBoxVector[ntoi(fname)];
-	return tmpTextBox;
+	SingleTextBox* tmpTextBox = &textBoxVector[ntoi(fname)];	//make the pointer
+
+	return tmpTextBox;											//return it
 }
+
+
+
+/*------------------------------------------------------------------------------------
+---------------------------------getTextboxPointerByIndex-----------------------------
+-----------------------------------------------------------------------------------*/
+SingleTextBox* MultiTextBox::getTextBoxPointerByIndex(int findex)
+{
+	SingleTextBox* tmpTextBox = &textBoxVector[findex];			//make the pointer
+
+	return tmpTextBox;											//return it
+}
+
+//----------------------------------------------------------------------------------------------------------------------------***************************
