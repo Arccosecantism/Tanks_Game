@@ -1,5 +1,6 @@
 #pragma once
 #include "MainMenu.h"
+#include "Player.h"
 
 class App
 {
@@ -63,6 +64,8 @@ private:
 
 	MainMenu startingMenu;									//The MAinMenu for the program
 	
+
+	Player testPlayer;
 
 
 };

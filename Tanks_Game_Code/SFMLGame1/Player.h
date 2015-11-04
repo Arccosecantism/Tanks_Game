@@ -6,8 +6,10 @@ class Player
 {
 public:
 	Player();
+	Player(AppSprite& fappSprite, sf::Vector2f fpos);
 	~Player();
 
+	void setup(AppSprite& fappSprite, sf::Vector2f fpos);
 
 	void move(sf::Vector2f fdisp);
 
@@ -21,9 +23,9 @@ public:
 
 
 
-	void update(std::vector<int> fkeyVec);
+	void update(std::vector<int>& fkeyVec);
 
-	void draw();
+	void draw(sf::RenderWindow& frenderwindow);
 
 
 private:

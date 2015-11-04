@@ -160,6 +160,9 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="AppSprite.cpp" />
     <ClCompile Include="BasicButton.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameMap.cpp" />
+    <ClCompile Include="GeneralMap.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -181,7 +184,10 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="AppSprite.h" />
     <ClInclude Include="BasicButton.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameToolsInclude.h" />
+    <ClInclude Include="GeneralMap.h" />
     <ClInclude Include="IncludeMe.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />

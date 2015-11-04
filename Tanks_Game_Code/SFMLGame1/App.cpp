@@ -43,7 +43,11 @@ void App::setup()												//initialize all objects
 
 	startingMenu.setup(generalResourceManager);					//set up the main menu
 
-	//startingMenu.deactivate();
+	AppSprite tmpAS(generalResourceManager.getTexturePointerByName("DefaultTank"), sf::Vector2f(0, 0), sf::Vector2f(50, 50), 0);
+
+	testPlayer.setup(tmpAS, sf::Vector2f(400, 300));
+
+	startingMenu.deactivate();
 }
 
 
@@ -147,6 +151,7 @@ void App::update()											//update all objects and menus
 {
 
 	startingMenu.update(mouseInfo);
+	testPlayer.update(keys);
 
 }
 
@@ -162,6 +167,7 @@ void App::draw()											//draw all objects
 {
 
 	startingMenu.draw(*window);
+	testPlayer.draw(*window);
 
 }
 
@@ -298,7 +304,7 @@ void App::setupResourceManager()																//adds all the files to the reso
 	generalResourceManager.addFile("Resources\\SliderBG.png", "SliderBackground");
 
 
-
+	generalResourceManager.addFile("Resources\\DefaultTank.png", "DefaultTank");
 
 	generalResourceManager.addFile("Resources\\AlexandriaFLF.ttf", "DefaultFont");				//adding fonts
 
