@@ -3,8 +3,11 @@
 class ConvexHitBox : GeneralHitBox
 {
 public:
+
 	ConvexHitBox();
+
 	~ConvexHitBox();
+
 
 	void addVertex(sf::Vector2f fvertex);
 
@@ -19,8 +22,10 @@ public:
 
 
 private:
+	bool checkConcavity();
 
 	std::vector<sf::Vector2f> vertecies;
+
 	sf::Vector2f position;
 };
 
