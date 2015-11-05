@@ -15,7 +15,10 @@ void ConvexHitBox::addVertex(sf::Vector2f fvertex)
 	vertecies.push_back(fvertex);
 	if (vertecies.size() > 3)
 	{
-		if (checkConcavity())
+		if (!checkConcavity())
+		{
+			vertecies.erase(vertecies.begin() + vertecies.size() - 1);
+		}
 	}
 }
 
@@ -84,4 +87,9 @@ bool ConvexHitBox::checkConcavity()
 	}
 
 	return  finalVal;
+}
+
+bool ConvexHitBox::checkSimplicity()
+{
+	return false;
 }

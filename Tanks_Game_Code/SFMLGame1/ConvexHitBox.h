@@ -23,6 +23,7 @@ public:
 
 private:
 	bool checkConcavity();
+	bool checkSimplicity();
 
 	std::vector<sf::Vector2f> vertecies;
 

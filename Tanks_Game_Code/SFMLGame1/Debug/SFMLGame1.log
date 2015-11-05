@@ -1,31 +1,24 @@
-﻿Build started 11/4/2015 8:04:03 PM.
-     1>Project "C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" on node 2 (Build target(s)).
+﻿Build started 11/5/2015 11:50:57 AM.
+     1>Project "C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AARectHitBox.cpp CircularHitBox.cpp ConvexHitBox.cpp Game.cpp GameMap.cpp GeneralHitBox.cpp GeneralMap.cpp MenuBackground.cpp NameSearchable.cpp MultiTextBox.cpp SingleTextBox.cpp
-         GeneralMap.cpp
-         GeneralHitBox.cpp
-         GameMap.cpp
-         Game.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AppSprite.cpp BasicButton.cpp ConvexHitBox.cpp MainMenu.cpp Menu.cpp MenuBackground.cpp MenuManager.cpp MenuSprite.cpp MultiMenuSprite.cpp MultiTextBox.cpp NameSearchable.cpp SingleTextBox.cpp Slider.cpp
          ConvexHitBox.cpp
-         CircularHitBox.cpp
-         AARectHitBox.cpp
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(31): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(32): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(33): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(34): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(41): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(43): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(44): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(45): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\riley\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(46): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
          Generating Code...
          Skipping... (no relevant changes detected)
+         Slider.cpp
          SingleTextBox.cpp
-         MultiTextBox.cpp
          NameSearchable.cpp
+         MultiTextBox.cpp
+         MultiMenuSprite.cpp
+         MenuSprite.cpp
+         MenuManager.cpp
          MenuBackground.cpp
+         Menu.cpp
+         MainMenu.cpp
+         BasicButton.cpp
+         AppSprite.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML\SFML-2.1\Libs\Debug" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.lib" /MACHINE:X86 Debug\AARectHitBox.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML\SFML-2.1\Libs\Debug" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.lib" /MACHINE:X86 Debug\AARectHitBox.obj
          Debug\App.obj
          Debug\AppSprite.obj
          Debug\BasicButton.obj
@@ -51,9 +44,9 @@
          Debug\MultiTextBox.obj
          Debug\SingleTextBox.obj
          Debug\Slider.obj
-         SFMLGame1.vcxproj -> C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.exe
-     1>Done Building Project "C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" (Build target(s)).
+         SFMLGame1.vcxproj -> C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.exe
+     1>Done Building Project "C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:12.08
+Time Elapsed 00:00:00.70

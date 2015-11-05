@@ -23,9 +23,9 @@ void Player::setup(AppSprite& fappSprite, sf::Vector2f fpos)
 
 	tankSprite = fappSprite;
 	rotation = 0;
-	forSpeed = .08;
-	bacSpeed = .05;
-	rotSpeed = .08;
+	forSpeed = 3.0;
+	bacSpeed = 2.0;
+	rotSpeed = 2.5;
 	resetVelocities();
 }
 

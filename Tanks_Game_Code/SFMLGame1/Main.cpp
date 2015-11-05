@@ -5,7 +5,7 @@ int main()																//the main function
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");	//creates a renderwindow that draws everything 
 
-
+	window.setFramerateLimit(60);
 
 	App myApp(window);													//declare an App by giving it a renderWidow
 
