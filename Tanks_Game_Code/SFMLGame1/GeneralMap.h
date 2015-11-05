@@ -5,5 +5,11 @@ class GeneralMap
 public:
 	GeneralMap();
 	~GeneralMap();
+
+private:
+
+	std::vector<sf::Sprite> wallSprites;
+
+
 };
 

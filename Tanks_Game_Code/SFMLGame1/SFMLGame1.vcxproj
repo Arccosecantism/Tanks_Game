@@ -157,11 +157,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AARectHitBox.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="AppSprite.cpp" />
     <ClCompile Include="BasicButton.cpp" />
+    <ClCompile Include="CircularHitBox.cpp" />
+    <ClCompile Include="ConvexHitBox.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMap.cpp" />
+    <ClCompile Include="GeneralHitBox.cpp" />
     <ClCompile Include="GeneralMap.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -181,12 +185,16 @@
     <ClCompile Include="Slider.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AARectHitBox.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="AppSprite.h" />
     <ClInclude Include="BasicButton.h" />
+    <ClInclude Include="CircularHitBox.h" />
+    <ClInclude Include="ConvexHitBox.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameToolsInclude.h" />
+    <ClInclude Include="GeneralHitBox.h" />
     <ClInclude Include="GeneralMap.h" />
     <ClInclude Include="IncludeMe.h" />
     <ClInclude Include="MainMenu.h" />

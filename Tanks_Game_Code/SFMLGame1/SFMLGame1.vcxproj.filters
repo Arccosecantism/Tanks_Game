@@ -25,6 +25,12 @@
     <Filter Include="Header Files\GameTools">
       <UniqueIdentifier>{13051b02-2c71-449a-83be-699074e6e25b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\HitBoxes">
+      <UniqueIdentifier>{d2e421b3-2ecc-4fc0-ad05-3bfcb89b44ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\HitBoxes">
+      <UniqueIdentifier>{8f71e201-362f-4b19-bb9c-19929382db72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -92,6 +98,18 @@
     </ClCompile>
     <ClCompile Include="GeneralMap.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneralHitBox.cpp">
+      <Filter>Source Files\HitBoxes</Filter>
+    </ClCompile>
+    <ClCompile Include="AARectHitBox.cpp">
+      <Filter>Source Files\HitBoxes</Filter>
+    </ClCompile>
+    <ClCompile Include="CircularHitBox.cpp">
+      <Filter>Source Files\HitBoxes</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvexHitBox.cpp">
+      <Filter>Source Files\HitBoxes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +187,18 @@
     </ClInclude>
     <ClInclude Include="GeneralMap.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneralHitBox.h">
+      <Filter>Header Files\HitBoxes</Filter>
+    </ClInclude>
+    <ClInclude Include="AARectHitBox.h">
+      <Filter>Header Files\HitBoxes</Filter>
+    </ClInclude>
+    <ClInclude Include="CircularHitBox.h">
+      <Filter>Header Files\HitBoxes</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvexHitBox.h">
+      <Filter>Header Files\HitBoxes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
