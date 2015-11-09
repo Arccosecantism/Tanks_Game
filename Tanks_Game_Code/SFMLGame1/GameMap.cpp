@@ -13,7 +13,7 @@ GameMap::~GameMap()
 {
 }
 
-void loadFromFile(std::string filename, ResourceGroup& frg)
+void GameMap::loadFromFile(std::string filename)
 {
 	std::ifstream ifs(filename);
 
@@ -23,31 +23,63 @@ void loadFromFile(std::string filename, ResourceGroup& frg)
 
 	std::string letter;
 
-	bool addingWalls = false;;
+	
+
+	bool addingWalls = false;
+
+	bool insideTriple = false;
+
+	bool insideRect = false;
+
+	std::string tripleRecord = "";
+	std::vector<std::string> rectTriples;
 
 	while (std::getline(ifs, line))
 	{
 		for (unsigned int i = 0; i < line.size(); i++)
 		{
 			letter = line[i];
-
-			if (letter != " ")
-			{
-				word += letter;
-			}
-			else
+			word += letter;
+			if (letter == " ")
 			{
 				word = "";
 			}
 
-			if ((!addingWalls) && word == "ADDING_WALLS")
+			if (addingWalls)
+			{
+				if (letter == "<")
+				{
+					insideTriple = true;
+				}
+
+				if (insideTriple)
+				{
+					tripleRecord += letter;
+					if (letter == ">")
+					{
+						insideTriple = false;
+						rectTriples.push_back(tripleRecord);
+						tripleRecord = "";
+					}
+				}
+
+				
+			}
+			if ((!addingWalls) && (word == "ADDING_WALLS"))
 			{
 				addingWalls = true; 
 				break;
 			}
 
+
+
 		}
 		word = "";
+	}
+
+	for (int i = 0; i < rectTriples.size(); i++)
+	{
+		std::cout << rectTriples[i] << std::endl;
 	}
 }
 

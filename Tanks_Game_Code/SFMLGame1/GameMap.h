@@ -7,7 +7,7 @@ public:
 	GameMap();
 	~GameMap();
 
-	void loadFromFile(std::string filename, ResourceGroup& frg);
+	void loadFromFile(std::string filename);
 
 	sf::Vector2f getTankSpawnPoint(int findex);
 	sf::Vector2f getUpgradeSpawnPoint(int findex);

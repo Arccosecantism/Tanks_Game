@@ -25,7 +25,7 @@ App::App(sf::RenderWindow& fwindow)								/*basic counstructor for App. App mus
 
 	mouseInfo.setButtonData(sf::Vector2i(UNHELD, UNHELD));		//starting the mouse as unheld
 
-	
+
 }
 
 
@@ -54,6 +54,8 @@ void App::setup()												//initialize all objects
 	testor.addVertex(150, 50);
 	testor.addVertex(100, 200);
 	testor.addVertex(200, 100);
+
+	GMtest.loadFromFile("Resources\\TextFiles\\DefaultGameMap.txt");
 }
 
 

@@ -2,6 +2,7 @@
 #include "MainMenu.h"
 #include "Player.h"
 #include "HitBoxInclude.h"
+#include "GameMap.h"
 
 class App
 {
@@ -68,6 +69,7 @@ private:
 
 	Player testPlayer;
 	ConvexHitBox testor;
+	GameMap GMtest;
 
 
 };
