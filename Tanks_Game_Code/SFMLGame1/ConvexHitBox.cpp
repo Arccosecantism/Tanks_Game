@@ -36,17 +36,17 @@ void ConvexHitBox::addVertex(sf::Vector2f fvertex)
 		//	std::cout << "didn't work -- complex" << std::endl;
 		//	vertecies.erase(vertecies.begin() + vertecies.size() - 1);
 		//}
-		else
-		{
-			//std::cout << "maybe worked" << std::endl;
-		}
+		//else
+		//{
+		//	std::cout << "maybe worked" << std::endl;
+		//}
 
 
 	}
-	else
-	{
-		std::cout << "maybe worked" << std::endl;
-	}
+	//else
+	//{
+	//	std::cout << "maybe worked" << std::endl;
+	//}
 }
 
 void  ConvexHitBox::addVertex(double fx, double fy)

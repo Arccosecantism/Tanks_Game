@@ -8,6 +8,7 @@ public:
 	~Collidable();
 
 	bool getActivity();
+	void setActivity(bool b);
 	GeneralHitBox* getHitBox(int findex);
 	AARectHitBox getBoundingBox();
 

@@ -1,9 +1,10 @@
 #pragma once
 #include "SFMLbase.h"
+#include "NameSearchable.h"
 
 
 
-class ResourceGroup														//essentially just a group of Textures, Fonts, and soundBuffers
+class ResourceGroup : public NameSearchable								//essentially just a group of Textures, Fonts, and soundBuffers
 {
 
 /*---------------------------------------------------------------------------------------------------------
@@ -17,9 +18,10 @@ public:
 
 	ResourceGroup();													//Constructor -- empty
 
-
 	void addTexture(sf::Texture* ftexture);								//adds a texture
+	void addTexture(sf::Texture* ftexture, std::string fname);			//adds a texture
 	void addFont(sf::Font* ffont);										//adds a font
+	void addFont(sf::Font* ffont, std::string name);					//adds a font
 	//void addSoundBuf(sf::SoundBuffer* fsoundbuf);						//adds a soundBuf
 
 
@@ -30,7 +32,9 @@ public:
 
 
 	sf::Texture* getTexturePointer(int findex);							//returns an element of textureVector
+	sf::Texture* getTexturePointer(std::string name);					//returns an element of textureVector
 	sf::Font* getFontPointer(int findex);								//returns an element of fontVector
+	sf::Font* getFontPointer(std::string name);							//returns an element of fontVector
 	//sf::SoundBuffer* getSoundBufPointer(int findex);					//returns an element of soundBufVector
 
 
@@ -56,5 +60,6 @@ private:
 	
 	//std::vector<std::string> nameVectors[3];							//array of name vectors for name access; probably wont use.
 
+	enum VectorNames { Texture_Vector = 0, Font_Vector = 1, SoundBuf_Vector = 2 };
 };
 

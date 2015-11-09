@@ -7,7 +7,7 @@ public:
 	~HitBoxVector();
 
 	void addHitBox(GeneralHitBox* fhitbox);
-	void addHitBox(GeneralHitBox& fhitbox);
+
 
 	void move(sf::Vector2f fdisp);
 	void setPosition(sf::Vector2f fpos);
@@ -18,6 +18,6 @@ public:
 
 private:
 
-	std::vector<GeneralHitBox> hitboxvec;
+	std::vector<GeneralHitBox*> hitboxvec;
 };
 

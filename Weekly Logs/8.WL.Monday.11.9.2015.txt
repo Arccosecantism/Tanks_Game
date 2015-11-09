@@ -1,0 +1,52 @@
+---------------------------------------------------------
+Things accomplished in last work session (1 week):
+---------------------------------------------------------
+
+
+	Last week I started working on the game. I got a tank running around the screen, and I started working on part of the nightmare that is collision.
+Specifically, I made several types of hitboxes and researched collision methods such as separating axis theorem.
+
+---------------------------------------------------------
+
+
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
+
+---------------------------------------------------------
+Previous Goals met:
+---------------------------------------------------------
+
+	*I would like to have a tank running around the screen
+
+
+	I have completed this goal. This was not a good goal because of how simple and easy it is. Also, there were no other goals, so I didn't have a sense of
+
+direction. This time, I shall write better goals.
+
+
+---------------------------------------------------------
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
+
+
+----------------------------------------------------
+Things I'd like to accomplish by Tuesday, 11/17/2015:
+----------------------------------------------------
+
+	*I want to be done with hitbox creation
+
+	*I want to be able to load a gameMap from a file
+
+	*Ideally, I want a tank running around with basic axis-aligned bounding box collision with walls
+
+	*I want ot implement a Controls class
+	
+
+
+-----------------------------------------------------

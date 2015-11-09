@@ -63,7 +63,7 @@ private:
 	ResourceManager generalResourceManager;					//the ResourceManager for everything in the App, which is almost everything
 
 
-	MainMenu startingMenu;									//The MAinMenu for the program
+	//MainMenu startingMenu;									//The MAinMenu for the program
 	
 
 	Player testPlayer;

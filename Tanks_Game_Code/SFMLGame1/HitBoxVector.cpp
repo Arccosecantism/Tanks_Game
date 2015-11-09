@@ -15,11 +15,6 @@ void HitBoxVector::addHitBox(GeneralHitBox* fhitbox)
 	hitboxvec.push_back(fhitbox);
 }
 
-void HitBoxVector::addHitBox(GeneralHitBox& fhitbox)
-{
-	hitboxvec.push_back(&fhitbox);
-}
-
 void HitBoxVector::move(sf::Vector2f fdisp)
 {
 	for (int i = 0; i < hitboxvec.size(); i++)

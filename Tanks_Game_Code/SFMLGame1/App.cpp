@@ -41,13 +41,13 @@ void App::setup()												//initialize all objects
 
 	setupResourceManager();										//set up the resource manager, adding all files
 
-	startingMenu.setup(generalResourceManager);					//set up the main menu
+	//startingMenu.setup(generalResourceManager);					//set up the main menu
 
 	AppSprite tmpAS(generalResourceManager.getTexturePointerByName("DefaultTank"), sf::Vector2f(0, 0), sf::Vector2f(50, 50), 0);
 
 	testPlayer.setup(tmpAS, sf::Vector2f(400, 300));
 
-	startingMenu.deactivate();
+	//startingMenu.deactivate();
 
 	testor.addVertex(100, 100);
 	testor.addVertex(200, 200);
@@ -156,7 +156,7 @@ void App::checkEvents(sf::Event& fevent)						//checks events like mouse clickin
 void App::update()											//update all objects and menus
 {
 
-	startingMenu.update(mouseInfo);
+	//startingMenu.update(mouseInfo);
 	testPlayer.update(keys);
 
 }
@@ -172,7 +172,7 @@ void App::update()											//update all objects and menus
 void App::draw()											//draw all objects
 {
 
-	startingMenu.draw(*window);
+	//startingMenu.draw(*window);
 	testPlayer.draw(*window);
 
 }
@@ -291,28 +291,28 @@ void App::doPerFrame()							//do the above four functions every update cycle
 void App::setupResourceManager()																//adds all the files to the resource manager
 {
 
-	generalResourceManager.addFile("Resources\\GreenButtonUnpressed.png", "GreenButtonUnpressed");
-	generalResourceManager.addFile("Resources\\GreenButtonHovered.png", "GreenButtonHovered");
-	generalResourceManager.addFile("Resources\\GreenButtonHeld.png", "GreenButtonHeld");
-	generalResourceManager.addFile("Resources\\GreenButtonPressed.png", "GreenButtonPressed");
-	generalResourceManager.addFile("Resources\\GreenButtonHoveredPressed.png", "GreenButtonHoveredPressed");
-	generalResourceManager.addFile("Resources\\GreenButtonHeldPressed.png", "GreenButtonHeldPressed");
+	generalResourceManager.addFile("Resources\\Textures\\GreenButtonUnpressed.png", "GreenButtonUnpressed");
+	generalResourceManager.addFile("Resources\\Textures\\GreenButtonHovered.png", "GreenButtonHovered");
+	generalResourceManager.addFile("Resources\\Textures\\GreenButtonHeld.png", "GreenButtonHeld");
+	generalResourceManager.addFile("Resources\\Textures\\GreenButtonPressed.png", "GreenButtonPressed");
+	generalResourceManager.addFile("Resources\\Textures\\GreenButtonHoveredPressed.png", "GreenButtonHoveredPressed");
+	generalResourceManager.addFile("Resources\\Textures\\GreenButtonHeldPressed.png", "GreenButtonHeldPressed");
 
 
-	generalResourceManager.addFile("Resources\\WalrusBG.png", "WalrusBackground");
+	generalResourceManager.addFile("Resources\\Textures\\\WalrusBG.png", "WalrusBackground");
 
-	generalResourceManager.addFile("Resources\\GiraffeBG.png", "GiraffeBackground");
+	generalResourceManager.addFile("Resources\\Textures\\GiraffeBG.png", "GiraffeBackground");
 
-	generalResourceManager.addFile("Resources\\SliderButton.png", "SliderButton");
+	generalResourceManager.addFile("Resources\\Textures\\SliderButton.png", "SliderButton");
 
-	generalResourceManager.addFile("Resources\\SliderNotch.png", "SliderNotch");
+	generalResourceManager.addFile("Resources\\Textures\\SliderNotch.png", "SliderNotch");
 
-	generalResourceManager.addFile("Resources\\SliderBG.png", "SliderBackground");
+	generalResourceManager.addFile("Resources\\Textures\\SliderBG.png", "SliderBackground");
 
 
-	generalResourceManager.addFile("Resources\\DefaultTank.png", "DefaultTank");
+	generalResourceManager.addFile("Resources\\Textures\\DefaultTank.png", "DefaultTank");
 
-	generalResourceManager.addFile("Resources\\AlexandriaFLF.ttf", "DefaultFont");				//adding fonts
+	generalResourceManager.addFile("Resources\\Fonts\\AlexandriaFLF.ttf", "DefaultFont");				//adding fonts
 
 	
 

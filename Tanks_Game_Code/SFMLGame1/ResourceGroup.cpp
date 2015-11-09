@@ -11,7 +11,7 @@
 ------------------------------------------------------------------------------------*/
 ResourceGroup::ResourceGroup()												//Constructor is empty	
 {
-
+	setVectorSize(3);
 }
 
 
@@ -26,10 +26,20 @@ void ResourceGroup::addTexture(sf::Texture* ftexture)						//add a pointer to a 
 {
 
 	textureVector.push_back(ftexture);
+	addName(textureVector.size() - 1, Texture_Vector, textureVector.size() - 1);
 
 }
 
+/*------------------------------------------------------------------------------------
+-------------------------------addTexture---------------------------------------------
+------------------------------------------------------------------------------------*/
+void ResourceGroup::addTexture(sf::Texture* ftexture, std::string fname)						//add a pointer to a texture to textureVector
+{
 
+	textureVector.push_back(ftexture);
+	addName(fname, Texture_Vector, textureVector.size() - 1);
+
+}
 
 //----------------------------------------------------------------------------------------------------------------------------***************************
 
@@ -41,6 +51,20 @@ void ResourceGroup::addFont(sf::Font* ffont)								//add a pointer to a font to
 {
 
 	fontVector.push_back(ffont);
+	addName(fontVector.size() - 1, Font_Vector, fontVector.size() - 1);
+
+}
+
+
+/*------------------------------------------------------------------------------------
+-------------------------------addFont------------------------------------------------
+------------------------------------------------------------------------------------*/
+void ResourceGroup::addFont(sf::Font* ffont, std::string fname)								//add a pointer to a font to fontVector
+{
+
+	fontVector.push_back(ffont);
+	addName(fname, Font_Vector, fontVector.size() - 1);
+
 
 }
 
@@ -121,6 +145,15 @@ sf::Texture* ResourceGroup::getTexturePointer(int findex)					//returns an eleme
 }
 
 
+/*------------------------------------------------------------------------------------
+-------------------------------getTexturePointer--------------------------------------
+------------------------------------------------------------------------------------*/
+sf::Texture* ResourceGroup::getTexturePointer(std::string fname)					//returns an element of textureVector -- a pointer to a texture
+{
+
+	return textureVector[ntoi(fname, Texture_Vector)];
+
+}
 
 //----------------------------------------------------------------------------------------------------------------------------***************************
 
@@ -135,6 +168,15 @@ sf::Font* ResourceGroup::getFontPointer(int findex)							//returns an element o
 
 }
 
+/*------------------------------------------------------------------------------------
+-------------------------------getFontPointer-----------------------------------------
+------------------------------------------------------------------------------------*/
+sf::Font* ResourceGroup::getFontPointer(std::string fname)							//returns an element of fontVector -- a pointer to a font
+{
+
+	return fontVector[ntoi(fname, Texture_Vector)];
+
+}
 
 
 //----------------------------------------------------------------------------------------------------------------------------***************************
