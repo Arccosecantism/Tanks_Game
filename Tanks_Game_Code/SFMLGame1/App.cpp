@@ -48,6 +48,12 @@ void App::setup()												//initialize all objects
 	testPlayer.setup(tmpAS, sf::Vector2f(400, 300));
 
 	startingMenu.deactivate();
+
+	testor.addVertex(100, 100);
+	testor.addVertex(200, 200);
+	testor.addVertex(150, 50);
+	testor.addVertex(100, 200);
+	testor.addVertex(200, 100);
 }
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "MainMenu.h"
 #include "Player.h"
+#include "HitBoxInclude.h"
 
 class App
 {
@@ -66,6 +67,7 @@ private:
 	
 
 	Player testPlayer;
+	ConvexHitBox testor;
 
 
 };

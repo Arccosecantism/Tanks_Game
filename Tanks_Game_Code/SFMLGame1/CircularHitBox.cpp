@@ -26,6 +26,11 @@ CircularHitBox::~CircularHitBox()
 
 }
 
+
+
+
+
+
 void CircularHitBox::move(sf::Vector2f fdisp)
 {
 	position += fdisp;
@@ -35,6 +40,20 @@ void CircularHitBox::setPosition(sf::Vector2f fpos)
 {
 	position = fpos;
 }
+
+void CircularHitBox::rotate(double frot)
+{
+
+}
+
+
+
+void CircularHitBox::setRotation(double frot)
+{
+
+}
+
+
 
 double CircularHitBox::getRadius()
 {

@@ -9,9 +9,17 @@ public:
 	void setup(sf::Vector2f fpos, double frad);
 	~CircularHitBox();
 
+
+
 	void move(sf::Vector2f fdisp);
 
 	void setPosition(sf::Vector2f fpos);
+
+	void rotate(double frot);
+
+	void setRotation(double frot);
+
+
 
 
 	double getRadius();

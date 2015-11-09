@@ -111,6 +111,15 @@
     <ClCompile Include="ConvexHitBox.cpp">
       <Filter>Source Files\HitBoxes</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionLineSeg.cpp">
+      <Filter>Source Files\HitBoxes</Filter>
+    </ClCompile>
+    <ClCompile Include="HitBoxVector.cpp">
+      <Filter>Source Files\HitBoxes</Filter>
+    </ClCompile>
+    <ClCompile Include="Collidable.cpp">
+      <Filter>Source Files\GameTools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -199,6 +208,18 @@
     </ClInclude>
     <ClInclude Include="ConvexHitBox.h">
       <Filter>Header Files\HitBoxes</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionLineSeg.h">
+      <Filter>Header Files\HitBoxes</Filter>
+    </ClInclude>
+    <ClInclude Include="HitBoxInclude.h">
+      <Filter>Header Files\HitBoxes</Filter>
+    </ClInclude>
+    <ClInclude Include="HitBoxVector.h">
+      <Filter>Header Files\HitBoxes</Filter>
+    </ClInclude>
+    <ClInclude Include="Collidable.h">
+      <Filter>Header Files\GameTools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

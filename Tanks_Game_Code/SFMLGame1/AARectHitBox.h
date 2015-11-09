@@ -24,6 +24,10 @@ public:
 
 	void setPosition(sf::Vector2f fpos);
 
+	void rotate(double frot);
+
+	void setRotation(double frot);
+
 
 
 	sf::Vector2f getCorner(int findex);
@@ -42,5 +46,8 @@ private:
 	double height;
 	sf::Vector2f position;
 	sf::Vector2f corners[4];
+
+	double rotation;
+	sf::Vector2f initCorners[4];
 };
 

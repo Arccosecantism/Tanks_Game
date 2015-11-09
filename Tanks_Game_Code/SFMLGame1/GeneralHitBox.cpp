@@ -29,3 +29,9 @@ bool GeneralHitBox::getActive()
 {
 	return active;
 }
+
+void GeneralHitBox::degtorad(double& fdeg)
+{
+	double pi = 3.141592653589793238463;
+	fdeg *= pi / 180.0f;
+}
