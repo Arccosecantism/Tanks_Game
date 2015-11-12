@@ -328,10 +328,14 @@ void GameMap::loadFromFileHelpSprite(std::string ftupleLine)
 
 	bool firstSet = true;
 
+	bool lastWasNum = true;
 
-	enum rectType { TWOARG = 0, THREEARG = 1 };
+	bool elementBegin = true;
 
-	bool setType[2] = { TWOARG, TWOARG};
+
+	enum rectType {TWOARG = 0, THREEARG = 1 };
+
+	bool setType[2] = {TWOARG, TWOARG};
 
 	bool typeCheck = true;
 
@@ -359,6 +363,7 @@ void GameMap::loadFromFileHelpSprite(std::string ftupleLine)
 				{
 					inSet = true;
 					wasFirstOP = true;
+					lastWasNum = true;
 				}
 				else
 				{
@@ -367,8 +372,9 @@ void GameMap::loadFromFileHelpSprite(std::string ftupleLine)
 						if (character == "(")
 						{
 							inOP = true;
+							lastWasNum = true;
 
-							if (!wasFirstOP)
+							if (wasFirstOP)
 							{
 								if (firstSet)
 								{
@@ -392,9 +398,11 @@ void GameMap::loadFromFileHelpSprite(std::string ftupleLine)
 								if (character == "," || character == ")")
 								{
 									numberVec.push_back(number);
+									number = "";
 									if (character == ")")
 									{
 										inOP = false;
+										lastWasNum = false;
 									}
 								}
 								else
@@ -402,6 +410,53 @@ void GameMap::loadFromFileHelpSprite(std::string ftupleLine)
 									number += character;
 								}
 							}
+							else
+							{
+								if (character == "," || character == "}")
+								{
+									if (lastWasNum)
+									{
+										numberVec.push_back(number);
+										number = "";
+									}
+									if (character == "}")
+									{
+										inSet = false;
+										lastWasNum = false;
+									}
+								}
+								else
+								{
+									number += character;
+								}
+							}
+						}
+					}
+					else
+					{
+						if (character == "," || character == ">")
+						{
+							elementBegin = true;
+							if (lastWasNum)
+							{
+								numberVec.push_back(number);
+								number = "";
+							}
+							if (character == ">")
+							{
+								inTuple = false;
+							}
+						}
+						else
+						{
+							if (elementBegin)
+							{
+								if (character == "s")
+								
+							}
+							number += character;
+							
+							
 						}
 					}
 				}
