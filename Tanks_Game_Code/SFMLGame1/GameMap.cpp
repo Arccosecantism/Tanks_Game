@@ -59,13 +59,7 @@ void GameMap::loadFromFile(std::string filename)
 	
 	bool inset = false;
 
-	enum rectType { TWOARG = 0, THREEARG = 1 };
-
-	bool curType = TWOARG;
-
-	bool typeCheck = true;
-
-	int argCounter = 0;
+	
 
 
 	while (std::getline(ifs, line))
@@ -324,6 +318,96 @@ sf::Vector2f GameMap::getUpgradeSpawnPoint(int findex)
 void GameMap::loadFromFileHelpSprite(std::string ftupleLine)
 {
 
+	bool inTuple = false;
+	
+	bool inSet = false;
+
+	bool inOP = false;
+	
+	bool wasFirstOP = false;
+
+	bool firstSet = true;
+
+
+	enum rectType { TWOARG = 0, THREEARG = 1 };
+
+	bool setType[2] = { TWOARG, TWOARG};
+
+	bool typeCheck = true;
+
+	int argCounter = 0;
+
+	std::string character;
+
+
+	std::string number = "";
+
+	std::vector<std::string> numberVec;
+
+	for (int i = 0; i < ftupleLine.size(); i++)
+	{
+		character = ftupleLine[i];
+		if (character == "<")
+		{
+			inTuple = true;
+		}
+		else
+		{
+			if (inTuple)
+			{
+				if (character == "{")
+				{
+					inSet = true;
+					wasFirstOP = true;
+				}
+				else
+				{
+					if (inSet)
+					{
+						if (character == "(")
+						{
+							inOP = true;
+
+							if (!wasFirstOP)
+							{
+								if (firstSet)
+								{
+									setType[0] = THREEARG;
+								}
+								else
+								{
+									setType[1] = THREEARG;
+								}
+							}
+							
+						}
+						else
+						{
+							if (wasFirstOP)
+							{
+								wasFirstOP = false;
+							}
+							if (inOP)
+							{
+								if (character == "," || character == ")")
+								{
+									numberVec.push_back(number);
+									if (character == ")")
+									{
+										inOP = false;
+									}
+								}
+								else
+								{
+									number += character;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 void GameMap::loadFromFileHelpOP(std::string fopLine)
