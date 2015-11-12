@@ -14,6 +14,8 @@ public:
 
 private:
 
+	void loadFromFileHelpSprite(std::string ftupleLine);
+	void loadFromFileHelpOP(std::string fopLine);
 	sf::Sprite bgSprite;
 	std::vector<sf::Sprite> wallSprites;
 

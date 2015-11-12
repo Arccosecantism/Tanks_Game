@@ -2,3 +2,41 @@ ADDING_WALLS
 
 
 < { 100, 100, ( 400, 300 ) }, s, Cooltexture >
+
+< { 100, 200, ( 400, 302 ) }, s, Cooltexture >
+
+< { 100, 120, ( 400, 320 ) }, s, Cooltexture >
+
+< { 100, 102, ( 400, 200 ) }, s, Cooltexture >
+
+
+DONE
+
+
+--------
+
+ADDING_PLAYER_SPAWN_POINTS
+
+(100,300)
+
+(200,400)
+
+(500,400)
+
+DONE
+
+------
+ADDING_UPGRADE_SPAWN_POINTS
+
+(200,400)
+
+(600,700)
+
+DONE
+------
+
+ADDING_BACKGROUND
+< { (100, 200), (400, 500)}, xooltex>
+
+< { (200, 300), (400, 700)}, xooltex>
+DONE
