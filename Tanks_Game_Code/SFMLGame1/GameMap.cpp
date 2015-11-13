@@ -19,40 +19,27 @@ void GameMap::loadFromFile(std::string filename)
 
 	std::string line;
 
-	std::string word = "";
-
-	std::string letter;
-
 	
 	bool tagFinder = true;
 
-
-
 	bool addingWalls = false;
-
-	bool insideTuple = false;
-
-	std::string number = "";
-
-	sf::Vector2f vec2f;
-
-	std::vector<std::string> rectTriples;
 
 	bool addingBGs = false;
 
-	std::string bgCouple;
-
-
 	bool addingPlayerSpawn = false;
-
-	bool insideOP = false;
-
-	std::vector<std::string> playerSpawns;
-
 
 	bool addingUpgradeSpawn = false;
 
+	
 	std::vector<std::string> upgradeSpawns;
+	
+	std::vector<std::string> playerSpawns;
+	
+	std::vector<std::string> wallVector;
+	
+	std::vector<std::string> BGVector;
+	
+	std::vector<std::string>* tmpVecPointer;
 
 
 	
@@ -64,244 +51,92 @@ void GameMap::loadFromFile(std::string filename)
 
 	while (std::getline(ifs, line))
 	{
-		for (unsigned int i = 0; i < line.size(); i++)
+		if (line != "")
 		{
-			letter = line[i];
-			word += letter;
-			if (letter == " ")
+			
+			if (addingWalls || addingBGs)
 			{
-				word = "";
-			}
-
-
-
-			if (addingWalls)
-			{
-				if (letter == "<")
-				{
-					insideTuple = true;
-				}
-
-				else if (insideTuple)
-				{
-					if (letter == "{")
-					{
-						inset = true;
-					}
-
-					else if (inset)
-					{
-						if (letter == "(")
-						{
-							if (typeCheck)
-							{
-								typeCheck = false;
-								curType = TWOARG;
-							}
-							insideOP = true;
-						}
-						else if (insideOP)
-						{
-							if (letter != ",")
-							{
-								number += letter;
-							}
-						}
-						else
-						{
-							if (typeCheck)
-							{
-								typeCheck = false;
-								curType = THREEARG;
-							}
-							
-							if (letter == ",")
-							{
-								
-							}
-							else
-							{
-								number += letter;
-							}
-						}
-					}
-					if (letter != " ")
-					{
-						tupleRecord += letter;
-					}
-					if (letter == ">")
-					{
-						insideTuple = false;
-						rectTriples.push_back(tupleRecord);
-						tupleRecord = "";
-					}
-				}
-
-				if (word == "DONE")
+				if (line == "DONE")
 				{
 					addingWalls = false;
-					tagFinder = true;
-				}
-			}
-
-
-
-			if (addingBGs)
-			{
-				if (letter == "<")
-				{
-					insideTuple = true;
-				}
-
-				if (insideTuple)
-				{
-					if (letter != " ")
-					{
-						tupleRecord += letter;
-					}
-					if (letter == ">")
-					{
-						insideTuple = false;
-						bgCouple = tupleRecord;
-						tupleRecord = "";
-					}
-				}
-
-				if (word == "DONE")
-				{
 					addingBGs = false;
 					tagFinder = true;
 				}
-			}
-
-
-			else if (addingPlayerSpawn)
-			{
-				if (letter == "(")
+				else if (line[0] == "<")
 				{
-					insideOP = true;
-				}
-
-				if (insideOP)
-				{
-					if (letter != " ")
+					if (addingBGs)
 					{
-						OPrecord += letter;
+						tmpVecPointer = &BGVector;
 					}
-					if (letter == ")")
+					else
 					{
-						insideOP = false;
-						playerSpawns.push_back(OPrecord);
-						OPrecord = "";
+						tmpVecPointer = &wallVector;
 					}
-
-				}
-
-				if (word == "DONE")
-				{
-					addingPlayerSpawn = false;
-					tagFinder = true;
+					
+					loadFromFileHelpSprite(*tmpVecPointer);
 				}
 				
 			}
 
 
-
-			else if (addingUpgradeSpawn)
+			else if (addingPlayerSpawn || addingUpgradeSpawn)
 			{
-				if (letter == "(")
+	
+				if (line == "DONE")
 				{
-					insideOP = true;
-				}
-
-				if (insideOP)
-				{
-					if (letter != " ")
-					{
-						OPrecord += letter;
-					}
-					if (letter == ")")
-					{
-						insideOP = false;
-						upgradeSpawns.push_back(OPrecord);
-						OPrecord = "";
-					}
-
-				}
-
-				if (word == "DONE")
-				{
+					addingPlayerSpawn = false;
 					addingUpgradeSpawn = false;
 					tagFinder = true;
 				}
+				else if (line[0] == "(")
+				{
+					if (addingBGs)
+					{
+						tmpVecPointer = &playerSpawns;
+					}
+					else
+					{
+						tmpVecPointer = &upgradeSpawnPoints;
+					}
+					
+					loadFromFileHelpOP(*tmpVecPointer);
+				}
+				
 			}
-
-
-
 
 			if (tagFinder)
 			{
-				if (word == "ADDING_WALLS")
+				if (line == "ADDING_WALLS")
 				{
 					addingWalls = true;
 					tagFinder = false;
-					break;
+	
 				}
 
-				else if (word == "ADDING_PLAYER_SPAWN_POINTS")
+				else if (line == "ADDING_PLAYER_SPAWN_POINTS")
 				{
 					addingPlayerSpawn = true;
 					tagFinder = false;
 				}
 
-				else if (word == "ADDING_UPGRADE_SPAWN_POINTS")
+				else if (line == "ADDING_UPGRADE_SPAWN_POINTS")
 				{
 					addingUpgradeSpawn = true;
 					tagFinder = false;
 				}
 
-				else if (word == "ADDING_BACKGROUND")
+				else if (line == "ADDING_BACKGROUND")
 				{
 					addingBGs = true;
 					tagFinder = false;
 				}
+				else if (line == "FILE_DONE")
+				{
+					break;
+				}
 			}
-
-
-
-		}
-		word = "";
-	}
-	
-
-
-	for (int i = 0; i < rectTriples.size(); i++)
-	{
-		for (int j = 0; j < rectTriples[i].size(); j++)
-		{
-			letter = rectTriples[i][j];
-			if (letter ==)
 		}
 	}
-
-	std::cout << std::endl;
-
-	for (int i = 0; i < playerSpawns.size(); i++)
-	{
-		std::cout << playerSpawns[i] << std::endl;
-	}
-
-	std::cout << std::endl;
-
-	for (int i = 0; i < upgradeSpawns.size(); i++)
-	{
-		std::cout << upgradeSpawns[i] << std::endl;
-	}
-
-	std::cout << std::endl;
-
-	std::cout << bgCouple << std::endl;
-
 }
 
 sf::Vector2f GameMap::getTankSpawnPoint(int findex)
@@ -315,158 +150,204 @@ sf::Vector2f GameMap::getUpgradeSpawnPoint(int findex)
 }
 
 
-void GameMap::loadFromFileHelpSprite(std::string ftupleLine)
+void GameMap::loadFromFileHelpSprite(std::string ftupleLine, std::vector<std::string>& vectbfilled)
 {
-
-	bool inTuple = false;
-	
-	bool inSet = false;
-
-	bool inOP = false;
-	
-	bool wasFirstOP = false;
-
-	bool firstSet = true;
-
-	bool lastWasNum = true;
-
-	bool elementBegin = true;
-
-
-	enum rectType {TWOARG = 0, THREEARG = 1 };
-
-	bool setType[2] = {TWOARG, TWOARG};
-
-	bool typeCheck = true;
-
-	int argCounter = 0;
-
-	std::string character;
-
-
-	std::string number = "";
-
-	std::vector<std::string> numberVec;
-
-	for (int i = 0; i < ftupleLine.size(); i++)
+	if (!vectbfilled.size())
 	{
-		character = ftupleLine[i];
-		if (character == "<")
-		{
-			inTuple = true;
-		}
-		else
-		{
-			if (inTuple)
-			{
-				if (character == "{")
-				{
-					inSet = true;
-					wasFirstOP = true;
-					lastWasNum = true;
-				}
-				else
-				{
-					if (inSet)
-					{
-						if (character == "(")
-						{
-							inOP = true;
-							lastWasNum = true;
+		bool inTuple = false;
+		
+		bool inSet = false;
 
-							if (wasFirstOP)
-							{
-								if (firstSet)
-								{
-									setType[0] = THREEARG;
-								}
-								else
-								{
-									setType[1] = THREEARG;
-								}
-							}
-							
-						}
-						else
+		bool inOP = false;
+		
+		bool wasFirstOP = false;
+
+		bool firstSet = true;
+
+		bool lastWasNum = true;
+
+
+		enum rectType {TWOARG = 0, THREEARG = 1 };
+
+		bool setType[2] = {TWOARG, TWOARG};
+
+		bool typeCheck = true;
+
+		int argCounter = 0;
+
+		std::string character;
+
+
+		std::string number = "";
+
+		
+		for (int i = 0; i < ftupleLine.size(); i++)
+		{
+			character = ftupleLine[i];
+			if (character == "<")
+			{
+				inTuple = true;
+			}
+			else
+			{
+				if (inTuple)
+				{
+					if (character == "{")
+					{
+						inSet = true;
+						wasFirstOP = true;
+						lastWasNum = true;
+					}
+					else
+					{
+						if (inSet)
 						{
-							if (wasFirstOP)
+							if (character == "(")
 							{
-								wasFirstOP = false;
-							}
-							if (inOP)
-							{
-								if (character == "," || character == ")")
+								inOP = true;
+								lastWasNum = true;
+
+								if (wasFirstOP)
 								{
-									numberVec.push_back(number);
-									number = "";
-									if (character == ")")
+									if (firstSet)
 									{
-										inOP = false;
-										lastWasNum = false;
+										setType[0] = THREEARG;
+									}
+									else
+									{
+										setType[1] = THREEARG;
+									}
+								}
+								
+							}
+							else
+							{
+								if (wasFirstOP)
+								{
+									wasFirstOP = false;
+								}
+								if (inOP)
+								{
+									if (character == "," || character == ")")
+									{
+										vectbfilled.push_back(number);
+										number = "";
+										if (character == ")")
+										{
+											inOP = false;
+											lastWasNum = false;
+										}
+									}
+									else
+									{
+										number += character;
 									}
 								}
 								else
 								{
-									number += character;
+									if (character == "," || character == "}")
+									{
+										if (lastWasNum)
+										{
+											vectbfilled.push_back(number);
+											number = "";
+										}
+										if (character == "}")
+										{
+											inSet = false;
+											lastWasNum = false;
+										}
+									}
+									else
+									{
+										number += character;
+									}
+								}
+							}
+						}
+						else
+						{
+							if (character == "," || character == ">")
+							{
+								elementBegin = true;
+								if (lastWasNum)
+								{
+									if (number == "SET_DUPLICATE")
+									{
+										int tmpsiz = vectbfilled.size();
+										
+										for (int i = 0; i < tmpsiz; i++)
+										{
+											vectbfilled.push_back(vectbfilled[i]);
+										}
+										
+									}
+									else
+									{
+										vectbfilled.push_back(number);
+									}
+									
+									number = "";
+								}
+								if (character == ">")
+								{
+									inTuple = false;
+									break;
 								}
 							}
 							else
 							{
-								if (character == "," || character == "}")
-								{
-									if (lastWasNum)
-									{
-										numberVec.push_back(number);
-										number = "";
-									}
-									if (character == "}")
-									{
-										inSet = false;
-										lastWasNum = false;
-									}
-								}
-								else
-								{
-									number += character;
-								}
-							}
-						}
-					}
-					else
-					{
-						if (character == "," || character == ">")
-						{
-							elementBegin = true;
-							if (lastWasNum)
-							{
-								numberVec.push_back(number);
-								number = "";
-							}
-							if (character == ">")
-							{
-								inTuple = false;
-							}
-						}
-						else
-						{
-							if (elementBegin)
-							{
-								if (character == "s")
+								number += character;
+								
 								
 							}
-							number += character;
-							
-							
 						}
 					}
 				}
+
 			}
 		}
 	}
 }
 
-void GameMap::loadFromFileHelpOP(std::string fopLine)
+void GameMap::loadFromFileHelpOP(std::string fopLine, std::vector<std::string>& vectbfilled)
 {
-
+	if (!vectbfilled.size())
+	{
+		bool inOP;
+		
+		std::string character = "";
+		
+		std::string number = "";
+		
+		for (int i = 0; i < fopLine.size(); i++)
+		{
+			character = fopLine[i];
+			if (character = "(")
+			{
+				inOP = true;
+			}
+			else
+			{
+				if (inOP)
+				{
+					if (character == "," || character == ")")
+					{
+						vectbfilled.push_back(number);
+						number = "";
+						if (character == ")")
+						{
+							inOP = false;
+							break;
+						}
+					}
+					else
+					{
+						number += character;
+					}
+				}
+			}
+		}	
+	}
 }
 
