@@ -17,6 +17,8 @@ GameMap::~GameMap()
 
 void GameMap::loadFromFile(std::string filename, ResourceGroup* fresourceGroup)
 {
+	reset();
+
 	std::ifstream ifs(filename);
 
 	std::string line;
@@ -270,6 +272,17 @@ void GameMap::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)
 	}
 
 }
+
+
+
+void GameMap::reset()
+{
+	wallSprites.clear();
+	tankSpawnPoints.clear();
+	upgradeSpawnPoints.clear();
+	hitboxvec.clearVector();
+}
+
 
 
 void GameMap::readSpriteTuple(std::string ftupleLine, std::vector<std::string>& vectbfilled)

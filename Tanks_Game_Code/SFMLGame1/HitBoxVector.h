@@ -6,6 +6,8 @@ public:
 	HitBoxVector();
 	~HitBoxVector();
 
+	void clearVector();
+
 	void addHitBox(GeneralHitBox* fhitbox);
 
 

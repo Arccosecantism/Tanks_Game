@@ -8,6 +8,7 @@ Collidable::Collidable()
 
 Collidable::~Collidable()
 {
+	
 }
 
 bool Collidable::getActivity()
@@ -37,7 +38,7 @@ bool Collidable::getStillness()
 
 
 
-std::string getID()
+std::string Collidable::getID()
 {
 	return ID;
 }

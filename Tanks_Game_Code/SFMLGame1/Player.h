@@ -36,14 +36,12 @@ public:
 
 	void collideWithWall();
 
-	void collideWithPlayer();
-
 
 private:
 
-	void incMovement(std::vector<int>& fkeyVec);
+	void incMovement();
 
-	void unincMovement(std::vector<int>& fkeyVec);
+	void unincMovement();
 
 	void resetVelocities();
 
@@ -63,6 +61,8 @@ private:
 
 
 	double rotation;
+
+	std::vector<int> lastKeyVec;
 
 };
 

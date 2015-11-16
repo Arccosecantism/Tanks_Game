@@ -7,15 +7,15 @@ class CollidableManager
 public:
 	CollidableManager();
 	~CollidableManager();
-	void addCollidabe(Collidable& fcol);
-	void addCollidabe(Collidable* fcol);
+	void addCollidable(Collidable& fcol);
+	void addCollidable(Collidable* fcol);
 	void checkCollision();
+	void clear();
 
 private:
 
 	void interpretCollisions(int& i, int& j);
-	void tankWallCollision(int& i, int& j);
-	void tankTankCollision(int& i, int& j);
+
 
 	bool checkAABBCollision(AARectHitBox aabb1, AARectHitBox aabb2);
 	bool checkMotion(int& i, int& j);

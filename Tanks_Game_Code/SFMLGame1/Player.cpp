@@ -72,7 +72,8 @@ void Player::setRotation(double frot)
 
 void Player::update(std::vector<int>& fkeyVec)
 {
-	
+	lastKeyVec = fkeyVec;
+	incMovement();
 }
 
 void Player::draw(sf::RenderWindow& frenderwindow)
@@ -85,33 +86,47 @@ void Player::collideWithWall()
 	unincMovement();
 }
 
-void Player::collideWithPlayer()
-{
 
-}
-
-void Player::incMovement(std::vector<int>& fkeyVec)
+void Player::incMovement()
 {
-	
-}
-
-void Player::unincMovement(std::vector<int>& fkeyVec)
-{
-	for (unsigned int i = 0; i < fkeyVec.size(); i++)
+	for (unsigned int i = 0; i < lastKeyVec.size(); i++)
 	{
-		if (static_cast<sf::Keyboard::Key>(fkeyVec[i]) == sf::Keyboard::Up)
+		if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Up)
 		{
-			move(-forVelocity);
+			move(forVelocity);
 		}
-		else if (static_cast<sf::Keyboard::Key>(fkeyVec[i]) == sf::Keyboard::Down)
+		else if (static_cast<sf::Keyboard::Key> (lastKeyVec[i]) == sf::Keyboard::Down)
 		{
-			move(-bacVelocity);
+			move(bacVelocity);
 		}
-		else if (static_cast<sf::Keyboard::Key>(fkeyVec[i]) == sf::Keyboard::Right)
+		else if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Right)
+		{
+			rotate(rotSpeed);
+		}
+		else if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Left)
 		{
 			rotate(-rotSpeed);
 		}
-		else if (static_cast<sf::Keyboard::Key>(fkeyVec[i]) == sf::Keyboard::Left)
+	}
+}
+
+void Player::unincMovement()
+{
+	for (unsigned int i = 0; i < lastKeyVec.size(); i++)
+	{
+		if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Up)
+		{
+			move(-forVelocity);
+		}
+		else if (static_cast<sf::Keyboard::Key> (lastKeyVec[i]) == sf::Keyboard::Down)
+		{
+			move(-bacVelocity);
+		}
+		else if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Right)
+		{
+			rotate(-rotSpeed);
+		}
+		else if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Left)
 		{
 			rotate(rotSpeed);
 		}

@@ -8,6 +8,17 @@ HitBoxVector::HitBoxVector()
 
 HitBoxVector::~HitBoxVector()
 {
+	clearVector();
+}
+
+
+void HitBoxVector::clearVector()
+{
+	for (int i = 0; i < hitboxvec.size(); i++)
+	{
+		delete hitboxvec[i];
+	}
+	hitboxvec.clear();
 }
 
 void HitBoxVector::addHitBox(GeneralHitBox* fhitbox)

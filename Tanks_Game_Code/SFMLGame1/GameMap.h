@@ -8,6 +8,7 @@ public:
 	GameMap();
 	~GameMap();
 
+
 	void loadFromFile(std::string filename, ResourceGroup* fresourceGroup);
 
 	sf::Vector2f getTankSpawnPoint(int findex);
@@ -17,6 +18,8 @@ public:
 	void draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition);
 
 private:
+
+	void reset();
 
 	void readSpriteTuple(std::string ftupleLine, std::vector<std::string>& vectbfilled);
 

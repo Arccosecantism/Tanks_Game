@@ -43,19 +43,11 @@ void App::setup()												//initialize all objects
 
 	//startingMenu.setup(generalResourceManager);					//set up the main menu
 
-	AppSprite tmpAS(generalResourceManager.getTexturePointerByName("DefaultTank"), sf::Vector2f(0, 0), sf::Vector2f(50, 50), 0);
 
-	testPlayer.setup(tmpAS, sf::Vector2f(400, 300));
 
 	//startingMenu.deactivate();
 
-	testor.addVertex(100, 100);
-	testor.addVertex(200, 200);
-	testor.addVertex(150, 50);
-	testor.addVertex(100, 200);
-	testor.addVertex(200, 100);
-
-	GMtest.loadFromFile("Resources\\TextFiles\\DefaultGameMap.txt", generalResourceManager.getResourceSetByName("TestGameMapRG"));
+	GMtest.loadFromFile();
 }
 
 

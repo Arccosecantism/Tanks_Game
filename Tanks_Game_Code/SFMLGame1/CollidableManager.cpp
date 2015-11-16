@@ -10,12 +10,12 @@ CollidableManager::~CollidableManager()
 {
 }
 
-void CollidableManager::addCollidabe(Collidable& fcol)
+void CollidableManager::addCollidable(Collidable& fcol)
 {
 	collidables.push_back(&fcol);
 }
 
-void CollidableManager::addCollidabe(Collidable* fcol)
+void CollidableManager::addCollidable(Collidable* fcol)
 {
 	collidables.push_back(fcol);
 }
@@ -94,29 +94,25 @@ bool CollidableManager::checkMotion(int& i, int& j)
 	return !(collidables[i]->getStillness() && collidables[j]->getStillness());
 }
 
+void CollidableManager::clear()
+{
+	collidables.clear();
+}
+
 
 void CollidableManager::interpretCollisions(int& i, int& j)
 {
 	if (collidables[i]->getID() == "Player" && collidables[j]->getID() == "Player")
 	{
-		tankTankCollision(i, j);
+
 	}
 	else if (collidables[i]->getID() == "Player" && collidables[j]->getID() == "GameMap")
 	{
-		tankWallCollision(i, j);
+		((Player*)collidables[i])->collideWithWall();
 	}
 	else if (collidables[i]->getID() == "GameMap" && collidables[j]->getID() == "Player")
 	{
-		tankWallCollision(j, i);
+		((Player*)collidables[j])->collideWithWall();
 	}
-}
-
-void CollidableManager::tankWallCollision(int& i, int& j)
-{
-	((Player*)collidables[i])->collideWithWall();
-}
-
-void CollidableManager::tankTankCollision(int& i, int& j)
-{
 
 }
