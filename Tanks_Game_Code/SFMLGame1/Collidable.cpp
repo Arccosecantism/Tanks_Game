@@ -35,6 +35,13 @@ bool Collidable::getStillness()
 	return wasStill;
 }
 
+
+
+std::string getID()
+{
+	return ID;
+}
+
 GeneralHitBox* Collidable::getHitBox(int findex)
 {
 	return hitboxvec.getHitBox(findex);

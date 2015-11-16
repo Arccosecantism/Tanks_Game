@@ -1,8 +1,9 @@
 #pragma once
 #include "SFMLbase.h"
 #include "AppSprite.h"
+#include "Collidable.h"
 
-class Player
+class Player : public Collidable
 {
 public:
 	Player();
@@ -22,13 +23,27 @@ public:
 	void setRotation(double frot);
 
 
+	void setInCollision(bool b);
+
 
 	void update(std::vector<int>& fkeyVec);
+
+
+
 
 	void draw(sf::RenderWindow& frenderwindow);
 
 
+	void collideWithWall();
+
+	void collideWithPlayer();
+
+
 private:
+
+	void incMovement(std::vector<int>& fkeyVec);
+
+	void unincMovement(std::vector<int>& fkeyVec);
 
 	void resetVelocities();
 
@@ -48,8 +63,6 @@ private:
 
 
 	double rotation;
-
-	
 
 };
 

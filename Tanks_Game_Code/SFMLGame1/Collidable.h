@@ -13,10 +13,17 @@ public:
 
 
 	void setInCollision(bool b);
-	
+
 	bool getInCollision();
 
+	
+
 	bool getStillness();
+
+	std::string getID();
+
+
+	
 
 	
 	GeneralHitBox* getHitBox(int findex);
@@ -26,7 +33,7 @@ public:
 
 protected:
 
-
+	std::string ID;
 	bool wasStill;
 	bool activity;
 	HitBoxVector hitboxvec;

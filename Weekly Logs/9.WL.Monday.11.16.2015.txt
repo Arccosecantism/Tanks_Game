@@ -1,0 +1,55 @@
+---------------------------------------------------------
+Things accomplished in last work session (1 week):
+---------------------------------------------------------
+
+	Last week, I worked on gameMaps loading from files as well as setting up collision. The gameMap works, and 
+
+I'm still working on the collision.
+
+---------------------------------------------------------
+
+
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
+
+---------------------------------------------------------
+Previous Goals met:
+---------------------------------------------------------
+
+	*I want to be done with hitbox creation
+
+	*I want to be able to load a gameMap from a file
+
+	*Ideally, I want a tank running around with basic axis-aligned bounding box collision with walls
+
+	*I want to implement a Controls class
+	
+
+
+	I have completed only one, maybe one and a half of these goals. I have the gameMap loading from a file and I almost have the basic collision done. These goals
+
+were a little ideal and spread out, but overall, they were attainable.
+
+
+---------------------------------------------------------
+
+
+.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
+
+
+----------------------------------------------------
+Things I'd like to accomplish by Tuesday, 11/17/2015:
+----------------------------------------------------
+
+	* I want to have the basic axis-aligned bounding box collision done
+
+	*I want to create controls
+	
+
+
+-----------------------------------------------------

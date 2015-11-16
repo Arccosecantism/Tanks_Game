@@ -5,7 +5,8 @@
 
 GameMap::GameMap()
 {
-	inCollision = false;
+	ID = "GameMap";
+	setInCollision(false);
 	activity = true;
 }
 
