@@ -11,6 +11,8 @@ public:
 
 	AppSprite(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize, double frot);	//constructor with all elements
 
+	AppSprite(sf::Texture* ftexture, sf::Vector2f fTL, sf::Vector2f fBR);
+
 	~AppSprite();																	//destructor
 
 

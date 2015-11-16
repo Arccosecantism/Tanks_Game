@@ -43,7 +43,7 @@ BasicButton::BasicButton()
 /*------------------------------------------------------------------------------------
 ------------------------------------Constructor2--------------------------------------
 ------------------------------------------------------------------------------------*/
-BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
+BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup* fResourceGroup,
 
 							std::string ftextName, sf::Color ftextColor,				//constructor; sets textures to sprites and other similar things 
 
@@ -81,7 +81,7 @@ BasicButton::BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 /*------------------------------------------------------------------------------------
 ------------------------------------Setup---------------------------------------------
 ------------------------------------------------------------------------------------*/
-void BasicButton::setup(	sf::Vector2f fposition, ResourceGroup& fResourceGroup,
+void BasicButton::setup(	sf::Vector2f fposition, ResourceGroup* fResourceGroup,
 
 							std::string ftextName, sf::Color ftextColor,				//constructor; sets textures to sprites and other similar things 
 
@@ -110,7 +110,7 @@ void BasicButton::setup(	sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 	for (int i = 0; i < States_Number; i++)												//cycle through 6 times
 	{
 
-		tempSprite.setup(fResourceGroup.getTexturePointer(i), sf::Vector2f(0, 0), fspriteSize);
+		tempSprite.setup(fResourceGroup->getTexturePointer(i), sf::Vector2f(0, 0), fspriteSize);
 																						//setup the temporary sprite with the desired textures
 
 		//now the Sprite should have the correct position, scaling, and origin
@@ -127,7 +127,7 @@ void BasicButton::setup(	sf::Vector2f fposition, ResourceGroup& fResourceGroup,
 
 	//Now, the text is set----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	buttonTextBox.setup(sf::Vector2f(0, 0), fResourceGroup.getFontPointer(0), ftextName, ftextCharSize, fspriteSize.x - 20, ftextColor);
+	buttonTextBox.setup(sf::Vector2f(0, 0), fResourceGroup->getFontPointer(0), ftextName, ftextCharSize, fspriteSize.x - 20, ftextColor);
 																						//setup the textbox
 
 

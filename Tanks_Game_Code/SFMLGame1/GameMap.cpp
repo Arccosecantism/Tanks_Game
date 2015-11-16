@@ -1,5 +1,6 @@
 #include "GameMap.h"
 #include <fstream>
+#include <sstream>
 
 
 GameMap::GameMap()
@@ -13,7 +14,7 @@ GameMap::~GameMap()
 {
 }
 
-void GameMap::loadFromFile(std::string filename)
+void GameMap::loadFromFile(std::string filename, ResourceGroup* fresourceGroup)
 {
 	std::ifstream ifs(filename);
 
@@ -31,14 +32,16 @@ void GameMap::loadFromFile(std::string filename)
 	bool addingUpgradeSpawn = false;
 
 	
-	std::vector<std::string> upgradeSpawns;
+	std::vector<std::vector<std::string>> upgradeSpawns;
 	
-	std::vector<std::string> playerSpawns;
+	std::vector<std::vector<std::string>> playerSpawns;
 	
-	std::vector<std::string> wallVector;
+	std::vector<std::vector<std::string>> wallVector;
 	
-	std::vector<std::string> BGVector;
+	std::vector<std::vector<std::string>> BGVector;
 	
+	std::vector<std::string> pbvec;
+
 	std::vector<std::string>* tmpVecPointer;
 
 
@@ -62,18 +65,20 @@ void GameMap::loadFromFile(std::string filename)
 					addingBGs = false;
 					tagFinder = true;
 				}
-				else if (line[0] == "<")
+				else if (line[0] == '<')
 				{
 					if (addingBGs)
 					{
-						tmpVecPointer = &BGVector;
+						BGVector.push_back(pbvec);
+						tmpVecPointer = &BGVector[BGVector.size()-1];
 					}
 					else
 					{
-						tmpVecPointer = &wallVector;
+						wallVector.push_back(pbvec);
+						tmpVecPointer = &wallVector[wallVector.size() - 1];
 					}
 					
-					loadFromFileHelpSprite(*tmpVecPointer);
+					readSpriteTuple(line, *tmpVecPointer);
 				}
 				
 			}
@@ -88,18 +93,20 @@ void GameMap::loadFromFile(std::string filename)
 					addingUpgradeSpawn = false;
 					tagFinder = true;
 				}
-				else if (line[0] == "(")
+				else if (line[0] == '(')
 				{
-					if (addingBGs)
+					if (addingPlayerSpawn)
 					{
-						tmpVecPointer = &playerSpawns;
+						playerSpawns.push_back(pbvec);
+						tmpVecPointer = &playerSpawns[playerSpawns.size() - 1];
 					}
 					else
 					{
-						tmpVecPointer = &upgradeSpawnPoints;
+						upgradeSpawns.push_back(pbvec);
+						tmpVecPointer = &upgradeSpawns[upgradeSpawns.size() - 1];
 					}
 					
-					loadFromFileHelpOP(*tmpVecPointer);
+					readOrderedPair(line, *tmpVecPointer);
 				}
 				
 			}
@@ -137,6 +144,108 @@ void GameMap::loadFromFile(std::string filename)
 			}
 		}
 	}
+
+
+	sf::Vector2f minTLcorn(0,0);
+	sf::Vector2f maxBRcorn(0,0);
+
+
+
+
+	for (int i = 0; i < wallVector.size(); i++)
+	{
+		if (wallVector[i][0] == "THREE_ARG")
+		{
+			wallSprites.push_back(	AppSprite(	fresourceGroup->getTexturePointer(wallVector[i][10]),
+												sf::Vector2f(matof(wallVector[i][3]), matof(wallVector[i][4])),
+												sf::Vector2f(matof(wallVector[i][1]), matof(wallVector[i][2])),
+												0		));
+		}
+		else if (wallVector[i][0] == "TWO_ARG")
+		{
+			wallSprites.push_back(	AppSprite(fresourceGroup->getTexturePointer(wallVector[i][10]),
+									sf::Vector2f(matof(wallVector[i][1]), matof(wallVector[i][2])),
+									sf::Vector2f(matof(wallVector[i][3]), matof(wallVector[i][4]))));
+		}
+
+		if (wallVector[i][5] == "THREE_ARG")
+		{
+			hitboxvec.addHitBox(new AARectHitBox(	matof(wallVector[i][6]), matof(wallVector[i][7]),
+													sf::Vector2f(matof(wallVector[i][8]), matof(wallVector[i][9]))));
+
+
+			if (matof(wallVector[i][8]) - matof(wallVector[i][6]) < minTLcorn.x)
+			{
+				minTLcorn.x = matof(wallVector[i][8]) - matof(wallVector[i][6]);
+			}
+			if (matof(wallVector[i][9]) - matof(wallVector[i][7]) < minTLcorn.y)
+			{
+				minTLcorn.y = matof(wallVector[i][9]) - matof(wallVector[i][7]);
+			}
+			if (matof(wallVector[i][8]) + matof(wallVector[i][6]) > maxBRcorn.x)
+			{
+				maxBRcorn.x = matof(wallVector[i][8]) + matof(wallVector[i][6]);
+			}
+			if (matof(wallVector[i][9]) + matof(wallVector[i][7]) > maxBRcorn.y)
+			{
+				maxBRcorn.y = matof(wallVector[i][9]) + matof(wallVector[i][7]);
+			}
+		}
+		else if (wallVector[i][5] == "TWO_ARG")
+		{
+			hitboxvec.addHitBox(new AARectHitBox(	sf::Vector2f(matof(wallVector[i][6]), matof(wallVector[i][7])),
+													sf::Vector2f(matof(wallVector[i][8]), matof(wallVector[i][9]))));
+
+			if (matof(wallVector[i][6]) < minTLcorn.x)
+			{
+				minTLcorn.x = matof(wallVector[i][6]);
+			}
+			if (matof(wallVector[i][7]) < minTLcorn.y)
+			{
+				minTLcorn.y = matof(wallVector[i][7]);
+			}
+			if (matof(wallVector[i][8]) > maxBRcorn.x)
+			{
+				maxBRcorn.x = matof(wallVector[i][8]);
+			}
+			if (matof(wallVector[i][9]) > maxBRcorn.y)
+			{
+				maxBRcorn.y = matof(wallVector[i][9]);
+			}
+
+		}
+	}
+
+	boundingBox = AARectHitBox(minTLcorn, maxBRcorn);
+
+
+	for (int i = 0; i < playerSpawns.size(); i++)
+	{
+		tankSpawnPoints.push_back(sf::Vector2f(matof(playerSpawns[i][0]), matof(playerSpawns[i][1])));
+
+	}
+
+	for (int i = 0; i < upgradeSpawns.size(); i++)
+	{
+		upgradeSpawnPoints.push_back(sf::Vector2f(matof(upgradeSpawns[i][0]), matof(upgradeSpawns[i][1])));
+
+	}
+
+
+	if (BGVector[0][0] == "THREE_ARG")
+	{
+		bgSprite = AppSprite(	fresourceGroup->getTexturePointer(BGVector[0][10]),
+								sf::Vector2f(matof(BGVector[0][3]), matof(BGVector[0][4])),
+								sf::Vector2f(matof(BGVector[0][1]), matof(BGVector[0][2])),
+								0);
+	}
+	else if (BGVector[0][0] == "TWO_ARG")
+	{
+		bgSprite = AppSprite(	fresourceGroup->getTexturePointer(BGVector[0][10]),
+								sf::Vector2f(matof(BGVector[0][1]), matof(BGVector[0][2])),
+								sf::Vector2f(matof(BGVector[0][3]), matof(BGVector[0][4])));
+	}	
+	
 }
 
 sf::Vector2f GameMap::getTankSpawnPoint(int findex)
@@ -150,7 +259,19 @@ sf::Vector2f GameMap::getUpgradeSpawnPoint(int findex)
 }
 
 
-void GameMap::loadFromFileHelpSprite(std::string ftupleLine, std::vector<std::string>& vectbfilled)
+void GameMap::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)
+{
+	bgSprite.draw(frenderWindow, drawPosition);
+
+	for (int i = 0; i < wallSprites.size(); i++)
+	{
+		wallSprites[i].draw(frenderWindow, drawPosition);
+	}
+
+}
+
+
+void GameMap::readSpriteTuple(std::string ftupleLine, std::vector<std::string>& vectbfilled)
 {
 	if (!vectbfilled.size())
 	{
@@ -166,14 +287,8 @@ void GameMap::loadFromFileHelpSprite(std::string ftupleLine, std::vector<std::st
 
 		bool lastWasNum = true;
 
+		bool decidedArg = false;
 
-		enum rectType {TWOARG = 0, THREEARG = 1 };
-
-		bool setType[2] = {TWOARG, TWOARG};
-
-		bool typeCheck = true;
-
-		int argCounter = 0;
 
 		std::string character;
 
@@ -184,133 +299,142 @@ void GameMap::loadFromFileHelpSprite(std::string ftupleLine, std::vector<std::st
 		for (int i = 0; i < ftupleLine.size(); i++)
 		{
 			character = ftupleLine[i];
-			if (character == "<")
+			if (character != " ")
 			{
-				inTuple = true;
-			}
-			else
-			{
-				if (inTuple)
+				if (character == "<")
 				{
-					if (character == "{")
+					inTuple = true;
+				}
+				else
+				{
+					if (inTuple)
 					{
-						inSet = true;
-						wasFirstOP = true;
-						lastWasNum = true;
-					}
-					else
-					{
-						if (inSet)
+						if (character == "{")
 						{
-							if (character == "(")
+							inSet = true;
+							wasFirstOP = true;
+							lastWasNum = true;
+						}
+						else
+						{
+							if (inSet)
 							{
-								inOP = true;
-								lastWasNum = true;
+								if (character == "(")
+								{
+									inOP = true;
+									lastWasNum = true;
 
-								if (wasFirstOP)
-								{
-									if (firstSet)
+									if (wasFirstOP)
 									{
-										setType[0] = THREEARG;
+										vectbfilled.push_back("TWO_ARG");
+										decidedArg = true;
 									}
-									else
-									{
-										setType[1] = THREEARG;
-									}
+
 								}
-								
-							}
-							else
-							{
-								if (wasFirstOP)
+								else
 								{
-									wasFirstOP = false;
-								}
-								if (inOP)
-								{
-									if (character == "," || character == ")")
+									if (wasFirstOP)
 									{
-										vectbfilled.push_back(number);
-										number = "";
-										if (character == ")")
+										if (!decidedArg)
 										{
-											inOP = false;
-											lastWasNum = false;
+											vectbfilled.push_back("THREE_ARG");
+											decidedArg = true;
+										}
+										
+										wasFirstOP = false;
+										
+									}
+									if (inOP)
+									{
+										if (character == "," || character == ")")
+										{
+											vectbfilled.push_back(number);
+											number = "";
+											if (character == ")")
+											{
+												inOP = false;
+												lastWasNum = false;
+											}
+										}
+										else
+										{
+											number += character;
 										}
 									}
 									else
 									{
-										number += character;
+										if (character == "," || character == "}")
+										{
+											if (lastWasNum)
+											{
+												vectbfilled.push_back(number);
+												number = "";
+											}
+											if (character == "}")
+											{
+												inSet = false;
+												lastWasNum = false;
+												decidedArg = false;
+											}
+										}
+										else
+										{
+											number += character;
+										}
+									}
+								}
+							}
+							else
+							{
+								if (character == "," || character == ">")
+								{
+									if (lastWasNum)
+									{
+										if (number == "SET_DUPLICATE")
+										{
+
+											int tmpsiz = vectbfilled.size();
+											
+											for (int i = 0; i < tmpsiz; i++)
+											{
+												vectbfilled.push_back(vectbfilled[i]);
+											}
+
+										}
+										else
+										{
+											vectbfilled.push_back(number);
+										}
+
+										number = "";
+									}
+									else
+									{
+										lastWasNum = true;
+									}
+									if (character == ">")
+									{
+										inTuple = false;
+										break;
 									}
 								}
 								else
 								{
-									if (character == "," || character == "}")
-									{
-										if (lastWasNum)
-										{
-											vectbfilled.push_back(number);
-											number = "";
-										}
-										if (character == "}")
-										{
-											inSet = false;
-											lastWasNum = false;
-										}
-									}
-									else
-									{
-										number += character;
-									}
-								}
-							}
-						}
-						else
-						{
-							if (character == "," || character == ">")
-							{
-								elementBegin = true;
-								if (lastWasNum)
-								{
-									if (number == "SET_DUPLICATE")
-									{
-										int tmpsiz = vectbfilled.size();
-										
-										for (int i = 0; i < tmpsiz; i++)
-										{
-											vectbfilled.push_back(vectbfilled[i]);
-										}
-										
-									}
-									else
-									{
-										vectbfilled.push_back(number);
-									}
 									
-									number = "";
+									number += character;
+
+
 								}
-								if (character == ">")
-								{
-									inTuple = false;
-									break;
-								}
-							}
-							else
-							{
-								number += character;
-								
-								
 							}
 						}
 					}
 				}
-
 			}
 		}
 	}
 }
 
-void GameMap::loadFromFileHelpOP(std::string fopLine, std::vector<std::string>& vectbfilled)
+void GameMap::readOrderedPair(std::string fopLine, std::vector<std::string>& vectbfilled)
 {
 	if (!vectbfilled.size())
 	{
@@ -323,27 +447,30 @@ void GameMap::loadFromFileHelpOP(std::string fopLine, std::vector<std::string>& 
 		for (int i = 0; i < fopLine.size(); i++)
 		{
 			character = fopLine[i];
-			if (character = "(")
+			if (character != " ")
 			{
-				inOP = true;
-			}
-			else
-			{
-				if (inOP)
+				if (character == "(")
 				{
-					if (character == "," || character == ")")
+					inOP = true;
+				}
+				else
+				{
+					if (inOP)
 					{
-						vectbfilled.push_back(number);
-						number = "";
-						if (character == ")")
+						if (character == "," || character == ")")
 						{
-							inOP = false;
-							break;
+							vectbfilled.push_back(number);
+							number = "";
+							if (character == ")")
+							{
+								inOP = false;
+								break;
+							}
 						}
-					}
-					else
-					{
-						number += character;
+						else
+						{
+							number += character;
+						}
 					}
 				}
 			}
@@ -351,3 +478,11 @@ void GameMap::loadFromFileHelpOP(std::string fopLine, std::vector<std::string>& 
 	}
 }
 
+float GameMap::matof(std::string str)
+{
+	float returnme = 0.0;
+	std::stringstream ss;
+	ss << str;
+	ss >> returnme;
+	return returnme;
+}

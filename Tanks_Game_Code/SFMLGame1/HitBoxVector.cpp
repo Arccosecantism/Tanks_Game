@@ -43,9 +43,14 @@ void HitBoxVector::setRotation(double frot)
 {
 	for (int i = 0; i < hitboxvec.size(); i++)
 	{
-		hitboxvec[i]->rotate(frot);
+		hitboxvec[i]->setRotation(frot);
 	}
 
+}
+
+unsigned int HitBoxVector::getVectorSize()
+{
+	return hitboxvec.size();
 }
 
 GeneralHitBox* HitBoxVector::getHitBox(int findex)

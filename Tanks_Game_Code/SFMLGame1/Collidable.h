@@ -8,17 +8,32 @@ public:
 	~Collidable();
 
 	bool getActivity();
+
 	void setActivity(bool b);
+
+
+	void setInCollision(bool b);
+	
+	bool getInCollision();
+
+	bool getStillness();
+
+	
 	GeneralHitBox* getHitBox(int findex);
-	AARectHitBox getBoundingBox();
+	AARectHitBox& getBoundingBox();
 
-
+	unsigned int getVectorSize();
 
 protected:
 
-	bool inCollision;
+
+	bool wasStill;
 	bool activity;
 	HitBoxVector hitboxvec;
 	AARectHitBox boundingBox;
+
+private:
+
+	bool inCollision;
 };
 

@@ -55,7 +55,7 @@ void App::setup()												//initialize all objects
 	testor.addVertex(100, 200);
 	testor.addVertex(200, 100);
 
-	GMtest.loadFromFile("Resources\\TextFiles\\DefaultGameMap.txt");
+	GMtest.loadFromFile("Resources\\TextFiles\\DefaultGameMap.txt", generalResourceManager.getResourceSetByName("TestGameMapRG"));
 }
 
 
@@ -175,6 +175,7 @@ void App::draw()											//draw all objects
 {
 
 	//startingMenu.draw(*window);
+	GMtest.draw(*window, sf::Vector2f(0, 0));
 	testPlayer.draw(*window);
 
 }
@@ -301,7 +302,7 @@ void App::setupResourceManager()																//adds all the files to the reso
 	generalResourceManager.addFile("Resources\\Textures\\GreenButtonHeldPressed.png", "GreenButtonHeldPressed");
 
 
-	generalResourceManager.addFile("Resources\\Textures\\\WalrusBG.png", "WalrusBackground");
+	generalResourceManager.addFile("Resources\\Textures\\WalrusBG.png", "WalrusBackground");
 
 	generalResourceManager.addFile("Resources\\Textures\\GiraffeBG.png", "GiraffeBackground");
 
@@ -313,6 +314,11 @@ void App::setupResourceManager()																//adds all the files to the reso
 
 
 	generalResourceManager.addFile("Resources\\Textures\\DefaultTank.png", "DefaultTank");
+
+
+	generalResourceManager.addFile("Resources\\Textures\\Helipad.png", "Helipad");
+
+	generalResourceManager.addFile("Resources\\Textures\\TestWall.png", "TestWall");
 
 	generalResourceManager.addFile("Resources\\Fonts\\AlexandriaFLF.ttf", "DefaultFont");				//adding fonts
 
@@ -332,6 +338,17 @@ void App::setupResourceManager()																//adds all the files to the reso
 	tempGroup.addTexture(generalResourceManager.getTexturePointerByName("GreenButtonHeldPressed"));
 
 	generalResourceManager.addResourceSet(tempGroup, "GreenButtonRG");
+
+	//--------------------------
+
+
+	ResourceGroup testGroupB;
+
+	testGroupB.addTexture(generalResourceManager.getTexturePointerByName("Helipad"), "Helipad");
+	testGroupB.addTexture(generalResourceManager.getTexturePointerByName("TestWall"), "TestWall");
+
+	generalResourceManager.addResourceSet(testGroupB, "TestGameMapRG");
+
 }
 
 

@@ -163,6 +163,7 @@
     <ClCompile Include="BasicButton.cpp" />
     <ClCompile Include="CircularHitBox.cpp" />
     <ClCompile Include="Collidable.cpp" />
+    <ClCompile Include="CollideableManager.cpp" />
     <ClCompile Include="CollisionLineSeg.cpp" />
     <ClCompile Include="ConvexHitBox.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="BasicButton.h" />
     <ClInclude Include="CircularHitBox.h" />
     <ClInclude Include="Collidable.h" />
+    <ClInclude Include="CollideableManager.h" />
     <ClInclude Include="CollisionLineSeg.h" />
     <ClInclude Include="ConvexHitBox.h" />
     <ClInclude Include="Game.h" />

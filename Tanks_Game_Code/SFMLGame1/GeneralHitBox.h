@@ -13,10 +13,10 @@ public:
 	void switchActive();
 	bool getActive();
 
-	virtual void move(sf::Vector2f fdisp) = 0;
-	virtual void setPosition(sf::Vector2f fpos) = 0;
-	virtual void rotate(double frot) = 0;
-	virtual void setRotation(double frot) = 0;
+	virtual void move(sf::Vector2f fdisp);
+	virtual void setPosition(sf::Vector2f fpos);
+	virtual void rotate(double frot);
+	virtual void setRotation(double frot);
 
 protected:
 
@@ -24,5 +24,6 @@ protected:
 	
 	std::string identity;
 	bool active;
+	sf::Vector2f position;
 };
 

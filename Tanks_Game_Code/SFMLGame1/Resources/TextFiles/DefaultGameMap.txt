@@ -1,13 +1,11 @@
 ADDING_WALLS
 
 
-< { 100, 100, ( 400, 300 ) }, s, Cooltexture >
+< { (0,0), (20, 300) }, SET_DUPLICATE, TestWall >
 
-< { 100, 200, ( 400, 302 ) }, s, Cooltexture >
+< { (0,0), (300, 20) }, SET_DUPLICATE, TestWall >
 
-< { 100, 120, ( 400, 320 ) }, s, Cooltexture >
-
-< { 100, 102, ( 400, 200 ) }, s, Cooltexture >
+< { (400,300), (420, 550) }, SET_DUPLICATE, TestWall >
 
 
 DONE
@@ -36,7 +34,7 @@ DONE
 ------
 
 ADDING_BACKGROUND
-< { (100, 200), (400, 500)}, xooltex>
+< { (0, 0), (800, 600)}, SET_DUPLICATE, Helipad>
 
-< { (200, 300), (400, 700)}, xooltex>
 DONE
+FILE_DONE

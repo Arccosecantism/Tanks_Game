@@ -167,7 +167,7 @@ void ResourceManager::addEmptyResourceSet(std::string fname)								//adds an em
 
 	resourceSets.push_back(empt);															//add it
 	
-	addName(fname, ResourceSet_Names);														//add the name
+	addName(fname, ResourceSet_Names, resourceSets.size() - 1);														//add the name
 }
 
 
@@ -183,7 +183,7 @@ void ResourceManager::addResourceSet(ResourceGroup fresourceSet, std::string fna
 
 	resourceSets.push_back(fresourceSet);												//add the resourceGroup
 
-	addName(fname, ResourceSet_Names);
+	addName(fname, ResourceSet_Names, resourceSets.size() - 1);
 	
 }
 
@@ -252,10 +252,10 @@ void ResourceManager::addFonttoResourceSet(std::string rsName, std::string fontN
 /*------------------------------------------------------------------------------------
 -------------------------------getResourceSetByName-----------------------------------
 ------------------------------------------------------------------------------------*/
-ResourceGroup ResourceManager::getResourceSetByName(std::string fname)					//retrives a resourceGroup by name
+ResourceGroup* ResourceManager::getResourceSetByName(std::string fname)					//retrives a resourceGroup by name
 {
 
-	return resourceSets[ntoi(fname, ResourceSet_Names)];							//returns the resource set with the desired name
+	return &resourceSets[ntoi(fname, ResourceSet_Names)];							//returns the resource set with the desired name
 	
 }
 

@@ -1,95 +1,38 @@
-﻿Build started 11/12/2015 9:13:53 AM.
-     1>Project "C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AARectHitBox.cpp App.cpp AppSprite.cpp BasicButton.cpp CircularHitBox.cpp Collidable.cpp ConvexHitBox.cpp Game.cpp GameMap.cpp GeneralHitBox.cpp GeneralMap.cpp HitBoxVector.cpp Main.cpp MainMenu.cpp Menu.cpp MenuBackground.cpp MenuElement.cpp MenuManager.cpp MenuSprite.cpp MouseData.cpp MultiMenuSprite.cpp MultiTextBox.cpp NameSearchable.cpp Player.cpp ResourceGroup.cpp ResourceManager.cpp SingleTextBox.cpp Slider.cpp
-         Slider.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(66): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(187): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(220): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-         SingleTextBox.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\singletextbox.cpp(389): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-         ResourceManager.cpp
-         ResourceGroup.cpp
-         MultiTextBox.cpp
-         MultiMenuSprite.cpp
-         MouseData.cpp
-         MenuSprite.cpp
-         MenuManager.cpp
-         MenuElement.cpp
-         MenuBackground.cpp
-         Menu.cpp
-         MainMenu.cpp
-         Main.cpp
-         HitBoxVector.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\hitboxvector.cpp(20): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\hitboxvector.cpp(28): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\hitboxvector.cpp(36): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\hitboxvector.cpp(44): warning C4018: '<' : signed/unsigned mismatch
-         GeneralHitBox.cpp
-         GameMap.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(96): error C2065: 'typeCheck' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(98): error C2065: 'typeCheck' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(99): error C2065: 'curType' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(99): error C2065: 'TWOARG' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(112): error C2065: 'typeCheck' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(114): error C2065: 'typeCheck' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(115): error C2065: 'curType' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(115): error C2065: 'THREEARG' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(130): error C2065: 'tupleRecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(135): error C2065: 'tupleRecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(136): error C2065: 'tupleRecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(160): error C2065: 'tupleRecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(165): error C2065: 'tupleRecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(166): error C2065: 'tupleRecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(189): error C2065: 'OPrecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(194): error C2065: 'OPrecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(195): error C2065: 'OPrecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(221): error C2065: 'OPrecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(226): error C2065: 'OPrecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(227): error C2065: 'OPrecord' : undeclared identifier
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(278): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(280): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(283): error C2059: syntax error : ')'
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(289): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(296): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\gamemap.cpp(340): warning C4018: '<' : signed/unsigned mismatch
-         ConvexHitBox.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\convexhitbox.cpp(54): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\convexhitbox.cpp(84): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\convexhitbox.cpp(85): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-         Collidable.cpp
-         CircularHitBox.cpp
-         Generating Code...
-         Compiling...
-         BasicButton.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\basicbutton.cpp(337): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         App.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\app.cpp(304): warning C4129: 'W' : unrecognized character escape sequence
-         AARectHitBox.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(33): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(34): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(35): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(36): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(48): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(50): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(51): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(52): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(53): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(106): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(107): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(137): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(138): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(139): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\aarecthitbox.cpp(140): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         Game.cpp
-         Player.cpp
-         NameSearchable.cpp
-         GeneralMap.cpp
-         AppSprite.cpp
-     1>Done Building Project "C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" (Build target(s)) -- FAILED.
+﻿Build started 11/14/2015 11:21:48 AM.
+     1>Project "C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML\SFML-2.1\Libs\Debug" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.lib" /MACHINE:X86 Debug\AARectHitBox.obj
+         Debug\App.obj
+         Debug\AppSprite.obj
+         Debug\BasicButton.obj
+         Debug\CircularHitBox.obj
+         Debug\Collidable.obj
+         Debug\CollisionLineSeg.obj
+         Debug\ConvexHitBox.obj
+         Debug\Game.obj
+         Debug\GameMap.obj
+         Debug\GeneralHitBox.obj
+         Debug\GeneralMap.obj
+         Debug\HitBoxVector.obj
+         Debug\Main.obj
+         Debug\MainMenu.obj
+         Debug\Menu.obj
+         Debug\MenuBackground.obj
+         Debug\MenuElement.obj
+         Debug\MenuManager.obj
+         Debug\MenuSprite.obj
+         Debug\MouseData.obj
+         Debug\MultiMenuSprite.obj
+         Debug\NameSearchable.obj
+         Debug\Player.obj
+         Debug\ResourceGroup.obj
+         Debug\ResourceManager.obj
+         Debug\MultiTextBox.obj
+         Debug\SingleTextBox.obj
+         Debug\Slider.obj
+         SFMLGame1.vcxproj -> C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.exe
+     1>Done Building Project "C:\Users\Riley\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:08.84
+Time Elapsed 00:00:00.71

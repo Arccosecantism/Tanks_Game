@@ -14,14 +14,14 @@ public:
 	
 	BasicButton();
 
-	BasicButton(sf::Vector2f fposition, ResourceGroup& fResourceGroup,		//Quite a long constructor, these thing define a BasicButton.
+	BasicButton(sf::Vector2f fposition, ResourceGroup* fResourceGroup,		//Quite a long constructor, these thing define a BasicButton.
 																			//You need position, a resourceGroup, a string for the text,
 					std::string ftextName, sf::Color ftextColor,			//a color for the text, a size for the sprites, and a
 																			//size for the text
 					sf::Vector2f fspriteSize,	int ftextCharSize);		//-----------------
 
 
-	void setup(sf::Vector2f fposition, ResourceGroup& fResourceGroup,
+	void setup(sf::Vector2f fposition, ResourceGroup* fResourceGroup,
 
 				std::string ftextName, sf::Color ftextColor,				
 		

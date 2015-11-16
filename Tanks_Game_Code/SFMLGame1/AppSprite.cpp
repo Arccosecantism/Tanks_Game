@@ -19,7 +19,7 @@ AppSprite::AppSprite()
 
 
 /*------------------------------------------------------------------------------------
---------------------------Multi-Argument-constructor----------------------------------
+--------------------------Multi-Argument-constructor1---------------------------------
 ------------------------------------------------------------------------------------*/
 AppSprite::AppSprite(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f fsize, double frot)
 {
@@ -28,6 +28,22 @@ AppSprite::AppSprite(sf::Texture* ftexture, sf::Vector2f fposition, sf::Vector2f
 	position = sf::Vector2f(0, 0);
 
 	setup(ftexture, position, fsize, frot);		//setup	
+}
+
+
+/*------------------------------------------------------------------------------------
+--------------------------Multi-Argument-constructor2---------------------------------
+------------------------------------------------------------------------------------*/
+AppSprite::AppSprite(sf::Texture* ftexture, sf::Vector2f fTL, sf::Vector2f fBR)
+{
+	sf::Vector2f tposition = fTL + fBR;
+	tposition.x /= 2.00;
+	tposition.y /= 2.00;
+
+
+	sf::Vector2f dimensions(fabs(fBR.x - fTL.x), fabs(fBR.y - fTL.y));
+
+	setup(ftexture, tposition, dimensions, 0);
 }
 
 
