@@ -126,21 +126,22 @@ void Player::unincMovement()
 {
 	for (unsigned int i = 0; i < lastKeyVec.size(); i++)
 	{
-		if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Up)
-		{
-			move(-forVelocity);
-		}
-		else if (static_cast<sf::Keyboard::Key> (lastKeyVec[i]) == sf::Keyboard::Down)
-		{
-			move(-bacVelocity);
-		}
-		else if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Right)
+		
+		if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Right)
 		{
 			rotate(-rotSpeed);
 		}
 		else if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Left)
 		{
 			rotate(rotSpeed);
+		}
+		else if (static_cast<sf::Keyboard::Key>(lastKeyVec[i]) == sf::Keyboard::Up)
+		{
+			move(-forVelocity);
+		}
+		else if (static_cast<sf::Keyboard::Key> (lastKeyVec[i]) == sf::Keyboard::Down)
+		{
+			move(-bacVelocity);
 		}
 	}
 }
