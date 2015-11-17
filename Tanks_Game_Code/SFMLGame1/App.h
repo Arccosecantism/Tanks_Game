@@ -1,8 +1,6 @@
 #pragma once
 #include "MainMenu.h"
-#include "Player.h"
-#include "HitBoxInclude.h"
-#include "GameMap.h"
+#include "Game.h"
 
 class App
 {
@@ -63,13 +61,7 @@ private:
 
 	ResourceManager generalResourceManager;					//the ResourceManager for everything in the App, which is almost everything
 
+	Game tanksGame;
 
-	//MainMenu startingMenu;									//The MAinMenu for the program
-	
-
-	Player testPlayer;
-	ConvexHitBox testor;
-	GameMap GMtest;
-
-
+	//MainMenu startingMenu;									//The MainMenu for the program
 };

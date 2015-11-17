@@ -2,7 +2,7 @@
 #include "Collidable.h"
 #include "IncludeMe.h"
 #include "AppSprite.h"
-class GameMap : Collidable
+class GameMap : public Collidable
 {
 public:
 	GameMap();

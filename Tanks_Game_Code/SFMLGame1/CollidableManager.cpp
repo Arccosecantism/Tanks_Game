@@ -35,7 +35,7 @@ void CollidableManager::checkCollision()
 		{
 			if (checkMotion(i, j))
 			{
-				if (!checkAABBCollision(collidables[i]->getBoundingBox(), collidables[j]->getBoundingBox()))
+				if (checkAABBCollision(collidables[i]->getBoundingBox(), collidables[j]->getBoundingBox()))
 				{
 					ksiz = collidables[i]->getVectorSize();
 					hsiz = collidables[j]->getVectorSize();
@@ -50,14 +50,15 @@ void CollidableManager::checkCollision()
 							hba = collidables[i]->getHitBox(k);
 							hbb = collidables[j]->getHitBox(h);
 
-							if (hba->getID() == "AABB")
+							if (hba->getID() == "AARHB")
 							{
-								if (hbb->getID() == "AABB")
+								if (hbb->getID() == "AARHB")
 								{
 									if (checkAABBCollision(*((AARectHitBox*)(hba)), *((AARectHitBox*)(hbb))))
 									{
 										collidables[i]->setInCollision(true);
 										collidables[j]->setInCollision(true);
+										interpretCollisions(i, j);
 										bool doneCheckingCollision = true;
 									}
 								}
@@ -77,14 +78,11 @@ bool CollidableManager::checkAABBCollision(AARectHitBox aabb1, AARectHitBox aabb
 	float aVals[4] = { aabb1.getCorner(0).x, aabb1.getCorner(0).y, aabb1.getCorner(2).x, aabb1.getCorner(2).y };
 	float bVals[4] = { aabb2.getCorner(0).x, aabb2.getCorner(0).y, aabb2.getCorner(2).x, aabb2.getCorner(2).y };
 
-	for (int i = 0; i < 4; i++)
+	if ((aVals[0] > bVals[2]) || (aVals[1] > bVals[3]) || (aVals[2] < bVals[0]) || (aVals[3] < bVals[1]))
 	{
-		if (aVals[i] > bVals[(i + 2) % 4])
-		{
-			iscolliding = false;
-			break;
-		}
+		iscolliding = false;
 	}
+
 
 	return iscolliding;
 }

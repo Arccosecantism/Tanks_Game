@@ -41,13 +41,13 @@ void App::setup()												//initialize all objects
 
 	setupResourceManager();										//set up the resource manager, adding all files
 
-	//startingMenu.setup(generalResourceManager);					//set up the main menu
+	//startingMenu.setup(generalResourceManager);				//set up the main menu
 
+	tanksGame.setup(generalResourceManager);
 
-
+	tanksGame.setupLevel("Resources\\TextFiles\\DefaultGameMap.txt", "TestGameMapRG");
 	//startingMenu.deactivate();
 
-	GMtest.loadFromFile();
 }
 
 
@@ -150,8 +150,8 @@ void App::checkEvents(sf::Event& fevent)						//checks events like mouse clickin
 void App::update()											//update all objects and menus
 {
 
+	tanksGame.update(keys);
 	//startingMenu.update(mouseInfo);
-	testPlayer.update(keys);
 
 }
 
@@ -167,8 +167,7 @@ void App::draw()											//draw all objects
 {
 
 	//startingMenu.draw(*window);
-	GMtest.draw(*window, sf::Vector2f(0, 0));
-	testPlayer.draw(*window);
+	tanksGame.draw(*window);
 
 }
 

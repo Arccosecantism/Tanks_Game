@@ -264,11 +264,24 @@ sf::Vector2f GameMap::getUpgradeSpawnPoint(int findex)
 
 void GameMap::draw(sf::RenderWindow& frenderWindow, sf::Vector2f drawPosition)
 {
+
+	sf::CircleShape testor;
+	testor.setRadius(3);
+	testor.setOrigin(1.5, 1.5);
+	testor.setFillColor(sf::Color::Red);
+
 	bgSprite.draw(frenderWindow, drawPosition);
 
 	for (int i = 0; i < wallSprites.size(); i++)
 	{
 		wallSprites[i].draw(frenderWindow, drawPosition);
+		
+
+		for (int j = 0; j < 4; j++)
+		{
+			testor.setPosition((((AARectHitBox*)(hitboxvec.getHitBox(i)))->getCorner(j)));
+			frenderWindow.draw(testor);
+		}
 	}
 
 }

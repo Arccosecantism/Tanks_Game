@@ -27,6 +27,6 @@ private:
 
 	ResourceManager* gameResources;
 
-
+	bool activity;
 };
 

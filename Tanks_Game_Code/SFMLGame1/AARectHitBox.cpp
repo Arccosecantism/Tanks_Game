@@ -75,6 +75,7 @@ void AARectHitBox::move(sf::Vector2f fdisp)
 	for (unsigned int i = 0; i < 4; i++)
 	{
 		corners[i] += fdisp;
+		initCorners[i] += fdisp;
 	}
 
 }
@@ -109,10 +110,10 @@ void AARectHitBox::setRotation(double frot)
 	}
 
 
-	double maxX = corners[0].x;
-	double minX = corners[0].x;
-	double maxY = corners[0].y;
-	double minY = corners[0].y;
+	double maxX = position.x;
+	double minX = position.x;
+	double maxY = position.y;
+	double minY = position.y;
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -130,7 +131,7 @@ void AARectHitBox::setRotation(double frot)
 		}
 		if (corners[i].y < minY)
 		{
-			maxY = corners[i].y;
+			minY = corners[i].y;
 		}
 	}
 
