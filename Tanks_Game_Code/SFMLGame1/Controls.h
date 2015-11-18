@@ -9,7 +9,7 @@ public:
 	Controls();
 	~Controls();
 	void addKey(int key);
-	void addFunctionTokey(memfunc_of_object function, int key);
+	void addFunctionToKey(memfunc_of_object function, int key);
 	void callKeyFuncs(std::vector<int>& fkeys);
 
 
