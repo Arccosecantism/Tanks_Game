@@ -82,14 +82,6 @@ void Player::draw(sf::RenderWindow& frenderwindow)
 {
 	tankSprite.draw(frenderwindow, position);
 	sf::CircleShape testor;
-	testor.setRadius(3);
-	testor.setOrigin(1.5, 1.5);
-	testor.setFillColor(sf::Color::Red);
-	for (int i = 0; i < 4; i++)
-	{
-		testor.setPosition((((AARectHitBox*)(hitboxvec.getHitBox(0)))->getCorner(i)));
-		frenderwindow.draw(testor);
-	}
 	
 }
 

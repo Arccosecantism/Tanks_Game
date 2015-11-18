@@ -123,6 +123,9 @@
     <ClCompile Include="CollidableManager.cpp">
       <Filter>Source Files\GameTools</Filter>
     </ClCompile>
+    <ClCompile Include="Controls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -225,6 +228,9 @@
       <Filter>Header Files\GameTools</Filter>
     </ClInclude>
     <ClInclude Include="CollidableManager.h">
+      <Filter>Header Files\GameTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls.h">
       <Filter>Header Files\GameTools</Filter>
     </ClInclude>
   </ItemGroup>
