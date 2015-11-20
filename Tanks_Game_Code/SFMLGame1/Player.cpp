@@ -72,8 +72,8 @@ void Player::setRotation(double frot)
 
 void Player::update(std::vector<int>& fkeyVec)
 {
-	std::cout << (((AARectHitBox*)(hitboxvec.getHitBox(0)))->getCorner(0).x) << ",\t" << (((AARectHitBox*)(hitboxvec.getHitBox(0)))->getCorner(0).y) << std::endl;
-	std::cout << (((AARectHitBox*)(hitboxvec.getHitBox(0)))->getCorner(2).x) << ",\t" << (((AARectHitBox*)(hitboxvec.getHitBox(0)))->getCorner(2).y) << std::endl << std::endl;
+	//std::cout << (((AARectHitBox*)(hitboxvec.getHitBox(0)))->getCorner(0).x) << ",\t" << (((AARectHitBox*)(hitboxvec.getHitBox(0)))->getCorner(0).y) << std::endl;
+	//std::cout << (((AARectHitBox*)(hitboxvec.getHitBox(0)))->getCorner(2).x) << ",\t" << (((AARectHitBox*)(hitboxvec.getHitBox(0)))->getCorner(2).y) << std::endl << std::endl;
 	lastKeyVec = fkeyVec;
 	incMovement();
 }
