@@ -1,10 +1,19 @@
-﻿Build started 11/20/2015 8:30:11 AM.
+﻿Build started 2/22/2016 8:13:20 AM.
      1>Project "C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\SFMLGame1\SFMLGame1.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
-         Player.cpp
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\player.cpp(147): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\player.cpp(149): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt App.cpp Main.cpp MainMenu.cpp Menu.cpp MenuManager.cpp Slider.cpp
+         MainMenu.cpp
+         Generating Code...
+         Compiling...
+         Slider.cpp
+     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(66): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(187): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\rwaugh9221\documents\visual studio 2013\projects\tanks_game\tanks_game_code\sfmlgame1\slider.cpp(220): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         MenuManager.cpp
+         Menu.cpp
+         Main.cpp
+         App.cpp
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML\SFML-2.1\Libs\Debug" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\rwaugh9221\Documents\Visual Studio 2013\Projects\Tanks_Game\Tanks_Game_Code\Debug\SFMLGame1.lib" /MACHINE:X86 Debug\AARectHitBox.obj
          Debug\App.obj
@@ -42,4 +51,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.79
+Time Elapsed 00:00:03.01

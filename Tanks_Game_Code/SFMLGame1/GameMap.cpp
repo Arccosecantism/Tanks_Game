@@ -170,7 +170,7 @@ void GameMap::loadFromFile(std::string filename, ResourceGroup* fresourceGroup)
 									sf::Vector2f(matof(wallVector[i][1]), matof(wallVector[i][2])),
 									sf::Vector2f(matof(wallVector[i][3]), matof(wallVector[i][4]))));
 		}
-
+		
 		if (wallVector[i][5] == "THREE_ARG")
 		{
 			hitboxvec.addHitBox(new AARectHitBox(	matof(wallVector[i][6]), matof(wallVector[i][7]),
